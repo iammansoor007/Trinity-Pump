@@ -156,14 +156,14 @@ export default async function RootLayout({
         <ContentProvider initialData={initialGlobalData} initialBlogs={initialBlogs}>
           <Providers>
             <div className="relative min-h-screen flex flex-col">
-              {/* Common background grid for all pages */}
-              <div className="fixed inset-0 pointer-events-none z-0 opacity-[0.03]">
+              {/* Common technical grid lines in Deep Ink Navy */}
+              <div className="fixed inset-0 pointer-events-none z-0 opacity-[0.025]">
                 <div
                   className="absolute inset-0"
                   style={{
                     backgroundImage: `
-                      linear-gradient(to right, #2563eb 1px, transparent 1px),
-                      linear-gradient(to bottom, #2563eb 1px, transparent 1px)
+                      linear-gradient(to right, #0B1726 1px, transparent 1px),
+                      linear-gradient(to bottom, #0B1726 1px, transparent 1px)
                     `,
                     backgroundSize: '80px 80px',
                   }}

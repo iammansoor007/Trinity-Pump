@@ -137,12 +137,12 @@ export default function ContactFaqSection({ pageData }: QAFormProps) {
 
           {/* ── Left Column: Luxury Form Card ── */}
           <div className="w-full h-fit">
-            <p className="section-label text-gold-dark mb-4">{formLabel}</p>
+            <p className="section-label text-gold mb-4">{formLabel}</p>
             <h2 className="display-heading text-[26px] min-[360px]:text-[30px] min-[400px]:text-[36px] md:text-[44px] text-dark leading-tight mb-8">
               {formTitle.includes(" ") ? (
                 <>
                   {formTitle.substring(0, formTitle.lastIndexOf(" "))} {" "}
-                  <span className="text-gold-dark italic font-light">{formTitle.substring(formTitle.lastIndexOf(" ") + 1)}</span>
+                  <span className="text-gold italic font-light">{formTitle.substring(formTitle.lastIndexOf(" ") + 1)}</span>
                 </>
               ) : (
                 formTitle
@@ -150,18 +150,18 @@ export default function ContactFaqSection({ pageData }: QAFormProps) {
             </h2>
 
             {/* Form wrapper */}
-            <div className="bg-white border border-brand-border-light p-6 min-[400px]:p-8 md:p-10 rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.06)] relative h-fit transition-all duration-300">
+            <div className="bg-white border border-brand-border-light p-6 min-[400px]:p-8 md:p-10 rounded-xl shadow-[0_20px_50px_rgba(11,23,38,0.06)] relative h-fit transition-all duration-300">
               
               {/* Gold frame accent in top-right */}
               <div className="absolute top-0 right-0 w-8 h-8 m-5 opacity-40 pointer-events-none">
-                <div className="absolute top-0 right-0 w-full h-[1px] bg-gold-dark" />
-                <div className="absolute top-0 right-0 h-full w-[1px] bg-gold-dark" />
+                <div className="absolute top-0 right-0 w-full h-[1px] bg-gold" />
+                <div className="absolute top-0 right-0 h-full w-[1px] bg-gold" />
               </div>
 
-              {/* Direct StyleSeat Booking Banner */}
-              <div className="mb-8 p-5 rounded-lg bg-gradient-to-r from-gold-dark/15 via-warm-cream to-warm-white border border-gold-dark/40 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
+              {/* Direct Booking Banner */}
+              <div className="mb-8 p-5 rounded-lg bg-gradient-to-r from-gold/10 via-warm-white to-warm-white border border-gold/30 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div className="text-left">
-                  <span className="text-gold-dark font-mono text-[10.5px] font-bold tracking-widest uppercase block mb-0.5">{formClinicPortal}</span>
+                  <span className="text-gold font-mono text-[10.5px] font-bold tracking-widest uppercase block mb-0.5">{formClinicPortal}</span>
                   <p className="text-dark font-bold text-[14px]">{formClinicPortalSub}</p>
                 </div>
                 <a
@@ -310,19 +310,19 @@ export default function ContactFaqSection({ pageData }: QAFormProps) {
 
           {/* ── Right Column: Editorial Underlined FAQs ── */}
           <div className="w-full">
-            <p className="section-label text-gold-dark mb-4">{activeFaqLabel}</p>
+            <p className="section-label text-gold mb-4">{activeFaqLabel}</p>
             <h2 className="display-heading text-[30px] min-[400px]:text-[36px] md:text-[44px] text-dark leading-tight mb-4 text-left">
               {activeFaqTitle.includes(" ") ? (
                 <>
                   {activeFaqTitle.substring(0, activeFaqTitle.lastIndexOf(" "))} {" "}
-                  <span className="text-gold-dark italic font-light">{activeFaqTitle.substring(activeFaqTitle.lastIndexOf(" ") + 1)}</span>
+                  <span className="text-gold italic font-light">{activeFaqTitle.substring(activeFaqTitle.lastIndexOf(" ") + 1)}</span>
                 </>
               ) : (
                 activeFaqTitle
               )}
             </h2>
             {activeFaqDescription && (
-              <p className="text-dark/65 text-[14px] md:text-[15.5px] font-light leading-relaxed mb-8 text-left">
+              <p className="text-body text-[14px] md:text-[15.5px] font-light leading-relaxed mb-8 text-left">
                 {activeFaqDescription}
               </p>
             )}
@@ -344,7 +344,7 @@ export default function ContactFaqSection({ pageData }: QAFormProps) {
                     >
                       {/* Monospace gold number */}
                       <span className={`text-[12px] md:text-[13px] font-mono font-bold tracking-widest mt-1.5 transition-colors duration-300
-                        ${isOpen ? "text-gold-dark" : "text-dark/25 group-hover:text-dark/45"}`}>
+                        ${isOpen ? "text-gold" : "text-dark/25 group-hover:text-dark/45"}`}>
                         {i < 9 ? `0${i + 1}` : i + 1}
                       </span>
                       
@@ -356,7 +356,7 @@ export default function ContactFaqSection({ pageData }: QAFormProps) {
                       />
                       
                       {/* Icon */}
-                      <span className={`text-gold-dark mt-1.5 transition-transform duration-300 ${isOpen ? "rotate-180 text-dark" : "group-hover:scale-110"}`}>
+                      <span className={`text-gold mt-1.5 transition-transform duration-300 ${isOpen ? "rotate-180 text-dark" : "group-hover:scale-110"}`}>
                         {isOpen ? <Minus size={15} /> : <Plus size={15} />}
                       </span>
                     </button>
@@ -371,9 +371,9 @@ export default function ContactFaqSection({ pageData }: QAFormProps) {
                           className="overflow-hidden"
                         >
                           <div className="pl-12 md:pl-14 pr-4 pt-3 pb-2">
-                            <div className="border-l-2 border-gold-dark/45 pl-4 py-0.5">
+                            <div className="border-l-2 border-gold/40 pl-4 py-0.5">
                               <div
-                                className="text-dark/55 text-[13.5px] leading-relaxed font-light prose prose-sm max-w-none"
+                                className="text-body text-[13.5px] leading-relaxed font-light prose prose-sm max-w-none"
                                 dangerouslySetInnerHTML={{ __html: faq.a }}
                               />
                             </div>

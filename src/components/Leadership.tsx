@@ -40,7 +40,7 @@ export default function Leadership() {
   } as const;
 
   return (
-    <section className="bg-white py-28 relative overflow-hidden border-t border-border-light/40">
+    <section className="bg-warm-white py-28 relative overflow-hidden border-t border-border-light/60">
       {/* Decorative background grid pattern */}
       <div className="absolute inset-0 opacity-[0.015] bg-grid-pattern-black pointer-events-none" />
 
@@ -56,7 +56,7 @@ export default function Leadership() {
             className="relative"
           >
             {/* Gold backdrop accent square */}
-            <div className="absolute -bottom-4 -right-4 w-full h-full border border-gold-dark/40 rounded-sm pointer-events-none z-0" />
+            <div className="absolute -bottom-4 -right-4 w-full h-full border border-gold/40 rounded-sm pointer-events-none z-0" />
 
             {/* Main photo container */}
             <div className="img-therapist h-[400px] md:h-[600px] rounded-sm overflow-hidden shadow-2xl relative z-10 border border-border-light group">
@@ -86,7 +86,7 @@ export default function Leadership() {
             viewport={{ once: true, margin: "-60px" }}
             className="flex flex-col"
           >
-            <motion.p variants={itemVariants} className="section-label text-gold-dark mb-4">
+            <motion.p variants={itemVariants} className="section-label text-gold mb-4">
               {label}
             </motion.p>
             
@@ -94,16 +94,16 @@ export default function Leadership() {
               {title}
             </motion.h2>
 
-            <motion.p variants={itemVariants} className="text-gold-dark font-serif italic text-[18px] md:text-[20px] mb-6">
+            <motion.p variants={itemVariants} className="text-gold font-serif italic text-[18px] md:text-[20px] mb-6">
               {tagline}
             </motion.p>
 
             {desc1 && (
-              <motion.div variants={itemVariants} className="text-dark/60 text-[14.5px] md:text-[15px] leading-relaxed mb-5 font-light [&>p]:mb-0" dangerouslySetInnerHTML={{ __html: desc1 }} />
+              <motion.div variants={itemVariants} className="text-body text-[14.5px] md:text-[15px] leading-relaxed mb-5 font-light [&>p]:mb-0" dangerouslySetInnerHTML={{ __html: desc1 }} />
             )}
 
             {desc2 && (
-              <motion.div variants={itemVariants} className="text-dark/65 text-[14.5px] md:text-[15px] leading-relaxed mb-8 border-l-2 border-gold-dark/30 pl-4 py-1 font-light [&>p]:mb-0" dangerouslySetInnerHTML={{ __html: desc2 }} />
+              <motion.div variants={itemVariants} className="text-body text-[14.5px] md:text-[15px] leading-relaxed mb-8 border-l-2 border-gold/40 pl-4 py-1 font-light [&>p]:mb-0" dangerouslySetInnerHTML={{ __html: desc2 }} />
             )}
 
             {/* Signature + CTA Row */}

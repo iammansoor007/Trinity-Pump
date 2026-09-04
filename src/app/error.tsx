@@ -17,7 +17,7 @@ export default function Error({
   }, [error]);
 
   return (
-    <div className="relative min-h-[85vh] flex items-center justify-center bg-[#0A0A0A] text-white p-4 pt-32 pb-20">
+    <div className="relative min-h-[85vh] flex items-center justify-center bg-dark text-white p-4 pt-32 pb-20">
       {/* Background Ambient Glow */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-red-500/10 rounded-full blur-[120px] pointer-events-none -z-10" />
 

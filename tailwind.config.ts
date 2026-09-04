@@ -78,6 +78,18 @@ export default {
                     blue: "#002664", // Deeper navy blue option
                     scarlet: "#B22234", // Alternative red
                 },
+                // Complete Trinity Palette
+                trinity: {
+                    ink: "var(--trinity-ink)",
+                    navy: "var(--trinity-navy)",
+                    paper: "var(--trinity-paper)",
+                    concrete: "var(--trinity-concrete)",
+                    white: "var(--trinity-white)",
+                    gold: "var(--trinity-gold)",
+                    bronze: "var(--trinity-bronze)",
+                    text: "var(--trinity-text)",
+                    muted: "var(--trinity-muted)",
+                },
                 gold: {
                     DEFAULT: "var(--color-gold)",
                     dark: "var(--color-gold-dark)",

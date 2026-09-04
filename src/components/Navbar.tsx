@@ -97,15 +97,15 @@ const Navbar = () => {
             ) : (
               <div className="flex items-center gap-3">
                 <svg width="36" height="42" viewBox="0 0 42 48" fill="none" className="md:w-[42px] md:h-[48px] flex-shrink-0">
-                  <path d="M21 1L40 9.5V25C40 36.5 31.5 44.5 21 47C10.5 44.5 2 36.5 2 25V9.5L21 1Z" fill="#C8960C" />
-                  <text x="21" y="33" textAnchor="middle" fill="#0A0A0A" fontFamily="Georgia,serif" fontSize="20" fontWeight="bold" fontStyle="italic">M</text>
+                  <path d="M21 1L40 9.5V25C40 36.5 31.5 44.5 21 47C10.5 44.5 2 36.5 2 25V9.5L21 1Z" fill="#C98A2E" />
+                  <text x="21" y="33" textAnchor="middle" fill="#0B1726" fontFamily="var(--font-heading), sans-serif" fontSize="22" fontWeight="bold">T</text>
                 </svg>
                 <span className="flex flex-col text-left">
-                  <span className="text-[15px] md:text-[18px] font-black tracking-[0.2em] text-white leading-none">
-                    {navbar.logoText1 || "MUSCLE"}
+                  <span className="text-[15px] md:text-[18px] font-black tracking-[0.16em] text-white leading-none">
+                    {navbar.logoText1 || "TRINITY"}
                   </span>
-                  <span className="text-[10px] md:text-[11px] font-black tracking-[0.2em] text-gold mt-1 leading-none">
-                    {navbar.logoText2 || "THERAPY"}
+                  <span className="text-[10px] md:text-[11px] font-black tracking-[0.16em] text-gold mt-1 leading-none">
+                    {navbar.logoText2 || "PUMP & SUPPLY"}
                   </span>
                 </span>
               </div>

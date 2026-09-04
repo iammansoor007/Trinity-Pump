@@ -20,17 +20,17 @@ export default function CtaBanner() {
   const bookingUrl = btnUrl || buttonUrl || globalMetadata?.bookingUrl || "/contact-us/";
 
   return (
-    <section className="bg-gold relative overflow-hidden py-12 md:py-14">
+    <section className="bg-dark relative overflow-hidden py-14 md:py-16 border-y border-white/10">
 
-      {/* Diagonal stripe texture */}
+      {/* Subtle radial dots texture */}
       <div
-        className="absolute inset-0 opacity-[0.07] bg-diagonal-stripes-black"
+        className="absolute inset-0 opacity-[0.03] bg-radial-dots-gold pointer-events-none"
       />
 
       {/* Left decorative circle */}
-      <div className="absolute -left-16 top-1/2 -translate-y-1/2 w-64 h-64 rounded-full border-[40px] border-black/[0.06] hidden md:block" />
+      <div className="absolute -left-16 top-1/2 -translate-y-1/2 w-64 h-64 rounded-full border-[30px] border-white/[0.02] hidden md:block" />
       {/* Right decorative circle */}
-      <div className="absolute -right-16 top-1/2 -translate-y-1/2 w-64 h-64 rounded-full border-[40px] border-black/[0.06] hidden md:block" />
+      <div className="absolute -right-16 top-1/2 -translate-y-1/2 w-64 h-64 rounded-full border-[30px] border-white/[0.02] hidden md:block" />
 
       <motion.div
         initial={{ opacity: 0, y: 15 }}
@@ -42,33 +42,33 @@ export default function CtaBanner() {
 
         {/* Left: Icon + Text */}
         <div className="flex flex-col sm:flex-row items-center gap-4 md:gap-8">
-          {/* Calendar icon */}
-          <div className="flex-shrink-0 w-14 h-14 md:w-16 md:h-16 rounded-full bg-dark/10 flex items-center justify-center text-dark">
+          {/* Calendar icon with refined gold treatment */}
+          <div className="flex-shrink-0 w-14 h-14 md:w-16 md:h-16 rounded-xl bg-gold/10 border border-gold/30 flex items-center justify-center text-gold">
             <CalendarRange size={24} className="md:w-7 md:h-7" strokeWidth={1.8} />
           </div>
 
           <div className="flex flex-col items-center sm:items-start">
-            <p className="text-dark/60 text-[10px] md:text-[12px] font-bold tracking-[0.15em] uppercase mb-1">
+            <p className="text-gold text-[10.5px] md:text-[12px] font-bold tracking-[0.18em] uppercase mb-1.5 font-mono">
               {stripHtml(tagline)}
             </p>
-            <h3 className="display-heading text-[20px] min-[400px]:text-[24px] md:text-[30px] text-dark leading-tight mb-1.5">
+            <h3 className="display-heading text-[22px] min-[400px]:text-[26px] md:text-[32px] text-white leading-tight mb-2">
               {stripHtml(title)}
             </h3>
-            <p className="text-dark/65 text-[13px] md:text-[14px]">
+            <p className="text-white/70 text-[13.5px] md:text-[14.5px] max-w-xl font-light">
               {stripHtml(description)}
             </p>
           </div>
         </div>
 
-        {/* Right: CTA */}
+        {/* Right: CTA Button */}
         <div className="flex-shrink-0 w-full md:w-auto">
           <a
             href={bookingUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-dark text-[11px] md:text-[12px] px-8 py-3.5 md:py-4 shadow-lg w-full md:w-auto justify-center text-center"
+            className="btn-gold text-[11px] md:text-[12px] px-8 py-4 shadow-xl w-full md:w-auto justify-center text-center"
           >
-            {button} <ArrowRight size={14} className="ml-1" />
+            {button} <ArrowRight size={14} className="ml-1.5" />
           </a>
         </div>
 

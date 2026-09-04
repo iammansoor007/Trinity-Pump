@@ -28,7 +28,7 @@ export default function StatsSection() {
   } as const;
 
   return (
-    <section className="bg-white py-20 md:py-28 relative overflow-hidden border-y border-border-light/40">
+    <section className="bg-warm-gray py-20 md:py-28 relative overflow-hidden border-y border-border-light/60">
       <div className="site-container">
         <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1.3fr] gap-12 lg:gap-16 items-center">
 
@@ -54,17 +54,17 @@ export default function StatsSection() {
             <div className="absolute inset-0 bg-dark/5" />
             {/* Gold corner brackets */}
             <div className="absolute top-0 left-0 w-8 h-8 m-3">
-              <div className="absolute top-0 left-0 w-full h-[2px] bg-gold-dark" />
-              <div className="absolute top-0 left-0 h-full w-[2px] bg-gold-dark" />
+              <div className="absolute top-0 left-0 w-full h-[2px] bg-gold" />
+              <div className="absolute top-0 left-0 h-full w-[2px] bg-gold" />
             </div>
           </div>
 
           {/* ── Right Column: Editorial Text ── */}
           <div>
-            <p className="section-label text-gold-dark mb-4">{stripHtml(label)}</p>
+            <p className="section-label text-gold mb-4">{stripHtml(label)}</p>
             <h2 className="display-heading text-[30px] min-[400px]:text-[36px] md:text-[44px] text-dark leading-tight mb-6">
               {stripHtml(titleLine1)}<br />
-              {stripHtml(titleLine2)} <span className="text-gold-dark italic">{stripHtml(titleItalicWord)}</span>
+              {stripHtml(titleLine2)} <span className="text-gold italic">{stripHtml(titleItalicWord)}</span>
             </h2>
 
             <motion.p
@@ -72,7 +72,7 @@ export default function StatsSection() {
               whileInView="visible"
               viewport={{ once: true, margin: "-40px" }}
               variants={paragraphVariants}
-              className="text-dark/70 text-[15px] md:text-[16px] leading-[1.8] font-light max-w-[540px] border-l-2 border-gold-dark/30 pl-4 py-1"
+              className="text-body text-[15px] md:text-[16px] leading-[1.8] font-light max-w-[540px] border-l-2 border-gold/40 pl-4 py-1"
             >
               {stripHtml(description)}
             </motion.p>

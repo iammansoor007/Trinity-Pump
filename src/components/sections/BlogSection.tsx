@@ -72,20 +72,20 @@ export default function BlogSection({
   };
 
   return (
-    <section id="blog" className="bg-white py-16 md:py-24 overflow-hidden border-t border-border-light/40">
+    <section id="blog" className="bg-warm-white py-16 md:py-24 overflow-hidden border-t border-border-light/60">
       <div className="site-container">
 
         {/* ── Header ─────────────────────────────── */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12">
           <div>
-            <p className="section-label text-gold-dark mb-3 md:mb-4">{subtitle}</p>
+            <p className="section-label text-gold mb-3 md:mb-4">{subtitle}</p>
             <h2 className="display-heading text-[28px] min-[400px]:text-[32px] md:text-[44px] text-dark leading-tight">{title}</h2>
           </div>
 
           <div className="flex items-center gap-4">
             <Link
               href={viewAllLink}
-              className="flex items-center gap-2 text-gold-dark text-[12px] font-bold tracking-[0.12em] uppercase hover:gap-3 transition-all duration-200"
+              className="flex items-center gap-2 text-gold text-[12px] font-bold tracking-[0.12em] uppercase hover:gap-3 transition-all duration-200"
             >
               {ctaAll} <ArrowRight size={14} />
             </Link>
@@ -96,14 +96,14 @@ export default function BlogSection({
                 <button
                   onClick={handlePrev}
                   aria-label="Previous article"
-                  className="w-9 h-9 rounded-md border border-border-light text-dark/70 hover:border-gold-dark hover:text-gold-dark hover:bg-gold-light/10 flex items-center justify-center transition-all duration-200 active:scale-95"
+                  className="w-9 h-9 rounded-md border border-border-light text-dark/70 hover:border-gold hover:text-gold hover:bg-gold/10 flex items-center justify-center transition-all duration-200 active:scale-95"
                 >
                   <ChevronLeft size={18} />
                 </button>
                 <button
                   onClick={handleNext}
                   aria-label="Next article"
-                  className="w-9 h-9 rounded-md border border-border-light text-dark/70 hover:border-gold-dark hover:text-gold-dark hover:bg-gold-light/10 flex items-center justify-center transition-all duration-200 active:scale-95"
+                  className="w-9 h-9 rounded-md border border-border-light text-dark/70 hover:border-gold hover:text-gold hover:bg-gold/10 flex items-center justify-center transition-all duration-200 active:scale-95"
                 >
                   <ChevronRight size={18} />
                 </button>
@@ -143,7 +143,7 @@ export default function BlogSection({
                   style={{ width: `${100 / cardsPerView}%` }}
                   className="flex-shrink-0 px-3 md:px-4"
                 >
-                  <article className="blog-card group bg-[#fbfbfa] border border-border-light hover:border-gold-dark/40 hover:shadow-xl rounded-sm overflow-hidden flex flex-col h-full transition-all duration-300">
+                  <article className="blog-card group bg-white border border-border-light hover:border-gold/50 hover:shadow-xl rounded-sm overflow-hidden flex flex-col h-full transition-all duration-300">
                     <Link href={postUrl} className="flex flex-col flex-1 no-underline">
 
                       {/* Image */}
@@ -157,13 +157,13 @@ export default function BlogSection({
                             className="object-cover transition-transform duration-500 group-hover:scale-105"
                           />
                         ) : (
-                          <div className="w-full h-full bg-warm-cream flex items-center justify-center">
-                            <ArrowRight size={32} className="text-gold-dark/30" />
+                          <div className="w-full h-full bg-warm-white flex items-center justify-center">
+                            <ArrowRight size={32} className="text-gold/30" />
                           </div>
                         )}
                         {/* Tag chip */}
                         {tag && (
-                          <span className="absolute top-3 left-3 bg-gold-dark text-white text-[10px] font-bold tracking-wider uppercase px-2.5 py-1 rounded-xs shadow-sm">
+                          <span className="absolute top-3 left-3 bg-gold text-white text-[10px] font-bold tracking-wider uppercase px-2.5 py-1 rounded-xs shadow-sm">
                             {tag}
                           </span>
                         )}
@@ -172,16 +172,16 @@ export default function BlogSection({
                       {/* Content */}
                       <div className="flex flex-col flex-1 p-5 sm:p-6 justify-between">
                         <div>
-                          <h3 className="text-dark font-bold text-[16px] sm:text-[17px] leading-snug mb-2.5 group-hover:text-gold-dark transition-colors duration-200 line-clamp-2">
+                          <h3 className="text-dark font-bold text-[16px] sm:text-[17px] leading-snug mb-2.5 group-hover:text-gold transition-colors duration-200 line-clamp-2">
                             {post.title}
                           </h3>
                           {cleanExcerpt && (
-                            <p className="text-dark/60 text-[13px] leading-relaxed mb-4 line-clamp-2 font-light">
+                            <p className="text-body text-[13px] leading-relaxed mb-4 line-clamp-2 font-light">
                               {cleanExcerpt}
                             </p>
                           )}
                         </div>
-                        <span className="flex items-center gap-2 text-gold-dark text-[11.5px] font-bold tracking-wider uppercase group-hover:gap-3 transition-all duration-200 pt-2 border-t border-border-light/60">
+                        <span className="flex items-center gap-2 text-gold text-[11.5px] font-bold tracking-wider uppercase group-hover:gap-3 transition-all duration-200 pt-2 border-t border-border-light/60">
                           {ctaReadMore} <ArrowRight size={13} />
                         </span>
                       </div>

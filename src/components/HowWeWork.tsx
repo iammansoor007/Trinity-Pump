@@ -8,10 +8,10 @@ import { useContent } from "../hooks/useContent";
 import { stripHtml } from "../lib/utils";
 
 const stepImages = [
-  "/uploads/blog/what-to-expect-during-a-deep-tissue-massage.jpg.jpeg",
-  "/uploads/blog/how-corrective-movement-helps-improve-posture-mobility.jpg.jpeg",
-  "/uploads/blog/deep-tissue-massage.jpg",
-  "/uploads/blog/fascial-stretch-therapy-explained-benefits-process.jpg.jpeg",
+  "/images/trinity/hero-banner.jpg",
+  "/images/trinity/rod-pumps.jpg",
+  "/images/trinity/rod-rotator.jpg",
+  "/images/trinity/oilfield-supplies.jpg",
 ];
 
 export default function HowItWorksSection() {
@@ -62,7 +62,7 @@ export default function HowItWorksSection() {
   };
 
   return (
-    <section className="bg-white py-16 md:py-32 relative border-t border-border-light/40">
+    <section className="bg-warm-gray py-16 md:py-32 relative border-t border-border-light/60">
       {/* Decorative background grid pattern */}
       <div className="absolute inset-0 opacity-[0.015] bg-grid-pattern-black pointer-events-none" />
 
@@ -70,11 +70,11 @@ export default function HowItWorksSection() {
 
         {/* ── Header ── */}
         <div className="mb-12 md:mb-20 max-w-xl">
-          <p className="section-label text-gold-dark mb-4">{stripHtml(label)}</p>
+          <p className="section-label text-gold mb-4">{stripHtml(label)}</p>
           <h2 className="display-heading text-[28px] min-[400px]:text-[34px] md:text-[48px] text-dark leading-tight">
             {stripHtml(title)}
           </h2>
-          <p className="text-dark/55 text-[14px] md:text-[15px] leading-relaxed mt-4">
+          <p className="text-body text-[14px] md:text-[15px] leading-relaxed mt-4">
             {stripHtml(description)}
           </p>
         </div>
@@ -137,16 +137,16 @@ export default function HowItWorksSection() {
                   data-step-index={idx}
                   onClick={() => handleStepClick(idx)}
                   className={`process-step-item py-6 md:py-8 border-b border-border-light transition-all duration-300 cursor-pointer flex flex-col justify-center min-h-[240px] md:min-h-[320px] rounded-lg px-3 md:px-4
-                    ${isActive ? "bg-warm-white/60 md:bg-transparent opacity-100 border-gold-dark/40 shadow-sm md:shadow-none" : "opacity-60 md:opacity-40 hover:opacity-80"}`}
+                    ${isActive ? "bg-white/80 md:bg-transparent opacity-100 border-gold/50 shadow-sm md:shadow-none" : "opacity-60 md:opacity-40 hover:opacity-80"}`}
                 >
                   {/* Step ID & Phase Label */}
                   <div className="flex items-center justify-between mb-3">
                     <span className={`text-[36px] md:text-[44px] font-serif font-bold leading-none transition-colors select-none
-                      ${isActive ? "text-gold-dark" : "text-dark/30"}`}>
+                      ${isActive ? "text-gold" : "text-dark/30"}`}>
                       {step.id}
                     </span>
                     <span className={`text-[10px] font-mono font-bold uppercase px-2.5 py-1 rounded-full border transition-all
-                      ${isActive ? "bg-gold-dark/15 text-gold-dark border-gold-dark/30" : "bg-black/5 text-dark/40 border-transparent"}`}>
+                      ${isActive ? "bg-gold/15 text-gold border-gold/30" : "bg-black/5 text-dark/40 border-transparent"}`}>
                       {phaseLabel} {step.id}
                     </span>
                   </div>
@@ -166,16 +166,16 @@ export default function HowItWorksSection() {
                     {stripHtml(step.title)}
                   </h3>
 
-                  <p className="text-dark/65 text-[13.5px] md:text-[14.5px] leading-relaxed mb-5 font-light">
+                  <p className="text-body text-[13.5px] md:text-[14.5px] leading-relaxed mb-5 font-light">
                     {stripHtml(step.description)}
                   </p>
 
                   {/* Action Items Checklist */}
                   <ul className="flex flex-col gap-2.5 pt-4 border-t border-border-light/60">
                     {actions.map((act: string) => (
-                      <li key={act} className="flex items-center gap-3 text-dark/75 text-[12.5px] md:text-[13px]">
+                      <li key={act} className="flex items-center gap-3 text-dark/80 text-[12.5px] md:text-[13px]">
                         <div className={`w-[18px] h-[18px] md:w-5 md:h-5 rounded-full flex items-center justify-center flex-shrink-0 transition-colors duration-300
-                          ${isActive ? "bg-gold-dark text-white" : "bg-gold-dark/15 text-gold-dark"}`}>
+                          ${isActive ? "bg-gold text-white" : "bg-gold/15 text-gold"}`}>
                           <Check size={11} strokeWidth={2.5} />
                         </div>
                         <span className="font-medium">{act}</span>

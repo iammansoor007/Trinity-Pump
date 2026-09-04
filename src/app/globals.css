@@ -26,106 +26,115 @@
 
 @layer base {
   :root {
-    /* Background - White */
-    --background: 0 0% 100%;
-    /* Foreground - Black for ALL text */
-    --foreground: 0 0% 0%;
-    /* Black */
+    /* ── The Complete Trinity Palette ───────────────────── */
+    --trinity-ink: #0B1726;
+    --trinity-navy: #14243A;
 
-    /* Card - White background with Black text */
+    --trinity-paper: #F5F3EE;
+    --trinity-concrete: #E8E6E0;
+    --trinity-white: #FFFFFF;
+
+    --trinity-gold: #C98A2E;
+    --trinity-bronze: #8A5A24;
+
+    --trinity-text: #5E6670;
+    --trinity-muted: #A9AFB5;
+
+    /* ── Background & Foreground Tokens ─────────────────── */
+    /* Main Background - Warm Architectural White #F5F3EE */
+    --background: 43 24% 95%;
+    /* Primary / Foreground - Deep Ink Navy #0B1726 */
+    --foreground: 213 55% 10%;
+
+    /* Card - Clean White */
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 0%;
-    /* Black */
+    --card-foreground: 213 55% 10%;
 
     /* Popover */
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 0%;
-    /* Black */
+    --popover: 43 24% 95%;
+    --popover-foreground: 213 55% 10%;
 
-    /* Primary - Gold */
-    --primary: 47 67% 45%;
-    --primary-foreground: 0 0% 0%;
+    /* Primary - Refined Industrial Gold #C98A2E */
+    --primary: 36 63% 48%;
+    --primary-foreground: 0 0% 100%;
 
-    /* Secondary - Darker Gold */
-    --secondary: 47 67% 38%;
-    --secondary-foreground: 0 0% 0%;
+    /* Secondary - Soft Concrete #E8E6E0 */
+    --secondary: 45 13% 89%;
+    --secondary-foreground: 213 55% 10%;
 
-    /* Muted - Light gray background */
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 45%;
-    /* Medium gray */
+    /* Muted */
+    --muted: 45 13% 89%;
+    --muted-foreground: 213 9% 40%; /* #5E6670 Text Gray */
 
-    /* Accent - Gold for highlights */
-    --accent: 47 67% 45%;
-    --accent-foreground: 0 0% 0%;
+    /* Accent - Refined Industrial Gold */
+    --accent: 36 63% 48%;
+    --accent-foreground: 213 55% 10%;
 
     /* Destructive */
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    /* Borders */
-    --border: 0 0% 90%;
-    --input: 0 0% 90%;
-    --ring: 47 67% 45%;
-    /* Gold ring focus */
+    /* Borders & Inputs */
+    --border: 45 13% 84%;
+    --input: 45 13% 84%;
+    --ring: 36 63% 48%;
 
     --radius: 0.5rem;
 
-    /* Deep - Gold for dark backgrounds */
-    --deep: 47 67% 45%;
-    --surface: 0 0% 98%;
+    --deep: 36 63% 48%;
+    --surface: 43 24% 95%;
     --surface-light: 0 0% 100%;
-    --text-dark: 0 0% 0%;
+    --text-dark: 213 55% 10%;
 
-    /* Sidebar - Gold */
-    --sidebar-background: 47 67% 45%;
-    --sidebar-foreground: 0 0% 0%;
-    --sidebar-primary: 47 67% 45%;
-    --sidebar-primary-foreground: 0 0% 0%;
-    --sidebar-accent: 47 67% 38%;
-    --sidebar-accent-foreground: 0 0% 0%;
-    --sidebar-border: 47 67% 38%;
-    --sidebar-ring: 47 67% 45%;
+    /* Sidebar */
+    --sidebar-background: 213 55% 10%;
+    --sidebar-foreground: 43 24% 95%;
+    --sidebar-primary: 36 63% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 213 48% 15%;
+    --sidebar-accent-foreground: 43 24% 95%;
+    --sidebar-border: 213 48% 18%;
+    --sidebar-ring: 36 63% 48%;
 
     /* Fonts */
     --font-heading: 'Space Grotesk', sans-serif;
     --font-body: 'DM Sans', sans-serif;
 
-    /* ── Brand Colors from new design system ────────────── */
-    --color-gold:           #f3e38c;
-    --color-gold-dark:      #be9c25;
-    --color-gold-hover:     #d8c66e;
-    --color-gold-light:     #f8f1c4;
-    --color-gold-muted:     rgba(243, 227, 140, 0.12);
+    /* ── Accent & Deep Accent ────────────────────────────── */
+    --color-gold:           #C98A2E;
+    --color-gold-dark:      #8A5A24;
+    --color-gold-hover:     #B57924;
+    --color-gold-light:     #E8B86E;
+    --color-gold-muted:     rgba(201, 138, 46, 0.12);
 
-    /* ── Dark Backgrounds ───────────────────────────────── */
-    --color-dark:           #0A0A0A;
-    --color-dark-2:         #111111;
-    --color-dark-3:         #1A1A1A;
-    --color-dark-4:         #222222;
+    /* ── Dark Statement Backgrounds (Deep Ink Navy) ─────── */
+    --color-dark:           #0B1726;
+    --color-dark-2:         #14243A;
+    --color-dark-3:         #1C304A;
+    --color-dark-4:         #233B59;
 
-    /* ── Light Backgrounds ──────────────────────────────────── */
-    --color-warm-white:     #F7F5F1;
-    --color-warm-cream:     #FAF9F5;
-    --color-card-bg:        #FAF9F6;
-    --color-warm-gray:      #EEECEA;
-    --color-off-white:      #F8F6F2;
+    /* ── Light Backgrounds (Warm Architectural White & Concrete) ── */
+    --color-warm-white:     #F5F3EE;
+    --color-warm-cream:     #F5F3EE;
+    --color-card-bg:        #FFFFFF;
+    --color-warm-gray:      #E8E6E0;
+    --color-off-white:      #F5F3EE;
 
-    /* ── Text ───────────────────────────────────────────── */
-    --color-body:           #1A1A1A;
-    --color-muted:          #6B6B6B;
-    --color-faint:          #9A9A9A;
+    /* ── Text (Text Gray & Light Technical Gray) ────────── */
+    --color-body:           #5E6670;
+    --color-muted:          #5E6670;
+    --color-faint:          #A9AFB5;
 
     /* ── Borders ────────────────────────────────────────── */
-    --color-border-light:   #E8E8E6;
+    --color-border-light:   #E8E6E0;
     --color-border-dark:    rgba(255, 255, 255, 0.10);
     --color-border-dark-2:  rgba(255, 255, 255, 0.06);
 
-    /* ── Custom Theme Extracted Colors ─────────────────── */
-    --color-brand-bg-light:      #FAF8F5;
-    --color-brand-border-light:  #EBEAE6;
-    --color-brand-border-muted:  #E2E1DD;
-    --color-brand-hover-cream:   #FAF5EA;
+    /* ── Brand Utilities ────────────────────────────────── */
+    --color-brand-bg-light:      #F5F3EE;
+    --color-brand-border-light:  #E8E6E0;
+    --color-brand-border-muted:  #D8D5CC;
+    --color-brand-hover-cream:   #E8E6E0;
 
     /* ── Typography ─────────────────────────────────────── */
     --font-sans:    var(--font-inter), Inter, ui-sans-serif, system-ui, -apple-system, sans-serif;
@@ -171,31 +180,31 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* ALL headings default to BLACK */
+  /* Headings default to Deep Ink Navy */
   h1,
   h2,
   h3,
   h4,
   h5,
   h6 {
-    @apply text-foreground;
+    color: var(--trinity-ink);
     font-family: var(--font-heading);
     letter-spacing: -0.03em;
     line-height: 1.05;
   }
 
-  /* Paragraphs default to BLACK */
+  /* Paragraphs and secondary text default to Text Gray #5E6670 */
   p {
-    @apply text-foreground;
+    color: var(--trinity-text);
   }
 
-  /* Links default to BLACK, hover to BLUE */
+  /* Links */
   a {
-    @apply text-foreground transition-colors duration-300;
+    transition: color 0.2s ease;
   }
 
   a:hover {
-    @apply text-primary;
+    color: var(--trinity-gold);
   }
 }
 
@@ -249,28 +258,28 @@
     @apply grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8;
   }
 
-  /* Blue to black gradient for special text */
+  /* Deep Ink Navy gradient for special text */
   .text-gradient {
-    background: linear-gradient(135deg, #2430D2 0%, #000000 100%);
+    background: linear-gradient(135deg, #0B1726 0%, #14243A 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }
 
-  /* Blue gradient for CTAs */
+  /* Deep Ink Navy gradient for CTAs */
   .bg-gradient-cta {
-    background: linear-gradient(135deg, #2430D2 0%, #1A24A8 100%);
+    background: linear-gradient(135deg, #0B1726 0%, #14243A 100%);
     color: white;
   }
 
-  /* Blue gradient for dark sections */
+  /* Deep statement background */
   .bg-patriotic {
-    background: linear-gradient(135deg, #2430D2 0%, #1A24A8 100%);
+    background: linear-gradient(135deg, #0B1726 0%, #14243A 100%);
     color: white;
   }
 
   .border-american {
-    border-color: #2430D2;
+    border-color: #C98A2E;
   }
 
   .hover-lift {
@@ -279,24 +288,24 @@
 
   .hover-lift:hover {
     transform: translateY(-4px);
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+    box-shadow: 0 10px 25px -5px rgba(11, 23, 38, 0.1), 0 8px 10px -6px rgba(11, 23, 38, 0.02);
   }
 
   /* Text color utilities */
   .text-navy {
-    color: #2430D2;
+    color: #0B1726;
   }
 
   .text-american-red {
-    color: #2430D2;
+    color: #8A5A24;
   }
 
   .bg-navy {
-    background-color: #2430D2;
+    background-color: #0B1726;
   }
 
   .bg-american-red {
-    background-color: #2430D2;
+    background-color: #8A5A24;
   }
 
   .glass {
@@ -424,14 +433,14 @@
     justify-content: center;
     gap: 9px;
     padding: 14px 28px;
-    background: linear-gradient(135deg, #fbf5d4 0%, #f3e38c 40%, #d8c66e 100%);
-    color: var(--color-dark);
+    background: #C98A2E;
+    color: #FFFFFF;
     font-size: 11.5px;
     font-weight: 700;
     letter-spacing: 0.11em;
     text-transform: uppercase;
     border: none;
-    box-shadow: 0 4px 15px rgba(216, 198, 110, 0.4);
+    box-shadow: 0 4px 15px rgba(201, 138, 46, 0.3);
     cursor: pointer;
     transition: all 0.3s ease;
     white-space: nowrap;
@@ -448,8 +457,8 @@
   }
 
   .btn-gold:hover { 
-    filter: brightness(1.1) contrast(1.05);
-    box-shadow: 0 6px 22px rgba(216, 198, 110, 0.65);
+    background: #8A5A24;
+    box-shadow: 0 6px 20px rgba(138, 90, 36, 0.45);
     transform: translateY(-2px);
   }
 
@@ -473,7 +482,7 @@
 
   .btn-gold-dark:hover { 
     background-color: var(--color-gold); 
-    color: var(--color-dark); 
+    color: #ffffff; 
   }
 
   .btn-outline-white {
@@ -501,34 +510,36 @@
   .btn-dark {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 9px;
     padding: 14px 28px;
-    background-color: var(--color-dark);
+    background-color: var(--trinity-ink);
     color: #ffffff;
     font-size: 11.5px;
     font-weight: 700;
     letter-spacing: 0.11em;
     text-transform: uppercase;
-    border: none;
+    border: 1px solid rgba(201, 138, 46, 0.25);
     cursor: pointer;
-    transition: background-color 0.2s ease;
+    transition: all 0.2s ease;
     white-space: nowrap;
     line-height: 1;
   }
 
   .btn-dark:hover { 
-    background-color: var(--color-dark-3); 
+    background-color: var(--trinity-navy); 
+    border-color: var(--trinity-gold);
   }
 
   /* ── Overlays ─────────────────────────────────────────── */
   .hero-img-overlay {
     background: linear-gradient(
       to right,
-      #0A0A0A 0%,
-      #0A0A0A 5%,
-      rgba(10, 10, 10, 0.82) 26%,
-      rgba(10, 10, 10, 0.25) 55%,
-      transparent 78%
+      #0B1726 0%,
+      #0B1726 10%,
+      rgba(11, 23, 38, 0.88) 35%,
+      rgba(11, 23, 38, 0.4) 65%,
+      transparent 85%
     );
   }
 
@@ -653,12 +664,12 @@
   }
 
   .bg-radial-dots-black {
-    background-image: radial-gradient(#000 1px, transparent 1px);
+    background-image: radial-gradient(rgba(11, 23, 38, 0.15) 1px, transparent 1px);
     background-size: 32px 32px;
   }
 
   .bg-grid-pattern-black {
-    background-image: linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px);
+    background-image: linear-gradient(rgba(11, 23, 38, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(11, 23, 38, 0.05) 1px, transparent 1px);
     background-size: 40px 40px;
   }
 
@@ -671,7 +682,7 @@
   }
 
   .bg-diagonal-stripes-black {
-    background-image: repeating-linear-gradient(-45deg, #000 0px, #000 1px, transparent 1px, transparent 12px);
+    background-image: repeating-linear-gradient(-45deg, rgba(11, 23, 38, 0.08) 0px, rgba(11, 23, 38, 0.08) 1px, transparent 1px, transparent 12px);
   }
 
   .bg-radial-dots-gold {
@@ -684,13 +695,13 @@
     display: flex;
     flex-direction: column;
     background: #fff;
-    border: 1px solid var(--brand-border-light, #e8e2d9);
+    border: 1px solid var(--color-border-light);
     overflow: hidden;
     transition: box-shadow 0.3s ease, transform 0.3s ease;
   }
 
   .blog-card:hover {
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 16px 40px rgba(11, 23, 38, 0.08);
     transform: translateY(-4px);
   }
 
@@ -706,38 +717,38 @@
     border: 1px solid rgba(255, 255, 255, 0.08) !important;
   }
   .stepper-card-dark:hover {
-    border-color: #f3e38c !important;
+    border-color: #C98A2E !important;
   }
 
   .candidate-card-clean {
     border: 1px solid transparent !important;
   }
   .candidate-card-clean:hover {
-    border-color: #be9c25 !important;
+    border-color: #8A5A24 !important;
   }
 
   .stepper-step-num {
-    border: 1px solid rgba(243, 227, 140, 0.3) !important;
+    border: 1px solid rgba(201, 138, 46, 0.3) !important;
     transition: all 0.3s ease;
   }
   .stepper-card-dark:hover .stepper-step-num {
-    background-color: #f3e38c !important;
-    color: #0a0a0a !important;
-    border-color: #f3e38c !important;
+    background-color: #C98A2E !important;
+    color: #FFFFFF !important;
+    border-color: #C98A2E !important;
   }
 
   .stepper-step-time {
-    border: 1px solid rgba(243, 227, 140, 0.2) !important;
+    border: 1px solid rgba(201, 138, 46, 0.2) !important;
   }
 
   .stepper-banner-cta {
-    border: 1px solid rgba(243, 227, 140, 0.3) !important;
+    border: 1px solid rgba(201, 138, 46, 0.3) !important;
   }
 
   /* ── Custom Scrollbar for Blog Navigation & TOC ── */
   .custom-scrollbar {
     scrollbar-width: thin;
-    scrollbar-color: rgba(243, 227, 140, 0.4) transparent;
+    scrollbar-color: rgba(201, 138, 46, 0.4) transparent;
   }
   .custom-scrollbar::-webkit-scrollbar {
     width: 4px;
@@ -746,10 +757,10 @@
     background: transparent;
   }
   .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: rgba(243, 227, 140, 0.3);
+    background: rgba(201, 138, 46, 0.3);
     border-radius: 4px;
   }
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: rgba(243, 227, 140, 0.6);
+    background: rgba(201, 138, 46, 0.6);
   }
 }

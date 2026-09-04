@@ -29,15 +29,15 @@ function FooterLogo({ logoUrl, siteTitle, logoText1, logoText2 }: { logoUrl?: st
   return (
     <Link href="/" className="inline-flex items-center gap-3 mb-6">
       <svg width="36" height="42" viewBox="0 0 42 48" fill="none" className="md:w-[42px] md:h-[48px] flex-shrink-0">
-        <path d="M21 1L40 9.5V25C40 36.5 31.5 44.5 21 47C10.5 44.5 2 36.5 2 25V9.5L21 1Z" fill="#C8960C" />
-        <text x="21" y="33" textAnchor="middle" fill="#0A0A0A" fontFamily="Georgia,serif" fontSize="20" fontWeight="bold" fontStyle="italic">M</text>
+        <path d="M21 1L40 9.5V25C40 36.5 31.5 44.5 21 47C10.5 44.5 2 36.5 2 25V9.5L21 1Z" fill="#C98A2E" />
+        <text x="21" y="33" textAnchor="middle" fill="#0B1726" fontFamily="var(--font-heading), sans-serif" fontSize="22" fontWeight="bold">T</text>
       </svg>
       <span className="flex flex-col text-left">
-        <span className="text-[15px] md:text-[18px] font-black tracking-[0.2em] text-white leading-none">
-          {logoText1 || "MUSCLE"}
+        <span className="text-[15px] md:text-[18px] font-black tracking-[0.16em] text-white leading-none">
+          {logoText1 || "TRINITY"}
         </span>
-        <span className="text-[10px] md:text-[11px] font-black tracking-[0.2em] text-gold mt-1 leading-none">
-          {logoText2 || "THERAPY"}
+        <span className="text-[10px] md:text-[11px] font-black tracking-[0.16em] text-gold mt-1 leading-none">
+          {logoText2 || "PUMP & SUPPLY"}
         </span>
       </span>
     </Link>
@@ -122,7 +122,7 @@ function MapPlaceholder({ addressText, iframeHtml }: { addressText: string; ifra
   return (
     <div className="mt-5 h-24 sm:h-28 bg-white/[0.03] rounded-md overflow-hidden relative flex items-center justify-center border border-white/10">
       <div className="relative flex flex-col items-center gap-1.5 px-3">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="#C8960C">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="#C98A2E">
           <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
         </svg>
         <p className="text-white/55 text-[10.5px] font-medium text-center whitespace-pre-line leading-tight">{addressText}</p>
@@ -232,7 +232,7 @@ export default function Footer() {
     <footer>
 
       {/* ══ Main Footer ════════════════════════════════ */}
-      <div className="bg-dark-2 pt-12 md:pt-16 pb-0 border-t border-border-dark/10">
+      <div className="bg-dark pt-12 md:pt-16 pb-0 border-t border-border-dark/20">
         <div className="site-container">
 
           {/* Responsive grid wrapping from 1 to 4 columns */}
@@ -310,7 +310,7 @@ export default function Footer() {
                       width="14" height="14"
                       viewBox="0 0 24 24"
                       fill="none"
-                      stroke="#C8960C"
+                      stroke="#C98A2E"
                       strokeWidth="1.5"
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -339,7 +339,7 @@ export default function Footer() {
               <p className="text-white/75">
                 Designed & Developed by{" "}
                 <a
-                  href="https://trinitypumpsupply.com/"
+                  href="https://mohsindesigns.com/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gold hover:text-white font-semibold underline decoration-gold/60 hover:decoration-white transition-colors"

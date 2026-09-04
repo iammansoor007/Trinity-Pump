@@ -6,27 +6,27 @@ import { ArrowRight, Home, Compass, BookOpen, PhoneCall } from "lucide-react";
 export default function NotFound() {
   const quickLinks = [
     {
-      title: "Clinical Services",
-      desc: "Deep tissue, mobility & performance bodywork",
+      title: "Pumps & Supplies",
+      desc: "Downhole rod pumps & oilfield solutions",
       href: "/services/",
       icon: Compass,
     },
     {
-      title: "Recovery Journal",
-      desc: "Expert therapy tips & clinical insights",
+      title: "Industry Insights",
+      desc: "Pump maintenance & oilfield articles",
       href: "/blogs/",
       icon: BookOpen,
     },
     {
       title: "Contact & Location",
-      desc: "Find our clinic & connect with our therapists",
-      href: "/#contact",
+      desc: "Connect with our Texas & New Mexico team",
+      href: "/contact-us/",
       icon: PhoneCall,
     },
   ];
 
   return (
-    <div className="relative min-h-[90vh] bg-[#0A0A0A] text-white flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8 pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
+    <div className="relative min-h-[90vh] bg-dark text-white flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8 pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
       {/* Background Decorative Gradients & Glows */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gold/10 rounded-full blur-[120px] pointer-events-none -z-10" />
       <div className="absolute bottom-10 right-10 w-[300px] h-[300px] bg-gold/5 rounded-full blur-[100px] pointer-events-none -z-10" />
@@ -35,7 +35,7 @@ export default function NotFound() {
       <div
         className="absolute inset-0 opacity-[0.03] pointer-events-none -z-10"
         style={{
-          backgroundImage: `linear-gradient(to right, #C8960C 1px, transparent 1px), linear-gradient(to bottom, #C8960C 1px, transparent 1px)`,
+          backgroundImage: `linear-gradient(to right, #C98A2E 1px, transparent 1px), linear-gradient(to bottom, #C98A2E 1px, transparent 1px)`,
           backgroundSize: "60px 60px",
         }}
       />
@@ -54,10 +54,10 @@ export default function NotFound() {
 
         {/* Title & Description */}
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white tracking-tight mt-2 mb-4 font-heading">
-          Lost Your Way to Recovery?
+          Page Not Found
         </h2>
         <p className="text-white/60 text-base sm:text-lg max-w-xl mx-auto mb-10 leading-relaxed font-light">
-          The page or therapy session you are looking for doesn't exist, has been moved, or is temporarily unavailable. Let's get you back on track.
+          The page or equipment detail you are looking for doesn't exist, has been moved, or is temporarily unavailable. Let's get you back on track.
         </p>
 
         {/* Action Buttons */}
