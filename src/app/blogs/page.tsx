@@ -39,15 +39,15 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return {
     title: {
-      absolute: seo.metaTitle || pageDoc?.title || "Our Blogs | 410 Muscle Therapy"
+      absolute: seo.metaTitle || pageDoc?.title || "Our Blogs | Trinity Pump & Supply"
     },
-    description: seo.metaDescription || blogData?.hero?.description || "Explore our latest articles, insights, and clinical recovery tips.",
+    description: seo.metaDescription || blogData?.hero?.description || "Explore our latest articles, insights, and downhole rod pump guides.",
     alternates: {
       canonical: canonicalUrl,
     },
     openGraph: {
-      title: seo.ogTitle || seo.metaTitle || pageDoc?.title || "Our Blogs | 410 Muscle Therapy",
-      description: seo.ogDescription || seo.metaDescription || blogData?.hero?.description || "Explore our latest articles, insights, and clinical recovery tips.",
+      title: seo.ogTitle || seo.metaTitle || pageDoc?.title || "Our Blogs | Trinity Pump & Supply",
+      description: seo.ogDescription || seo.metaDescription || blogData?.hero?.description || "Explore our latest articles, insights, and downhole rod pump guides.",
       url: pageUrl,
       type: 'website',
       images: seo.featuredImage ? [{ url: seo.featuredImage }] : [`${BASE_URL}/logo.png`],
@@ -58,11 +58,11 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     twitter: {
       card: 'summary_large_image',
-      title: seo.twitterTitle || seo.ogTitle || seo.metaTitle || "Our Blogs | 410 Muscle Therapy",
-      description: seo.twitterDescription || seo.ogDescription || seo.metaDescription || "Explore our latest articles, insights, and clinical recovery tips.",
+      title: seo.twitterTitle || seo.ogTitle || seo.metaTitle || "Our Blogs | Trinity Pump & Supply",
+      description: seo.twitterDescription || seo.ogDescription || seo.metaDescription || "Explore our latest articles, insights, and downhole rod pump guides.",
       images: [seo.featuredImage || seo.twitterImage || seo.ogImage || `${BASE_URL}/logo.png`].filter(Boolean) as string[],
-      site: "@410MuscleTherapy",
-      creator: "@410MuscleTherapy",
+      site: "@TrinityPump",
+      creator: "@TrinityPump",
     },
     robots: getRobotsMetadata(settings, seo)
   };
@@ -108,8 +108,8 @@ export default async function BlogsIndexPage() {
   };
 
   const schema = generateSchema({
-    title: seo.metaTitle || pageDoc?.title || "Our Blogs | 410 Muscle Therapy",
-    description: seo.metaDescription || description || "Explore our latest articles, insights, and clinical recovery tips.",
+    title: seo.metaTitle || pageDoc?.title || "Our Blogs | Trinity Pump & Supply",
+    description: seo.metaDescription || description || "Explore our latest articles, insights, and downhole rod pump guides.",
     slug: "blogs",
     type: "CollectionPage",
     breadcrumbTitle: "Blogs",

@@ -27,7 +27,7 @@ export default function ContactFaqSection({ pageData }: QAFormProps) {
     formEmailLabel = "EMAIL ADDRESS",
     formEmailPlaceholder = "antoine@example.com",
     formPhoneLabel = "PHONE NUMBER",
-    formPhonePlaceholder = "(410) 555-0199",
+    formPhonePlaceholder = "830-279-3996",
     formServiceLabel = "DESIRED SERVICE CATEGORY",
     formServicePlaceholder = "Select a service category",
     formMessageLabel = "YOUR MESSAGE / INJURY DETAILS",
@@ -122,7 +122,7 @@ export default function ContactFaqSection({ pageData }: QAFormProps) {
     }, 3000);
   };
 
-  const bookingUrl = globalMetadata?.bookingUrl || "https://www.styleseat.com/m/v/410muscletherapy";
+  const bookingUrl = globalMetadata?.bookingUrl || "/contact-us/";
 
   return (
     <section id="contact-support" className="bg-warm-cream py-20 md:py-28 overflow-hidden relative border-t border-brand-border-light">

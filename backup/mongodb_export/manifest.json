@@ -1,0 +1,132 @@
+{
+  "timestamp": "2026-09-04T14:51:09.530Z",
+  "sourceDb": "eagle_revolution",
+  "collections": {
+    "media": {
+      "name": "media",
+      "count": 97,
+      "indexes": []
+    },
+    "submissions": {
+      "name": "submissions",
+      "count": 12,
+      "indexes": []
+    },
+    "redirects": {
+      "name": "redirects",
+      "count": 2,
+      "indexes": []
+    },
+    "categories": {
+      "name": "categories",
+      "count": 6,
+      "indexes": [
+        {
+          "v": 2,
+          "key": {
+            "slug": 1
+          },
+          "name": "slug_1",
+          "unique": true
+        }
+      ]
+    },
+    "tags": {
+      "name": "tags",
+      "count": 0,
+      "indexes": [
+        {
+          "v": 2,
+          "key": {
+            "slug": 1
+          },
+          "name": "slug_1",
+          "unique": true
+        }
+      ]
+    },
+    "pages": {
+      "name": "pages",
+      "count": 36,
+      "indexes": [
+        {
+          "v": 2,
+          "key": {
+            "slug": 1
+          },
+          "name": "slug_1",
+          "unique": true
+        }
+      ]
+    },
+    "roles": {
+      "name": "roles",
+      "count": 4,
+      "indexes": [
+        {
+          "v": 2,
+          "key": {
+            "name": 1
+          },
+          "name": "name_1",
+          "unique": true
+        }
+      ]
+    },
+    "site_contents": {
+      "name": "site_contents",
+      "count": 2,
+      "indexes": [
+        {
+          "v": 2,
+          "key": {
+            "key": 1
+          },
+          "name": "key_1",
+          "unique": true
+        }
+      ]
+    },
+    "users": {
+      "name": "users",
+      "count": 2,
+      "indexes": [
+        {
+          "v": 2,
+          "key": {
+            "username": 1
+          },
+          "name": "username_1",
+          "unique": true
+        },
+        {
+          "v": 2,
+          "key": {
+            "email": 1
+          },
+          "name": "email_1",
+          "unique": true
+        }
+      ]
+    },
+    "posts": {
+      "name": "posts",
+      "count": 75,
+      "indexes": [
+        {
+          "v": 2,
+          "key": {
+            "slug": 1
+          },
+          "name": "slug_1",
+          "unique": true
+        }
+      ]
+    },
+    "activitylogs": {
+      "name": "activitylogs",
+      "count": 2420,
+      "indexes": []
+    }
+  }
+}

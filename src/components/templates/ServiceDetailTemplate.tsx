@@ -86,7 +86,7 @@ export default function ServiceDetailTemplate({ pageData, params: syncParams }: 
   const pageContent = pageData?.content || {};
   const serviceDetailPage = pageContent.serviceDetailPage || globalServiceDetailPage || {};
 
-  const defaultBookingUrl = "https://www.styleseat.com/m/v/410muscletherapy";
+  const defaultBookingUrl = "/contact-us/";
   const globalBooking = globalMetadata?.bookingUrl || defaultBookingUrl;
 
   // Hydrate configurations cleanly with zero duplicate texts
@@ -135,7 +135,7 @@ export default function ServiceDetailTemplate({ pageData, params: syncParams }: 
     overviewHipaaText: service.overviewHipaaText || serviceDetailPage.overviewHipaaText || "100% Satisfaction Guaranteed & Certified",
 
     // Candidates / Why Choose Us Section
-    candidateSectionLabel: service.candidateSectionLabel || serviceDetailPage.candidateSectionLabel || "WHY 410 MUSCLE THERAPY FEELS DIFFERENT",
+    candidateSectionLabel: service.candidateSectionLabel || serviceDetailPage.candidateSectionLabel || "WHY TRINITY PUMP & SUPPLY FEELS DIFFERENT",
     candidateTitle1: service.candidateTitle1 || serviceDetailPage.candidateTitle1 || "Targeted Care.",
     candidateTitle2: service.candidateTitle2 || serviceDetailPage.candidateTitle2 || "Built Around You.",
     candidateDescription: service.candidateDescription || serviceDetailPage.candidateDescription || "Movement work shaped around what your body can comfortably do. The goal is useful progress, not a rushed routine or generic adjustment.",

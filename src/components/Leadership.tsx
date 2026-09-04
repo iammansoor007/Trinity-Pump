@@ -24,7 +24,7 @@ export default function Leadership() {
     imageAlt = "Antoine Lyles"
   } = leadership || {};
 
-  const bookingUrl = ctaLink || globalMetadata?.bookingUrl || "https://www.styleseat.com/m/v/410muscletherapy";
+  const bookingUrl = ctaLink || globalMetadata?.bookingUrl || "/contact-us/";
 
   const containerVariants = {
     hidden: { opacity: 0 },

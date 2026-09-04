@@ -61,8 +61,8 @@ export const useContent = () => {
     footerContact.address = footerContact.address || info.address || footer?.address || "";
     footerContact.hours = footerContact.hours || info.hours || footer?.hours || "";
 
-    const footerCompany = getSafe(footer, 'company', { name: "410 Muscle Therapy", tagline: "Performance Recovery & Clinical Bodywork", description: "", logo: "" });
-    const footerBottom = getSafe(footer, 'bottom', { copyright: "© 2026 410 Muscle Therapy", rights: "All Rights Reserved", tagline: "", links: [] });
+    const footerCompany = getSafe(footer, 'company', { name: "Trinity Pump & Supply", tagline: "Your Trusted Partner for Downhole Rod Pumps and Oilfield Supplies", description: "", logo: "" });
+    const footerBottom = getSafe(footer, 'bottom', { copyright: "© 2026 Trinity Pump & Supply", rights: "All Rights Reserved", tagline: "", links: [] });
     const footerMarquee = getSafe(footer, 'marquee', { texts: [], speed: 30, repeats: 8 });
     const footerCertifications = getSafe(footer, 'certifications', []);
 
@@ -146,7 +146,7 @@ export const useContent = () => {
                 titleLine1: s.titleLine1 || "Proven Results.",
                 titleLine2: s.titleLine2 || "Professional",
                 titleItalicWord: s.titleItalicWord || "Standards.",
-                description: s.description || "At 410 Muscle Therapy, we believe that true recovery is built on specialized bodywork and precision movement science.",
+                description: s.description || "At Trinity Pump & Supply, we deliver high-quality USA-manufactured pump parts and oilfield supplies across Texas and New Mexico.",
                 image: s.image || "/images/blog-3.webp",
                 imageAlt: s.imageAlt || "Clinical sports massage session",
                 items
@@ -410,7 +410,7 @@ export const useContent = () => {
             const formEmailLabel = quoteObj.formEmailLabel || "EMAIL ADDRESS";
             const formEmailPlaceholder = quoteObj.formEmailPlaceholder || "antoine@example.com";
             const formPhoneLabel = quoteObj.formPhoneLabel || "PHONE NUMBER";
-            const formPhonePlaceholder = quoteObj.formPhonePlaceholder || "(410) 555-0199";
+            const formPhonePlaceholder = quoteObj.formPhonePlaceholder || "830-279-3996";
             const formServiceLabel = quoteObj.formServiceLabel || "DESIRED SERVICE CATEGORY";
             const formServicePlaceholder = quoteObj.formServicePlaceholder || "Select a service category";
             const formMessageLabel = quoteObj.formMessageLabel || "YOUR MESSAGE / INJURY DETAILS";
@@ -472,7 +472,7 @@ export const useContent = () => {
                 title: cb.title || "Ready to Feel Your Best?",
                 description: cb.description || "Book your appointment today and start your journey to a pain-free, stronger you.",
                 button: cb.button || "BOOK APPOINTMENT",
-                buttonUrl: cb.buttonUrl || cb.btnUrl || "https://www.styleseat.com/m/v/410muscletherapy"
+                buttonUrl: cb.buttonUrl || cb.btnUrl || "/contact-us/"
             };
         })(),
         footer: {
@@ -508,7 +508,7 @@ export const useContent = () => {
             ...(completeData?.recognition ? { recognition: completeData.recognition } : {}),
         },
         images: getSafe(completeData, 'images', {}),
-        loader: getSafe(completeData, 'loader', { company: { name: "410 Muscle Therapy", tagline: "Performance Recovery Specialist" }, phases: { simpleDark: 200, logoText: 400, ready: 100 } }),
+        loader: getSafe(completeData, 'loader', { company: { name: "Trinity Pump & Supply", tagline: "Downhole Rod Pumps & Oilfield Supplies" }, phases: { simpleDark: 200, logoText: 400, ready: 100 } }),
         quickQuote: getSafe(completeData, 'quickQuote', {
             title: "",
             description: "",
@@ -529,7 +529,7 @@ export const useContent = () => {
             items: []
         }),
         serviceDetailPage: getSafe(completeData, 'serviceDetailPage'),
-        settings: completeData?.settings || { siteTitle: "410 Muscle Therapy", siteTemplate: "%s | 410 Muscle Therapy", favicon: "/logo.png" },
+        settings: completeData?.settings || { siteTitle: "Trinity Pump & Supply", siteTemplate: "%s | Trinity Pump & Supply", favicon: "/logo.png" },
         globalSite: getSafe(completeData, 'globalSite', {}),
         globalMetadata: getSafe(completeData, 'globalMetadata', {}),
         faqPage: getSafe(completeData, 'faqPage'),

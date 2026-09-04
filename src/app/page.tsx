@@ -33,13 +33,11 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     openGraph: {
       url: pageUrl,
-      siteName: "410 Muscle Therapy",
+      siteName: "Trinity Pump & Supply",
       type: "website",
     },
     twitter: {
       card: "summary_large_image",
-      site: "@410MuscleTherapy",
-      creator: "@410MuscleTherapy",
     }
   };
 
@@ -109,7 +107,7 @@ export async function generateMetadata(): Promise<Metadata> {
     homePageDoc?.title ||
     homeData?.seo?.metaTitle ||
     settings?.siteTitle ||
-    "Massage Therapy in Timonium Maryland | 410 Muscle Therapy";
+    "Trinity Pump & Supply | Downhole Rod Pumps & Oilfield Supplies";
 
   const metaDescription =
     seo.metaDescription ||
@@ -118,7 +116,7 @@ export async function generateMetadata(): Promise<Metadata> {
     homeData?.hero?.description ||
     homeData?.hero?.subheadline ||
     settings?.siteDescription ||
-    "Get real pain relief with massage therapy Timonium Maryland. 410 Muscle Therapy melts deep knots, eases stiffness and gets you moving. Book your session now.";
+    "Delivering High-Quality USA-Manufactured Downhole Rod Pump Parts and Oilfield Services Across Texas and New Mexico with 100+ Years Combined Experience.";
 
   return {
     ...metadata,
@@ -135,13 +133,13 @@ export async function generateMetadata(): Promise<Metadata> {
       description: seo.ogDescription || metaDescription,
       url: pageUrl,
       type: "website",
-      siteName: "410 Muscle Therapy",
+      siteName: "Trinity Pump & Supply",
       images: [
         {
           url: seo.ogImage || seo.featuredImage || settings?.favicon || `${BASE_URL}/logo.png`,
           width: 1200,
           height: 630,
-          alt: "410 Muscle Therapy – Performance Recovery & Clinical Bodywork Maryland",
+          alt: "Trinity Pump & Supply – Downhole Rod Pumps & Oilfield Supplies Texas",
           type: "image/png",
         },
       ],
@@ -151,8 +149,8 @@ export async function generateMetadata(): Promise<Metadata> {
       title: seo.twitterTitle || seo.ogTitle || metaTitle,
       description: seo.twitterDescription || seo.ogDescription || metaDescription,
       images: [seo.twitterImage || seo.ogImage || seo.featuredImage || settings?.favicon || `${BASE_URL}/logo.png`],
-      creator: "@410MuscleTherapy",
-      site: "@410MuscleTherapy",
+      creator: "@TrinityPump",
+      site: "@TrinityPump",
     },
   };
 }

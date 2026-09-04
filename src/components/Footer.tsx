@@ -19,7 +19,7 @@ function FooterLogo({ logoUrl, siteTitle, logoText1, logoText2 }: { logoUrl?: st
         <div className="relative w-[110px] h-[110px] sm:w-[130px] sm:h-[130px] flex items-center justify-center overflow-hidden">
           <img
             src={logoUrl}
-            alt={siteTitle || "410 Muscle Therapy Logo"}
+            alt={siteTitle || "Trinity Pump & Supply Logo"}
             className="object-contain w-full h-full"
           />
         </div>
@@ -171,8 +171,8 @@ export default function Footer() {
   const addressCleanHtml = rawAddress.replace(iframeRegex, "").trim();
   const addressText = stripHtml(addressCleanHtml);
 
-  const phoneText: string = stripHtml(contactInfo.phone || (footer as any)?.phone || "(410) 555-1234");
-  const emailText: string = stripHtml(contactInfo.email || (footer as any)?.email || "antoine.lyles@yahoo.com");
+  const phoneText: string = stripHtml(contactInfo.phone || (footer as any)?.phone || "830-279-3996");
+  const emailText: string = stripHtml(contactInfo.email || (footer as any)?.email || "trinitypumpsupply@gmail.com");
 
   // Construct business hours dynamically from general settings or fall back
   let hoursText = "";
@@ -207,7 +207,7 @@ export default function Footer() {
     hoursText = "Sun–Sat: 8:00 AM – 7:00 PM";
   }
 
-  const copyrightText: string = stripHtml(bottomInfo.copyright || (footer as any)?.copyright || "© 2026 410 Muscle Therapy. All Rights Reserved.");
+  const copyrightText: string = stripHtml(bottomInfo.copyright || (footer as any)?.copyright || "© 2026 Trinity Pump & Supply. All Rights Reserved.");
 
   const companyLinks = navbar?.companyLinks || navbar?.links || [];
   const quickLinksData = companyLinks.map((link: any) => {
@@ -339,7 +339,7 @@ export default function Footer() {
               <p className="text-white/75">
                 Designed & Developed by{" "}
                 <a
-                  href="https://410-cms.vercel.app/"
+                  href="https://trinitypumpsupply.com/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gold hover:text-white font-semibold underline decoration-gold/60 hover:decoration-white transition-colors"

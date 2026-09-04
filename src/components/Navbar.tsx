@@ -90,7 +90,7 @@ const Navbar = () => {
               <div className="relative h-[85px] w-[85px] min-[400px]:w-[110px] min-[400px]:h-[110px] sm:w-[150px] sm:h-[150px] flex items-center justify-center overflow-hidden">
                 <img
                   src={navbar.logo}
-                  alt={navbar.siteTitle || "410 Muscle Therapy Logo"}
+                  alt={navbar.siteTitle || "Trinity Pump & Supply Logo"}
                   className="object-contain w-full h-full"
                 />
               </div>

@@ -41,7 +41,7 @@ export default function HomeEditor({ pageId, data, setData }: { pageId: string, 
           titleLine1: "Proven Results.",
           titleLine2: "Professional",
           titleItalicWord: "Standards.",
-          description: "At 410 Muscle Therapy, we believe that true recovery is built on specialized bodywork and precision movement science.",
+          description: "At Trinity Pump & Supply, we deliver high-quality USA-manufactured pump parts and oilfield supplies across Texas and New Mexico.",
           image: "/images/blog-3.webp",
           imageAlt: "Clinical sports massage session",
           items: [
@@ -439,7 +439,7 @@ export default function HomeEditor({ pageId, data, setData }: { pageId: string, 
                         value={data.stats?.description || ""}
                         onChange={(e) => updateSection("stats", "description", e.target.value)}
                         className={UI.input + " h-24"}
-                        placeholder="At 410 Muscle Therapy, we believe that true recovery is built on..."
+                        placeholder="At Trinity Pump & Supply, we deliver high-quality USA-manufactured pump parts..."
                       />
                     </div>
                   </div>

@@ -43,18 +43,15 @@ export async function generateMetadata(): Promise<Metadata> {
       icon: settings.favicon || `${BASE_URL}/logo.png`,
       apple: settings.favicon || `${BASE_URL}/logo.png`,
     },
-    facebook: {
-      appId: "410-Muscle-Therapy-61564977483096",
-    },
     title: {
       default: settings.siteTitle,
       template: settings.siteTemplate,
     },
     description: settings.siteDescription,
-    keywords: settings.siteKeywords || ["410 Muscle Therapy"],
-    authors: [{ name: "410 Muscle Therapy", url: `${BASE_URL}/` }],
-    creator: "410 Muscle Therapy",
-    publisher: "410 Muscle Therapy",
+    keywords: settings.siteKeywords || ["Trinity Pump & Supply", "Downhole Rod Pumps", "Oilfield Supplies", "Burleson HD Rod Rotator"],
+    authors: [{ name: "Trinity Pump & Supply", url: `${BASE_URL}/` }],
+    creator: "Trinity Pump & Supply",
+    publisher: "Trinity Pump & Supply",
 
     // ── Robots & Canonical ──
     robots: getRobotsMetadata(settings),
@@ -67,7 +64,7 @@ export async function generateMetadata(): Promise<Metadata> {
       type: "website",
       locale: "en_US",
       url: `${BASE_URL}/`,
-      siteName: "410 Muscle Therapy",
+      siteName: "Trinity Pump & Supply",
       title: settings.siteTitle,
       description: settings.siteDescription,
       images: [
@@ -75,7 +72,7 @@ export async function generateMetadata(): Promise<Metadata> {
           url: settings.favicon || `${BASE_URL}/logo.png`,
           width: 1200,
           height: 630,
-          alt: "410 Muscle Therapy – Performance Recovery & Clinical Bodywork Maryland",
+          alt: "Trinity Pump & Supply – Downhole Rod Pumps & Oilfield Supplies Texas",
           type: "image/png",
         },
       ],
@@ -87,8 +84,8 @@ export async function generateMetadata(): Promise<Metadata> {
       title: settings.siteTitle,
       description: settings.siteDescription,
       images: [settings.favicon || `${BASE_URL}/logo.png`],
-      creator: "@410MuscleTherapy",
-      site: "@410MuscleTherapy",
+      creator: "@TrinityPump",
+      site: "@TrinityPump",
     },
 
     other: {

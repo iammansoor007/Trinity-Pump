@@ -24,8 +24,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   const seo = service.seo || {};
-  const title = seo.metaTitle || seo.title || service.title || "Service | 410 Muscle Therapy";
-  const description = seo.metaDescription || seo.description || service.description || "Specialized performance bodywork and mobility restoration in Maryland.";
+  const title = seo.metaTitle || seo.title || service.title || "Service | Trinity Pump & Supply";
+  const description = seo.metaDescription || seo.description || service.description || "High-quality downhole rod pumps and oilfield supplies across Texas and New Mexico.";
 
   return {
     title,
@@ -53,8 +53,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title,
       description,
       images: [seo.featuredImage || seo.twitterImage || seo.ogImage || `${BASE_URL}/logo.png`],
-      site: "@410MuscleTherapy",
-      creator: "@410MuscleTherapy",
+      site: "@TrinityPump",
+      creator: "@TrinityPump",
     },
   };
 }

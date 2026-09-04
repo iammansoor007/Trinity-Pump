@@ -27,7 +27,7 @@ export default function HeroSection() {
   const cleanTitle2 = stripHtml(title2);
   const cleanDescription = stripHtml(description);
 
-  const bookingUrl = globalMetadata?.bookingUrl || "https://www.styleseat.com/m/v/410muscletherapy";
+  const bookingUrl = globalMetadata?.bookingUrl || "/contact-us/";
 
   const containerVariants = {
     hidden: { opacity: 0 },

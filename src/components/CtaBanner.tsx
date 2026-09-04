@@ -17,7 +17,7 @@ export default function CtaBanner() {
     buttonUrl = ""
   } = ctaBanner || {};
 
-  const bookingUrl = btnUrl || buttonUrl || globalMetadata?.bookingUrl || "https://www.styleseat.com/m/v/410muscletherapy";
+  const bookingUrl = btnUrl || buttonUrl || globalMetadata?.bookingUrl || "/contact-us/";
 
   return (
     <section className="bg-gold relative overflow-hidden py-12 md:py-14">
