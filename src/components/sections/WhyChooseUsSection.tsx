@@ -21,40 +21,23 @@ const cleanTextOrFallback = (rawHtml: string | undefined | null, fallback: strin
 export default function WhyChooseUsSection() {
   const { whyChooseUs } = useContent();
   
-  const badge = whyChooseUs?.section?.badge || "WHY CHOOSE US";
-  const headline = whyChooseUs?.section?.headline || "Designed for Maximum Performance";
-  const rawDescription = whyChooseUs?.section?.description || whyChooseUs?.description || "";
-  const description = cleanTextOrFallback(
-    rawDescription,
-    "We blend clinical orthopedic massage with modern recovery science to get you back to your best self."
-  );
-  
-  const rawFeatures = Array.isArray(whyChooseUs?.features) && whyChooseUs.features.length > 0
-    ? whyChooseUs.features
-    : [
-        { title: "Clinical Expertise", description: "Specialized in soft-tissue dysfunction and chronic pain patterns.", icon: "Shield" },
-        { title: "Personalized Approach", description: "Every session is custom-tailored to your specific athletic goals.", icon: "Zap" },
-        { title: "Recovery Focused", description: "Designed to accelerate muscle repair and restore range of motion.", icon: "Flame" }
-      ];
+  if (!whyChooseUs || (!whyChooseUs.features?.length && !whyChooseUs.section?.headline)) {
+    return null;
+  }
 
+  const badge = whyChooseUs?.section?.badge || "";
+  const headline = whyChooseUs?.section?.headline || "";
+  const rawDescription = whyChooseUs?.section?.description || whyChooseUs?.description || "";
+  const description = cleanTextOrFallback(rawDescription, "");
+  
+  const rawFeatures = Array.isArray(whyChooseUs?.features) ? whyChooseUs.features : [];
   const features = rawFeatures.map((f: any, idx: number) => ({
-    title: f.title || f.name || `Advantage ${idx + 1}`,
-    description: cleanTextOrFallback(
-      f.description || f.desc || "",
-      "Specialized therapeutic care tailored to your exact athletic recovery needs."
-    ),
+    title: f.title || f.name || `Feature ${idx + 1}`,
+    description: cleanTextOrFallback(f.description || f.desc || "", ""),
     icon: f.icon || "Shield"
   }));
 
-  const rawStats = Array.isArray(whyChooseUs?.stats) && whyChooseUs.stats.length > 0
-    ? whyChooseUs.stats
-    : [
-        { value: "500", suffix: "+", label: "Athletes Treated" },
-        { value: "5", suffix: "/5", label: "Client Rating" },
-        { value: "100", suffix: "%", label: "Satisfaction Guarantee" }
-      ];
-
-  const stats = rawStats;
+  const stats = Array.isArray(whyChooseUs?.stats) ? whyChooseUs.stats : [];
 
   return (
     <section className="bg-dark border-b border-border-dark py-16 md:py-24 relative overflow-hidden">

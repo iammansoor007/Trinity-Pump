@@ -236,7 +236,7 @@ export default async function BlogPostPage({ params }: Props) {
   const featuredImage = normalizeBlogImage(post.featuredImage) || "/images/blog-3.webp";
 
   const rawAuthor = post.author as any;
-  let cleanName = "Antoine Lyles";
+  let cleanName = "Trinity Pump Specialist";
   if (rawAuthor) {
     if (typeof rawAuthor === "string" && rawAuthor.trim()) {
       cleanName = rawAuthor.trim();
@@ -247,7 +247,7 @@ export default async function BlogPostPage({ params }: Props) {
     }
   }
 
-  let cleanRole = "Founder & Licensed Massage Therapist";
+  let cleanRole = "Pump & Downhole Specialist";
   if (rawAuthor?.role) {
     if (typeof rawAuthor.role === "object" && rawAuthor.role?.name) {
       cleanRole = String(rawAuthor.role.name);
@@ -256,7 +256,7 @@ export default async function BlogPostPage({ params }: Props) {
     }
   }
 
-  let cleanAvatar = "/images/theraphist.jpeg";
+  let cleanAvatar = "/images/trinity/hero_banner.jpg";
   if (rawAuthor) {
     const candidate = rawAuthor.image || rawAuthor.avatar;
     if (candidate && typeof candidate === "string" && (candidate.startsWith("http") || candidate.startsWith("/"))) {
@@ -327,7 +327,7 @@ export default async function BlogPostPage({ params }: Props) {
         "isPartOf": { "@id": url },
         "author": {
           "@type": "Person",
-          "@id": `${BASE_URL}/#/schema/person/${post.author?._id || "antoine-lyles"}`,
+          "@id": `${BASE_URL}/#/schema/person/${post.author?._id || "trinity-specialist"}`,
           "name": authorInfo.name,
           "jobTitle": authorInfo.role
         },

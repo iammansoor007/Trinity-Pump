@@ -33,7 +33,7 @@ export async function POST(request: Request) {
       const resendKey = process.env.RESEND_API_KEY;
       if (resendKey) {
         // Fetch dynamic receiver email from CMS
-        let receiverEmail = 'antoine.lyles@yahoo.com';
+        let receiverEmail = process.env.CONTACT_EMAIL || 'trinitypumpsupply@gmail.com';
         try {
           const contentDoc = await Content.findOne({ key: "complete_data" }).lean() as any;
           if (contentDoc?.data?.contactPage?.email) {

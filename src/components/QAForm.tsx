@@ -62,12 +62,16 @@ export default function ContactFaqSection({ pageData }: QAFormProps) {
 
   // Dynamic FAQs resolution
   const activeFaqs = (faqs && faqs.length > 0) ? faqs.map((f: any) => ({
-    q: f.question || f.q || f.title || "",
-    a: f.answer || f.a || f.desc || f.description || ""
-  })) : [];
+    q: typeof f?.question === 'string' ? f.question : (typeof f?.q === 'string' ? f.q : (typeof f?.title === 'string' ? f.title : "")),
+    a: typeof f?.answer === 'string' ? f.answer : (typeof f?.a === 'string' ? f.a : (typeof f?.desc === 'string' ? f.desc : (typeof f?.description === 'string' ? f.description : "")))
+  })).filter((f: any) => f.q && f.a) : [];
 
-  const displayFaqLabel = pageData?.faqBadge || pageData?.content?.faqBadge || faqLabel;
-  const displayFaqTitle = pageData?.faqTitle || pageData?.content?.faqTitle || faqTitle;
+  const displayFaqLabel = typeof (pageData?.faqBadge || pageData?.content?.faqBadge || faqLabel) === 'string' 
+    ? (pageData?.faqBadge || pageData?.content?.faqBadge || faqLabel) 
+    : "";
+  const displayFaqTitle = typeof (pageData?.faqTitle || pageData?.content?.faqTitle || faqTitle) === 'string' 
+    ? (pageData?.faqTitle || pageData?.content?.faqTitle || faqTitle) 
+    : "";
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -234,11 +238,15 @@ export default function ContactFaqSection({ pageData }: QAFormProps) {
                       className="w-full bg-[#F5F3EE] border border-[#D6D3CC] focus:border-[#C98A2E] focus:outline-none px-4 py-3 text-[14px] text-[#0B1726] rounded-sm font-sans"
                     >
                       <option value="">{formServicePlaceholder}</option>
-                      {serviceOptions.map((opt: string, oIdx: number) => (
-                        <option key={oIdx} value={opt}>
-                          {opt}
-                        </option>
-                      ))}
+                      {serviceOptions.map((opt: any, oIdx: number) => {
+                        const optLabel = typeof opt === 'string' ? opt : (opt?.label || opt?.name || opt?.title || opt?.value || "");
+                        const optValue = typeof opt === 'string' ? opt : (opt?.value || opt?.id || opt?.label || "");
+                        return (
+                          <option key={oIdx} value={optValue}>
+                            {optLabel}
+                          </option>
+                        );
+                      })}
                     </select>
                   </div>
                 </div>
@@ -273,8 +281,8 @@ export default function ContactFaqSection({ pageData }: QAFormProps) {
 
                   {(trustHipa || trustResponse) && (
                     <div className="flex items-center gap-4 text-[11.5px] text-[#5E6670] font-mono">
-                      {trustHipa && <span>✓ {trustHipa}</span>}
-                      {trustResponse && <span>✓ {trustResponse}</span>}
+                      {trustHipa && typeof trustHipa === 'string' && <span>✓ {trustHipa}</span>}
+                      {trustResponse && typeof trustResponse === 'string' && <span>✓ {trustResponse}</span>}
                     </div>
                   )}
                 </div>

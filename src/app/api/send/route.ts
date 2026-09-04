@@ -80,7 +80,7 @@ export async function POST(request: Request) {
     }
 
     // Fetch dynamic email from Content CMS
-    let receiverEmail = 'antoine.lyles@yahoo.com';
+    let receiverEmail = process.env.CONTACT_EMAIL || 'trinitypumpsupply@gmail.com';
     try {
       const contentDoc = await Content.findOne({ key: "complete_data" }).lean() as any;
       if (contentDoc && contentDoc.data) {
@@ -101,7 +101,7 @@ export async function POST(request: Request) {
     }
 
     if (!receiverEmail || !receiverEmail.includes('@')) {
-      receiverEmail = 'antoine.lyles@yahoo.com';
+      receiverEmail = process.env.CONTACT_EMAIL || 'trinitypumpsupply@gmail.com';
     }
 
     const to = receiverEmail;

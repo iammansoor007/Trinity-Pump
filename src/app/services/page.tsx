@@ -33,7 +33,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title: {
       absolute: seo.metaTitle || pageDoc?.title || "Our Services"
     },
-    description: seo.metaDescription || servicesData?.description || "Discover our range of premium recovery and performance muscle therapies.",
+    description: seo.metaDescription || servicesData?.description || "Explore our comprehensive line of API downhole rod pumps, specialty pumps, repair services, and oilfield supplies.",
     alternates: {
       canonical: seo.canonicalUrl || pageUrl,
     },

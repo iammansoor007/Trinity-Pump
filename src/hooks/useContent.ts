@@ -88,21 +88,21 @@ export const useContent = () => {
         hero: (() => {
             const h = getSafe(completeData, 'hero', { description: "" });
             
-            const label = h.label || h.badge || "Performance Recovery Specialist • Est. 2020";
+            const label = h.label || h.badge || "";
             
             const headlines = h.headlines || [];
-            const title1 = h.title1 || headlines[0]?.text || "Recover Faster.";
-            const title2 = h.title2 || headlines[1]?.text || "Perform Higher.";
+            const title1 = h.title1 || headlines[0]?.text || "";
+            const title2 = h.title2 || headlines[1]?.text || "";
             
             const buttons = h.buttons || [];
-            const ctaBook = h.ctaBook || buttons[0]?.text || "BOOK RECOVERY SESSION";
-            const ctaServices = h.ctaServices || buttons[1]?.text || "EXPLORE SERVICES";
+            const ctaBook = h.ctaBook || buttons[0]?.text || "";
+            const ctaServices = h.ctaServices || buttons[1]?.text || "";
             
             const stats = h.stats || [];
-            const socialProofText = h.socialProofText || (stats.length > 0 ? `${stats[0].value} ${stats[0].label}` : "Trusted by 500+ athletes & active adults");
+            const socialProofText = h.socialProofText || (stats.length > 0 ? `${stats[0].value} ${stats[0].label}` : "");
                 
-            const image = h.image || h.images?.[0] || "/images/hero-bg.webp";
-            const imageAlt = h.imageAlt || h.bgImageAlt || "Expert muscle therapy session";
+            const image = h.image || h.images?.[0] || "";
+            const imageAlt = h.imageAlt || h.bgImageAlt || "";
             
             return {
                 ...h,
@@ -125,21 +125,15 @@ export const useContent = () => {
                     { text: ctaBook, href: h.bookingUrl || "/#contact", primary: true, icon: "ArrowRight" },
                     { text: ctaServices, href: "/#services", primary: false, icon: "ArrowRight" }
                 ],
-                stats: stats.length > 0 ? stats : [{ value: "500+", label: "Athletes Treated", icon: "Star" }],
-                images: [image],
+                stats: stats.length > 0 ? stats : [],
+                images: image ? [image] : [],
                 bgImageAlt: imageAlt
             };
         })(),
         about: getSafe(completeData, 'about'),
         stats: (() => {
             const s = getSafe(completeData, 'stats', {});
-            const defaultItems = [
-                { value: "8+", label: "Years of Experience" },
-                { value: "5,000+", label: "Clients Treated" },
-                { value: "15,000+", label: "Sessions Completed" },
-                { value: "100%", label: "Satisfaction Rate" }
-            ];
-            const items = Array.isArray(s.items) && s.items.length > 0 ? s.items : defaultItems;
+            const items = Array.isArray(s.items) ? s.items : [];
             return {
                 ...s,
                 label: s.label || "",
@@ -297,9 +291,9 @@ export const useContent = () => {
         testimonials: (() => {
             const t = getSafe(completeData, 'testimonials', { items: [], results: [] });
             
-            const label = t.label || t.section?.badge || "Reviews";
-            const title1 = t.title1 || t.section?.headlinePrefix || "Real People.";
-            const title2 = t.title2 || t.section?.headlineHighlight || "Real Results.";
+            const label = t.label || t.section?.badge || "";
+            const title1 = t.title1 || t.section?.headlinePrefix || "";
+            const title2 = t.title2 || t.section?.headlineHighlight || "";
             const quoteIcon = t.quoteIcon || "\"";
             const dash = t.dash || "—";
             
@@ -528,9 +522,9 @@ export const useContent = () => {
         globalMetadata: getSafe(completeData, 'globalMetadata', {}),
         faqPage: getSafe(completeData, 'faqPage'),
         blogSection: getSafe(completeData, 'blogSection', {
-            title: "Latest from the Blog",
-            subtitle: "Insights & News",
-            description: "Stay updated with the latest insights, recovery techniques, and clinical bodywork tips for peak performance.",
+            title: "Latest News & Updates",
+            subtitle: "Field Insights",
+            description: "",
             ctaAll: "View All Articles",
             ctaReadMore: "Read Article",
             selectedPosts: []

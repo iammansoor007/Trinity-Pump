@@ -57,26 +57,26 @@ export default function TermsPage() {
               </p>
             </div>
 
-            {/* Muscle Therapy Services */}
+            {/* Oilfield Equipment & Services */}
             <div className="bg-card rounded-2xl border border-border p-6 md:p-8">
               <h2 className="text-xl md:text-2xl font-bold text-foreground mb-4 flex items-center gap-2">
                 <Icon name="Activity" className="w-5 h-5 text-primary" />
-                2. Clinical Bodywork & Therapy Services
+                2. Equipment Fabrication, Rebuilding & Field Services
               </h2>
               
-              <h3 className="text-lg font-semibold text-foreground mt-4 mb-2">2.1 Appointments & Intake</h3>
+              <h3 className="text-lg font-semibold text-foreground mt-4 mb-2">2.1 Quotations & Work Orders</h3>
               <ul className="space-y-2 text-muted-foreground mb-4">
                 <li className="flex items-start gap-2">
                   <Icon name="Check" className="w-4 h-4 text-primary mt-1 flex-shrink-0" />
-                  <span>All clients must complete a health intake assessment before receiving bodywork</span>
+                  <span>All pump manufacturing, rebuilds, and supply orders are processed via official purchase or work orders</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <Icon name="Check" className="w-4 h-4 text-primary mt-1 flex-shrink-0" />
-                  <span>Please arrive 10 minutes prior to your scheduled session</span>
+                  <span>Custom downhole pump configurations require accurate well depth, stroke length, and metallurgical specifications</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <Icon name="Check" className="w-4 h-4 text-primary mt-1 flex-shrink-0" />
-                  <span>Sessions are customized based on individual biomechanical and recovery goals</span>
+                  <span>Services and repairs adhere strictly to API 11AX quality standards and factory testing protocols</span>
                 </li>
               </ul>
 
@@ -84,27 +84,23 @@ export default function TermsPage() {
               <ul className="space-y-2 text-muted-foreground mb-4">
                 <li className="flex items-start gap-2">
                   <Icon name="Check" className="w-4 h-4 text-primary mt-1 flex-shrink-0" />
-                  <span>Payment is due upon completion of each therapy session or at package booking</span>
+                  <span>Payment terms are Net 30 for approved commercial operator accounts, or due upon delivery for COD accounts</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <Icon name="Check" className="w-4 h-4 text-primary mt-1 flex-shrink-0" />
-                  <span>Accepted payment methods: Credit Card, Debit, Cash, and approved digital methods</span>
+                  <span>Accepted payment methods: Company Check, ACH/Wire Transfer, and approved commercial credit cards</span>
                 </li>
               </ul>
 
-              <h3 className="text-lg font-semibold text-foreground mt-4 mb-2">2.3 Cancellation & Rescheduling</h3>
+              <h3 className="text-lg font-semibold text-foreground mt-4 mb-2">2.3 Order Changes & Cancellations</h3>
               <ul className="space-y-2 text-muted-foreground">
                 <li className="flex items-start gap-2">
                   <Icon name="Check" className="w-4 h-4 text-primary mt-1 flex-shrink-0" />
-                  <span>We request at least 24 hours advance notice for cancellations or rescheduling</span>
+                  <span>Orders for stock components may be canceled prior to dispatch without penalty</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <Icon name="Check" className="w-4 h-4 text-primary mt-1 flex-shrink-0" />
-                  <span>Late cancellations or missed appointments may be subject to a cancellation fee</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <Icon name="Check" className="w-4 h-4 text-primary mt-1 flex-shrink-0" />
-                  <span>Pre-paid sessions may be rescheduled with proper advance notice</span>
+                  <span>Custom pump barrel machining or specialized alloy orders may be subject to material or restocking fees</span>
                 </li>
               </ul>
             </div>

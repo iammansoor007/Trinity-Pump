@@ -92,150 +92,99 @@ export default function ServiceDetailTemplate({ pageData, params: syncParams }: 
   // Hydrate configurations cleanly with zero duplicate texts
   const pg = {
     backLink: service.backLink || serviceDetailPage.backLink || "Back to All Services",
-    heroSectionLabel: service.heroSectionLabel || serviceDetailPage.heroSectionLabel || "CLINICAL RECOVERY PROTOCOL",
+    heroSectionLabel: service.heroSectionLabel || serviceDetailPage.heroSectionLabel || "EQUIPMENT SPECIFICATIONS",
 
     // Single distinct Hero Description
-    heroDescription: service.heroDescription || service.heroSubtitle || service.heroDescriptionSuffix || serviceDetailPage.heroDescription || "Targeted manual therapy engineered to eliminate chronic pain, unlock joint mobility, and accelerate athletic recovery.",
+    heroDescription: service.heroDescription || service.heroSubtitle || service.heroDescriptionSuffix || service.description || serviceDetailPage.heroDescription || "",
 
     // Specs Strip
-    specDurationValue: service.specDurationValue || serviceDetailPage.specDurationValue || "60 / 90 Mins",
-    specIntensityValue: service.specIntensityValue || serviceDetailPage.specIntensityValue || "Targeted Deep",
-    specFocusValue: service.specFocusValue || serviceDetailPage.specFocusValue || "Trigger Mapping",
+    specDurationValue: service.specDurationValue || serviceDetailPage.specDurationValue || "API 11AX",
+    specIntensityValue: service.specIntensityValue || serviceDetailPage.specIntensityValue || "Heavy-Duty",
+    specFocusValue: service.specFocusValue || serviceDetailPage.specFocusValue || "Downhole Reliability",
 
     // CTAs & Links
-    bookingCta: service.bookingCta || serviceDetailPage.bookingCta || "Book Appointment Now",
+    bookingCta: service.bookingCta || serviceDetailPage.bookingCta || "Request a Quote",
     bookingCtaUrl: service.bookingCtaUrl || globalBooking,
-    heroCtaSecondary: service.heroCtaSecondary || serviceDetailPage.heroCtaSecondary || "SEE HOW IT HELPS",
+    heroCtaSecondary: service.heroCtaSecondary || serviceDetailPage.heroCtaSecondary || "SEE SPECIFICATIONS",
     heroCtaSecondaryUrl: service.heroCtaSecondaryUrl || "#overview",
 
     // Stats Strip
-    statsItem1Val: service.statsItem1Val || serviceDetailPage.statsItem1Val || "8 Yrs",
-    statsItem1Label: service.statsItem1Label || serviceDetailPage.statsItem1Label || "Clinical Experience",
-    statsItem2Val: service.statsItem2Val || serviceDetailPage.statsItem2Val || "5.0 ★",
-    statsItem2Label: service.statsItem2Label || serviceDetailPage.statsItem2Label || "Google Reviews",
-    statsItem3Val: service.statsItem3Val || serviceDetailPage.statsItem3Val || "100%",
-    statsItem3Label: service.statsItem3Label || serviceDetailPage.statsItem3Label || "Satisfaction Guarantee",
-    statsItem4Val: service.statsItem4Val || serviceDetailPage.statsItem4Val || "5,000+",
-    statsItem4Label: service.statsItem4Label || serviceDetailPage.statsItem4Label || "Sessions Completed",
+    statsItem1Val: service.statsItem1Val || serviceDetailPage.statsItem1Val || "",
+    statsItem1Label: service.statsItem1Label || serviceDetailPage.statsItem1Label || "",
+    statsItem2Val: service.statsItem2Val || serviceDetailPage.statsItem2Val || "",
+    statsItem2Label: service.statsItem2Label || serviceDetailPage.statsItem2Label || "",
+    statsItem3Val: service.statsItem3Val || serviceDetailPage.statsItem3Val || "",
+    statsItem3Label: service.statsItem3Label || serviceDetailPage.statsItem3Label || "",
+    statsItem4Val: service.statsItem4Val || serviceDetailPage.statsItem4Val || "",
+    statsItem4Label: service.statsItem4Label || serviceDetailPage.statsItem4Label || "",
 
     // Overview Section
-    overviewSectionLabel: service.overviewSectionLabel || serviceDetailPage.overviewSectionLabel || "FIX THE PATTERNS THAT KEEP PAIN RETURNING",
-    overviewTitle1: service.overviewTitle1 || service.overviewTitlePrefix || serviceDetailPage.overviewTitle1 || "Targeted Bodywork.",
-    overviewTitle2: service.overviewTitle2 || service.overviewTitleHighlight || serviceDetailPage.overviewTitle2 || "Engineered For Recovery.",
-    overviewWatermark: service.overviewWatermark || serviceDetailPage.overviewWatermark || "SPECIALIST PRACTICE • EST. 2020",
-    overviewSuccessRate: service.overviewSuccessRate || serviceDetailPage.overviewSuccessRate || "5.0 RATED PRACTICE",
-    tailoredLabel: service.tailoredLabel ?? serviceDetailPage.tailoredLabel ?? "100% Tailored Therapy",
-    tailoredSub: service.tailoredSub ?? serviceDetailPage.tailoredSub ?? "Individualized Protocols",
+    overviewSectionLabel: service.overviewSectionLabel || serviceDetailPage.overviewSectionLabel || "FIELD RELIABILITY",
+    overviewTitle1: service.overviewTitle1 || service.overviewTitlePrefix || serviceDetailPage.overviewTitle1 || "Precision Engineering.",
+    overviewTitle2: service.overviewTitle2 || service.overviewTitleHighlight || serviceDetailPage.overviewTitle2 || "Permian Proven.",
+    overviewWatermark: service.overviewWatermark || serviceDetailPage.overviewWatermark || "TRINITY PUMP & SUPPLY",
+    overviewSuccessRate: service.overviewSuccessRate || serviceDetailPage.overviewSuccessRate || "API 11AX CERTIFIED",
+    tailoredLabel: service.tailoredLabel ?? serviceDetailPage.tailoredLabel ?? "Downhole Pump Quality",
+    tailoredSub: service.tailoredSub ?? serviceDetailPage.tailoredSub ?? "Engineered Solutions",
 
     // Single distinct Overview Clinical Narrative
-    overviewDescription: service.overviewDescription || service.overviewIntroSuffix || service.description || serviceDetailPage.overviewDescription || "We look at mobility, stability, posture, soft-tissue restrictions, and movement habits. Then we pair bodywork with guided exercises that help your body share the load more comfortably.",
+    overviewDescription: service.overviewDescription || service.overviewIntroSuffix || service.description || serviceDetailPage.overviewDescription || "",
 
-    overviewCtaText: service.overviewCtaText || serviceDetailPage.overviewCtaText || "BOOK YOUR SESSION NOW",
+    overviewCtaText: service.overviewCtaText || serviceDetailPage.overviewCtaText || "REQUEST A QUOTE",
     overviewCtaUrl: service.overviewCtaUrl || service.bookingCtaUrl || globalBooking,
-    overviewHipaaText: service.overviewHipaaText || serviceDetailPage.overviewHipaaText || "100% Satisfaction Guaranteed & Certified",
+    overviewHipaaText: service.overviewHipaaText || serviceDetailPage.overviewHipaaText || "Quality Guaranteed & Hydro-Tested",
 
     // Candidates / Why Choose Us Section
-    candidateSectionLabel: service.candidateSectionLabel || serviceDetailPage.candidateSectionLabel || "WHY TRINITY PUMP & SUPPLY FEELS DIFFERENT",
-    candidateTitle1: service.candidateTitle1 || serviceDetailPage.candidateTitle1 || "Targeted Care.",
-    candidateTitle2: service.candidateTitle2 || serviceDetailPage.candidateTitle2 || "Built Around You.",
-    candidateDescription: service.candidateDescription || serviceDetailPage.candidateDescription || "Movement work shaped around what your body can comfortably do. The goal is useful progress, not a rushed routine or generic adjustment.",
+    candidateSectionLabel: service.candidateSectionLabel || serviceDetailPage.candidateSectionLabel || "TRINITY ADVANTAGE",
+    candidateTitle1: service.candidateTitle1 || serviceDetailPage.candidateTitle1 || "Precision Engineering.",
+    candidateTitle2: service.candidateTitle2 || serviceDetailPage.candidateTitle2 || "Built for the Basin.",
+    candidateDescription: service.candidateDescription || serviceDetailPage.candidateDescription || "",
     profileBadgePrefix: service.profileBadgePrefix || serviceDetailPage.profileBadgePrefix || "ADVANTAGE",
-    candidateSuitability: service.candidateSuitability ?? serviceDetailPage.candidateSuitability ?? "CLINICAL STANDARD",
-    whoProfiles: service.whoProfiles || serviceDetailPage.whoProfiles || [
-      {
-        label: "Eight Years Of Experience",
-        desc: "Eight years of professional experience guide every session. Skilled observation and hands-on work matter when pain has several contributors.",
-        suitability: "CERTIFIED CARE"
-      },
-      {
-        label: "Five-Star Reputation",
-        desc: "A 5.0 Google rating gives you confidence before you book. Clients praise our knowledge, professionalism, and targeted muscle relief.",
-        suitability: "5.0 ★ RATED"
-      },
-      {
-        label: "Guaranteed Client Satisfaction",
-        desc: "Backed by our 100% Customer Satisfaction Guarantee. We explain every technique and adjust pressure to your exact comfort.",
-        suitability: "100% GUARANTEED"
-      },
-      {
-        label: "York Road Convenience",
-        desc: "Conveniently located at 1301 York Rd., Timonium, MD, serving Towson, Lutherville, Cockeysville, and Baltimore County with dedicated one-on-one care.",
-        suitability: "TIMONIUM, MD"
-      }
-    ],
+    candidateSuitability: service.candidateSuitability ?? serviceDetailPage.candidateSuitability ?? "API STANDARD",
+    whoProfiles: Array.isArray(service.whoProfiles) && service.whoProfiles.length > 0 
+      ? service.whoProfiles 
+      : (Array.isArray(serviceDetailPage.whoProfiles) ? serviceDetailPage.whoProfiles : []),
 
     // Treatment Protocol / Stepper Section
-    protocolSectionLabel: service.protocolSectionLabel || serviceDetailPage.protocolSectionLabel || "SESSION WORKFLOW PROTOCOL",
-    protocolTitle1: service.protocolTitle1 || serviceDetailPage.protocolTitle1 || "What Your Session",
-    protocolTitle2: service.protocolTitle2 || serviceDetailPage.protocolTitle2 || "Looks Like.",
-    protocolDescription: service.protocolDescription || serviceDetailPage.protocolDescription || "Your visit follows a clear path: listen, observe, release, practice, and retest so you always know what we are working on and why.",
-    protocolPhasePrefix: service.protocolPhasePrefix || serviceDetailPage.protocolPhasePrefix || "STEP 0",
-    protocolDurations: service.protocolDurations || serviceDetailPage.protocolDurations || ["15 MIN", "30 MIN", "30 MIN", "15 MIN"],
-    protocolBannerBadge: service.protocolBannerBadge || serviceDetailPage.protocolBannerBadge || "MOVE BETTER STARTING RIGHT HERE",
+    protocolSectionLabel: service.protocolSectionLabel || serviceDetailPage.protocolSectionLabel || "DEPLOYMENT PROTOCOL",
+    protocolTitle1: service.protocolTitle1 || serviceDetailPage.protocolTitle1 || "Specification &",
+    protocolTitle2: service.protocolTitle2 || serviceDetailPage.protocolTitle2 || "Field Deployment.",
+    protocolDescription: service.protocolDescription || serviceDetailPage.protocolDescription || "",
+    protocolPhasePrefix: service.protocolPhasePrefix || serviceDetailPage.protocolPhasePrefix || "PHASE 0",
+    protocolDurations: service.protocolDurations || serviceDetailPage.protocolDurations || ["PHASE 1", "PHASE 2", "PHASE 3", "PHASE 4"],
+    protocolBannerBadge: service.protocolBannerBadge || serviceDetailPage.protocolBannerBadge || "FIELD-READY RELIABILITY",
     protocolBannerTitle: service.protocolBannerTitle || serviceDetailPage.protocolBannerTitle,
-    protocolBannerTitlePrefix: service.protocolBannerTitlePrefix || serviceDetailPage.protocolBannerTitlePrefix || "Ready to experience",
+    protocolBannerTitlePrefix: service.protocolBannerTitlePrefix || serviceDetailPage.protocolBannerTitlePrefix || "Ready to equip your well with",
     protocolBannerTitleSuffix: service.protocolBannerTitleSuffix || serviceDetailPage.protocolBannerTitleSuffix || "?",
     protocolBannerDescription: service.protocolBannerDescription || serviceDetailPage.protocolBannerDescription,
-    protocolBannerCta: service.protocolBannerCta || serviceDetailPage.protocolBannerCta || "BOOK YOUR APPOINTMENT",
+    protocolBannerCta: service.protocolBannerCta || serviceDetailPage.protocolBannerCta || "REQUEST A QUOTE",
     protocolBannerCtaUrl: service.protocolBannerCtaUrl || service.bookingCtaUrl || globalBooking,
 
-    benefitsTitle: service.benefitsTitle || serviceDetailPage.benefitsTitle || "Patterns & Focus Areas",
-    benefitCardDesc: service.benefitCardDesc || serviceDetailPage.benefitCardDesc || "Targeted mechanical and myofascial input designed to restore movement.",
+    benefitsTitle: service.benefitsTitle || serviceDetailPage.benefitsTitle || "Key Features & Capabilities",
+    benefitCardDesc: service.benefitCardDesc || serviceDetailPage.benefitCardDesc || "",
 
     // Dynamic Step Sequence
-    sessionSteps: service.sessionSteps || (service.process && service.process.length > 0 ? service.process.map((step: any, idx: number) => ({
-      num: String(idx + 1).padStart(2, '0'),
-      title: step.title,
-      desc: step.description || step.desc || ""
-    })) : null) || serviceDetailPage.sessionSteps || [
-        {
-          num: "01",
-          title: "Talk And Screen",
-          desc: "We talk about what hurts and where motion feels guarded with standing, walking, reaching, or squatting assessments."
-        },
-        {
-          num: "02",
-          title: "Release Restricted Tissue",
-          desc: "Hands-on myofascial work targets deep muscle knots and stuck fascia matched to your comfortable pressure level."
-        },
-        {
-          num: "03",
-          title: "Practice Better Patterns",
-          desc: "We work on breathing, hip control, shoulder mechanics, balance, and core stability drills connected to daily life."
-        },
-        {
-          num: "04",
-          title: "Retest And Plan",
-          desc: "We retest key movements, evaluate improvements, and provide practical next steps to practice between sessions."
-        }
-      ]
+    sessionSteps: Array.isArray(service.sessionSteps) && service.sessionSteps.length > 0 
+      ? service.sessionSteps 
+      : (service.process && service.process.length > 0 
+        ? service.process.map((step: any, idx: number) => ({
+            num: String(idx + 1).padStart(2, '0'),
+            title: step.title,
+            desc: step.description || step.desc || ""
+          })) 
+        : (Array.isArray(serviceDetailPage.sessionSteps) ? serviceDetailPage.sessionSteps : []))
   };
 
   const serviceName = sh(service.title || service.name || "Service");
   const titleWords = serviceName.split(' ');
   const mainTitle = titleWords.slice(0, -1).join(' ');
   const lastTitleWord = titleWords[titleWords.length - 1] || "";
-  const serviceImage = service.image || service.featuredImage || "/images/service-massage.webp";
+  const serviceImage = service.image || service.featuredImage || "/images/trinity/hero_banner.jpg";
 
   // Format clinical benefits array
-  const benefits = (service.benefits && service.benefits.length > 0) ? service.benefits : [
-    {
-      title: "Recurring Low Back Tightness",
-      description: "Targeted mobility drills and soft-tissue release to take strain off the lumbar spine and restore hip motion."
-    },
-    {
-      title: "Hips That Feel Stuck",
-      description: "Soft-tissue work and joint control drills so you practice moving with less compensation during daily tasks."
-    },
-    {
-      title: "Neck And Shoulder Strain",
-      description: "Upper-back mobility and shoulder-blade mechanics to make reaching, turning, and desk posture feel natural."
-    },
-    {
-      title: "Posture & Compensation Patterns",
-      description: "Balance, coordination, and joint control practice supporting easier standing, walking, training, and work."
-    }
-  ];
+  const benefits = (Array.isArray(service.benefits) && service.benefits.length > 0)
+    ? service.benefits
+    : (Array.isArray(service.keyFeatures) && service.keyFeatures.length > 0 ? service.keyFeatures : []);
 
   const statsList = [
     { value: sh(pg.statsItem1Val), label: sh(pg.statsItem1Label) },
@@ -500,167 +449,171 @@ export default function ServiceDetailTemplate({ pageData, params: syncParams }: 
         {/* ════════════════════════════════════════════════════════
            4. WHY US & TARGET CANDIDATES (Editorial Grid)
            ════════════════════════════════════════════════════════ */}
-        <section className="py-20 md:py-28 bg-brand-bg-light border-b border-border-light relative">
-          <div className="site-container">
-            {/* Centered Editorial Header */}
-            <div className="max-w-3xl mx-auto text-center mb-16">
-              <div className="inline-flex items-center gap-3 mb-3.5">
-                <span className="w-6 h-[1px] bg-gold-dark" />
-                <p className="section-label text-gold-dark">
-                  {pg.candidateSectionLabel}
-                </p>
-                <span className="w-6 h-[1px] bg-gold-dark" />
+        {pg.whoProfiles && pg.whoProfiles.length > 0 && (
+          <section className="py-20 md:py-28 bg-brand-bg-light border-b border-border-light relative">
+            <div className="site-container">
+              {/* Centered Editorial Header */}
+              <div className="max-w-3xl mx-auto text-center mb-16">
+                <div className="inline-flex items-center gap-3 mb-3.5">
+                  <span className="w-6 h-[1px] bg-gold-dark" />
+                  <p className="section-label text-gold-dark">
+                    {pg.candidateSectionLabel}
+                  </p>
+                  <span className="w-6 h-[1px] bg-gold-dark" />
+                </div>
+                <h2 className="font-display font-medium text-[34px] min-[400px]:text-[44px] md:text-[52px] text-dark leading-[1.08] tracking-tight mb-4">
+                  {pg.candidateTitle1}{' '}
+                  <span className="text-gold-dark italic font-light block sm:inline">
+                    {pg.candidateTitle2}
+                  </span>
+                </h2>
+                {pg.candidateDescription && (
+                  <div
+                    className="text-dark/70 text-[15px] md:text-[16.5px] font-light leading-relaxed max-w-2xl mx-auto"
+                    dangerouslySetInnerHTML={{ __html: formatRichText(pg.candidateDescription, false) }}
+                  />
+                )}
               </div>
-              <h2 className="font-display font-medium text-[34px] min-[400px]:text-[44px] md:text-[52px] text-dark leading-[1.08] tracking-tight mb-4">
-                {pg.candidateTitle1}{' '}
-                <span className="text-gold-dark italic font-light block sm:inline">
-                  {pg.candidateTitle2}
-                </span>
-              </h2>
-              {pg.candidateDescription && (
-                <div
-                  className="text-dark/70 text-[15px] md:text-[16.5px] font-light leading-relaxed max-w-2xl mx-auto"
-                  dangerouslySetInnerHTML={{ __html: formatRichText(pg.candidateDescription, false) }}
-                />
-              )}
-            </div>
 
-            {/* 2x2 Feature Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
-              {pg.whoProfiles.map((profile: any, idx: number) => (
-                <div
-                  key={idx}
-                  className="candidate-card-clean p-8 rounded-xl bg-white transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.08)] flex flex-col justify-between group relative overflow-hidden"
-                >
-                  <div>
-                    <div className="flex items-center justify-between mb-6 border-b border-border-light/70 pb-4 relative z-10">
-                      <span className="text-gold-dark font-serif font-bold text-[28px] leading-none">
-                        {String(idx + 1).padStart(2, '0')}
-                      </span>
-                      <span className="px-3 py-1 rounded-full bg-gold-dark/10 text-gold-dark text-[10.5px] font-mono font-bold tracking-widest uppercase">
-                        {pg.profileBadgePrefix} {String(idx + 1).padStart(2, '0')}
-                      </span>
+              {/* 2x2 Feature Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+                {pg.whoProfiles.map((profile: any, idx: number) => (
+                  <div
+                    key={idx}
+                    className="candidate-card-clean p-8 rounded-xl bg-white transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.08)] flex flex-col justify-between group relative overflow-hidden"
+                  >
+                    <div>
+                      <div className="flex items-center justify-between mb-6 border-b border-border-light/70 pb-4 relative z-10">
+                        <span className="text-gold-dark font-serif font-bold text-[28px] leading-none">
+                          {String(idx + 1).padStart(2, '0')}
+                        </span>
+                        <span className="px-3 py-1 rounded-full bg-gold-dark/10 text-gold-dark text-[10.5px] font-mono font-bold tracking-widest uppercase">
+                          {pg.profileBadgePrefix} {String(idx + 1).padStart(2, '0')}
+                        </span>
+                      </div>
+
+                      <h3 className="text-dark font-bold text-[19px] mb-2.5 leading-snug group-hover:text-gold-dark transition-colors relative z-10">
+                        {sh(profile.label)}
+                      </h3>
+
+                      <div
+                        className="text-dark/65 text-[14px] font-light leading-relaxed relative z-10"
+                        dangerouslySetInnerHTML={{ __html: formatRichText(profile.desc, false) }}
+                      />
                     </div>
 
-                    <h3 className="text-dark font-bold text-[19px] mb-2.5 leading-snug group-hover:text-gold-dark transition-colors relative z-10">
-                      {sh(profile.label)}
-                    </h3>
-
-                    <div
-                      className="text-dark/65 text-[14px] font-light leading-relaxed relative z-10"
-                      dangerouslySetInnerHTML={{ __html: formatRichText(profile.desc, false) }}
-                    />
+                    <div className="mt-8 pt-4 border-t border-border-light/80 flex items-center justify-between text-gold-dark text-[11.5px] font-mono font-bold tracking-wider uppercase relative z-10">
+                      <span>{profile.suitability || profile.status || pg.candidateSuitability}</span>
+                      <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                    </div>
                   </div>
-
-                  <div className="mt-8 pt-4 border-t border-border-light/80 flex items-center justify-between text-gold-dark text-[11.5px] font-mono font-bold tracking-wider uppercase relative z-10">
-                    <span>{profile.suitability || profile.status || pg.candidateSuitability}</span>
-                    <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        )}
 
         {/* ════════════════════════════════════════════════════════
            5. SESSION PROTOCOL (Dark Luxury Connected Stepper Stage)
            ════════════════════════════════════════════════════════ */}
-        <section className="py-24 md:py-32 bg-dark text-white relative border-b border-white/10 overflow-hidden">
-          {/* Ambient Gold Glow Orbs */}
-          <div className="absolute top-1/2 left-1/3 -translate-y-1/2 w-[500px] h-[500px] bg-gold/[0.04] rounded-full blur-[160px] pointer-events-none" />
+        {pg.sessionSteps && pg.sessionSteps.length > 0 && (
+          <section className="py-24 md:py-32 bg-dark text-white relative border-b border-white/10 overflow-hidden">
+            {/* Ambient Gold Glow Orbs */}
+            <div className="absolute top-1/2 left-1/3 -translate-y-1/2 w-[500px] h-[500px] bg-gold/[0.04] rounded-full blur-[160px] pointer-events-none" />
 
-          <div className="site-container relative z-10">
-            <div className="max-w-3xl mb-16 md:mb-20 text-left">
-              <div className="flex items-center gap-3 mb-4">
-                <span className="w-8 h-[1px] bg-gold" />
-                <p className="text-gold font-mono text-[11px] font-bold tracking-[0.25em] uppercase">
-                  {pg.protocolSectionLabel}
-                </p>
-              </div>
-              <h2 className="font-display font-medium text-[36px] min-[400px]:text-[46px] md:text-[54px] text-white leading-[1.06] tracking-tight mb-4">
-                {pg.protocolTitle1} <br />
-                <span className="text-gold italic font-light">{pg.protocolTitle2}</span>
-              </h2>
-              {pg.protocolDescription && (
-                <div
-                  className="text-white/70 text-[15px] md:text-[16px] font-light leading-relaxed max-w-2xl"
-                  dangerouslySetInnerHTML={{ __html: formatRichText(pg.protocolDescription, true) }}
-                />
-              )}
-            </div>
-
-            {/* Dynamic Step Connected Cards */}
-            <div className={stepperGridClass}>
-              {pg.sessionSteps.map((step: any, idx: number) => (
-                <div
-                  key={step.num || idx}
-                  className="stepper-card-dark p-8 md:p-9 rounded-xl bg-gradient-to-b from-white/[0.04] to-white/[0.01] transition-all duration-300 shadow-2xl flex flex-col justify-between group relative overflow-hidden backdrop-blur-md"
-                >
-                  <div>
-                    <div className="flex items-center justify-between mb-6">
-                      <div className="stepper-step-num w-12 h-12 rounded-lg bg-gold/15 flex items-center justify-center text-gold font-mono font-bold text-[15px] transition-all">
-                        {step.num || `0${idx + 1}`}
-                      </div>
-                      <span className="stepper-step-time px-3 py-1 rounded-full bg-gold/10 text-gold text-[10px] font-mono font-bold tracking-widest uppercase">
-                        {pg.protocolDurations[idx] || '15 MIN'}
-                      </span>
-                    </div>
-
-                    <h3 className="text-white font-bold text-[19px] mb-3 leading-snug group-hover:text-gold transition-colors">
-                      {sh(step.title)}
-                    </h3>
-
-                    <div
-                      className="text-white/65 text-[14px] font-light leading-relaxed"
-                      dangerouslySetInnerHTML={{ __html: formatRichText(step.desc, true) }}
-                    />
-                  </div>
-
-                  <div className="mt-8 pt-4 border-t border-white/10 flex items-center justify-between text-gold text-[12px] font-bold tracking-wider uppercase">
-                    <span>{((pg.protocolPhasePrefix || "STEP").trim().replace(/0+$/, "").trim())} {String(idx + 1).padStart(2, '0')}</span>
-                    <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-                  </div>
+            <div className="site-container relative z-10">
+              <div className="max-w-3xl mb-16 md:mb-20 text-left">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="w-8 h-[1px] bg-gold" />
+                  <p className="text-gold font-mono text-[11px] font-bold tracking-[0.25em] uppercase">
+                    {pg.protocolSectionLabel}
+                  </p>
                 </div>
-              ))}
-            </div>
-
-            {/* Bottom Action Conversion Banner */}
-            <div className="stepper-banner-cta mt-16 p-8 md:p-10 rounded-xl bg-gradient-to-r from-gold/20 via-dark to-dark flex flex-col sm:flex-row items-center justify-between gap-6 shadow-2xl text-left border border-white/10">
-              <div className="max-w-xl">
-                {pg.protocolBannerBadge && (
-                  <span className="text-gold font-mono text-[10.5px] font-bold tracking-widest uppercase block mb-1">
-                    {pg.protocolBannerBadge}
-                  </span>
-                )}
-                <h3 className="font-display font-medium text-[22px] md:text-[28px] text-white leading-snug">
-                  {pg.protocolBannerTitle ? (
-                    pg.protocolBannerTitle
-                  ) : (
-                    <>
-                      {pg.protocolBannerTitlePrefix}  {pg.protocolBannerTitleSuffix}
-                    </>
-                  )}
-                </h3>
-                {pg.protocolBannerDescription && (
+                <h2 className="font-display font-medium text-[36px] min-[400px]:text-[46px] md:text-[54px] text-white leading-[1.06] tracking-tight mb-4">
+                  {pg.protocolTitle1} <br />
+                  <span className="text-gold italic font-light">{pg.protocolTitle2}</span>
+                </h2>
+                {pg.protocolDescription && (
                   <div
-                    className="text-white/70 text-[14px] font-light mt-2 leading-relaxed"
-                    dangerouslySetInnerHTML={{ __html: formatRichText(pg.protocolBannerDescription, true) }}
+                    className="text-white/70 text-[15px] md:text-[16px] font-light leading-relaxed max-w-2xl"
+                    dangerouslySetInnerHTML={{ __html: formatRichText(pg.protocolDescription, true) }}
                   />
                 )}
               </div>
-              <a
-                href={pg.protocolBannerCtaUrl}
-                target={pg.protocolBannerCtaUrl.startsWith("http") ? "_blank" : undefined}
-                rel={pg.protocolBannerCtaUrl.startsWith("http") ? "noopener noreferrer" : undefined}
-                className="btn-gold px-9 py-4 text-[13px] font-bold tracking-wider flex-shrink-0 rounded-md shadow-[0_10px_30px_rgba(200,150,12,0.25)] flex items-center gap-2"
-              >
-                <span>{pg.protocolBannerCta}</span>
-                <ArrowRight size={14} />
-              </a>
-            </div>
 
-          </div>
-        </section>
+              {/* Dynamic Step Connected Cards */}
+              <div className={stepperGridClass}>
+                {pg.sessionSteps.map((step: any, idx: number) => (
+                  <div
+                    key={step.num || idx}
+                    className="stepper-card-dark p-8 md:p-9 rounded-xl bg-gradient-to-b from-white/[0.04] to-white/[0.01] transition-all duration-300 shadow-2xl flex flex-col justify-between group relative overflow-hidden backdrop-blur-md"
+                  >
+                    <div>
+                      <div className="flex items-center justify-between mb-6">
+                        <div className="stepper-step-num w-12 h-12 rounded-lg bg-gold/15 flex items-center justify-center text-gold font-mono font-bold text-[15px] transition-all">
+                          {step.num || `0${idx + 1}`}
+                        </div>
+                        <span className="stepper-step-time px-3 py-1 rounded-full bg-gold/10 text-gold text-[10px] font-mono font-bold tracking-widest uppercase">
+                          {pg.protocolDurations[idx] || '15 MIN'}
+                        </span>
+                      </div>
+
+                      <h3 className="text-white font-bold text-[19px] mb-3 leading-snug group-hover:text-gold transition-colors">
+                        {sh(step.title)}
+                      </h3>
+
+                      <div
+                        className="text-white/65 text-[14px] font-light leading-relaxed"
+                        dangerouslySetInnerHTML={{ __html: formatRichText(step.desc, true) }}
+                      />
+                    </div>
+
+                    <div className="mt-8 pt-4 border-t border-white/10 flex items-center justify-between text-gold text-[12px] font-bold tracking-wider uppercase">
+                      <span>{((pg.protocolPhasePrefix || "STEP").trim().replace(/0+$/, "").trim())} {String(idx + 1).padStart(2, '0')}</span>
+                      <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Bottom Action Conversion Banner */}
+              <div className="stepper-banner-cta mt-16 p-8 md:p-10 rounded-xl bg-gradient-to-r from-gold/20 via-dark to-dark flex flex-col sm:flex-row items-center justify-between gap-6 shadow-2xl text-left border border-white/10">
+                <div className="max-w-xl">
+                  {pg.protocolBannerBadge && (
+                    <span className="text-gold font-mono text-[10.5px] font-bold tracking-widest uppercase block mb-1">
+                      {pg.protocolBannerBadge}
+                    </span>
+                  )}
+                  <h3 className="font-display font-medium text-[22px] md:text-[28px] text-white leading-snug">
+                    {pg.protocolBannerTitle ? (
+                      pg.protocolBannerTitle
+                    ) : (
+                      <>
+                        {pg.protocolBannerTitlePrefix}  {pg.protocolBannerTitleSuffix}
+                      </>
+                    )}
+                  </h3>
+                  {pg.protocolBannerDescription && (
+                    <div
+                      className="text-white/70 text-[14px] font-light mt-2 leading-relaxed"
+                      dangerouslySetInnerHTML={{ __html: formatRichText(pg.protocolBannerDescription, true) }}
+                    />
+                  )}
+                </div>
+                <a
+                  href={pg.protocolBannerCtaUrl}
+                  target={pg.protocolBannerCtaUrl.startsWith("http") ? "_blank" : undefined}
+                  rel={pg.protocolBannerCtaUrl.startsWith("http") ? "noopener noreferrer" : undefined}
+                  className="btn-gold px-9 py-4 text-[13px] font-bold tracking-wider flex-shrink-0 rounded-md shadow-[0_10px_30px_rgba(200,150,12,0.25)] flex items-center gap-2"
+                >
+                  <span>{pg.protocolBannerCta}</span>
+                  <ArrowRight size={14} />
+                </a>
+              </div>
+
+            </div>
+          </section>
+        )}
       </main>
 
       {/* ════════════════════════════════════════════════════════
