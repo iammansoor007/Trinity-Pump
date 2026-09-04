@@ -3,8 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { ArrowRight, CheckCircle2, ChevronRight } from "lucide-react";
 import { useContent } from "../hooks/useContent";
 import { stripHtml } from "../lib/utils";
 
@@ -12,146 +11,198 @@ export default function ServicesSection() {
   const [activeIdx, setActiveIdx] = useState(0);
   const { services } = useContent();
 
-  const { label, titleLine1, titleLine2, titleLine3, titleItalicWord, description, ctaAll, ctaLearnMore, items = [] } = services || {};
-  
-  const active = items[activeIdx] || {
-    id: "01",
-    name: "Deep Tissue Therapy",
-    description: "Targets chronic muscle tension and knots to relieve pain and restore natural movement.",
-    image: "/images/service-massage.webp",
-    benefits: ["Relieves tightness & knots", "Improves mobility", "Enhances blood flow", "Reduces pain & stiffness"],
-    slug: "deep-tissue-therapy"
-  };
+  const {
+    label,
+    badge,
+    titleLine1,
+    titleLine2,
+    titleLine3,
+    titleItalicWord,
+    description,
+    ctaAll,
+    ctaLearnMore
+  } = services || {};
+
+  const items = (services?.services || services?.items || []).filter(
+    (item: any) => item && (item.status === 'published' || item.status === undefined)
+  );
+
+  if (!services || items.length === 0) return null;
+
+  const active = items[activeIdx] || items[0];
+  const activeImage = active?.image || (active?.images && active.images[0]);
+  const activeBenefits = Array.isArray(active?.benefits) ? active.benefits : (Array.isArray(active?.keyFeatures) ? active.keyFeatures : []);
 
   return (
-    <section id="services" className="bg-dark py-20 md:py-28 overflow-hidden">
-      <div className="site-container">
-        
-        {/* Flexible Minimum Height Grid - Zero Text Clipping */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-0 items-stretch h-auto lg:min-h-[580px]">
+    <section id="services" className="bg-[#0B1726] py-24 md:py-32 overflow-hidden border-t border-white/[0.08] relative">
+      {/* Precision background technical lines */}
+      <div className="absolute inset-0 opacity-[0.025] bg-grid-pattern-dark pointer-events-none" />
 
-          {/* ── Col 1: Intro / Section Title ── */}
-          <div className="w-full lg:pr-8 lg:border-r border-border-dark flex flex-col justify-between py-2 h-full">
-            <div>
-              <p className="section-label mb-4">{stripHtml(label)}</p>
-              <h2 className="display-heading text-[32px] min-[400px]:text-[36px] md:text-[40px] text-white leading-[1.12] mb-5">
-                {stripHtml(titleLine1)}<br className="hidden lg:block" /> {stripHtml(titleLine2)}<br className="hidden lg:block" /> {stripHtml(titleLine3)}{' '}
-                <em className="text-gold not-italic italic">{stripHtml(titleItalicWord)}</em>
+      <div className="site-container relative z-10">
+        
+        {/* Section Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-14 text-left border-b border-white/[0.08] pb-10">
+          <div className="max-w-2xl">
+            {(label || badge) && (
+              <div className="flex items-center gap-2 mb-3">
+                <span className="w-3 h-[2px] bg-[#C98A2E]" />
+                <p className="text-[#C98A2E] text-[11px] font-mono tracking-[0.2em] uppercase font-bold">
+                  {stripHtml(label || badge || "")}
+                </p>
+              </div>
+            )}
+
+            {(titleLine1 || titleLine2 || titleItalicWord) && (
+              <h2 className="display-heading text-[32px] min-[400px]:text-[38px] md:text-[46px] text-white leading-[1.12] mb-4 font-bold tracking-tight">
+                {titleLine1 && <span>{stripHtml(titleLine1)} </span>}
+                {titleLine2 && <span>{stripHtml(titleLine2)} </span>}
+                {titleLine3 && <span>{stripHtml(titleLine3)} </span>}
+                {titleItalicWord && <span className="text-[#C98A2E] font-serif italic">{stripHtml(titleItalicWord)}</span>}
               </h2>
-              <p className="text-white/45 text-[13.5px] leading-[1.8] font-light">
+            )}
+
+            {description && (
+              <p className="text-[#A9AFB5] text-[15px] leading-[1.75] font-light max-w-xl">
                 {stripHtml(description)}
               </p>
+            )}
+          </div>
+
+          {ctaAll && (
+            <div className="flex-shrink-0">
+              <Link
+                href="/services/"
+                className="btn-outline-white inline-flex items-center gap-2 text-[11.5px] font-mono uppercase tracking-widest px-6 py-3.5"
+              >
+                <span>{ctaAll}</span>
+                <ArrowRight size={13} />
+              </Link>
             </div>
-            
-            <div className="pt-6 border-t border-border-dark/60 mt-auto">
-              <Link href="/services/" className="btn-outline-white text-[11px] w-full justify-center text-center">
-                {ctaAll} <ArrowRight size={14} className="ml-1.5" />
+          )}
+        </div>
+
+        {/* Equipment Selector Ribbon */}
+        <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-8 custom-scrollbar">
+          {items.map((item: any, idx: number) => {
+            const isSelected = activeIdx === idx;
+            return (
+              <button
+                key={idx}
+                onClick={() => setActiveIdx(idx)}
+                className={`flex items-center gap-2 px-5 py-3 rounded-sm font-mono text-[12px] tracking-wider uppercase transition-all duration-200 whitespace-nowrap cursor-pointer border ${
+                  isSelected
+                    ? "bg-[#C98A2E] text-[#0B1726] font-bold border-[#C98A2E] shadow-lg"
+                    : "bg-[#14243A]/60 text-white/70 hover:text-white hover:bg-[#14243A] border-white/10"
+                }`}
+              >
+                <span className={isSelected ? "text-[#0B1726]/70" : "text-[#C98A2E]"}>
+                  0{idx + 1}
+                </span>
+                <span>{item.title || item.name}</span>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Main Equipment Showcase (2-Col Architecture) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+          
+          {/* Left: Active Equipment Photo Frame (6 cols) */}
+          {activeImage && (
+            <div className="lg:col-span-6 relative h-[360px] sm:h-[450px] lg:h-auto min-h-[360px] rounded-sm overflow-hidden border border-white/10 bg-[#14243A] group shadow-2xl">
+              {activeImage.startsWith('http') || activeImage.startsWith('/uploads') || activeImage.startsWith('/cdn-images') ? (
+                <img
+                  src={activeImage}
+                  alt={active.title || active.name || "Equipment"}
+                  className="w-full h-full object-cover object-center filter contrast-105 group-hover:scale-105 transition-transform duration-700"
+                />
+              ) : (
+                <Image
+                  src={activeImage}
+                  alt={active.title || active.name || "Equipment"}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover object-center filter contrast-105 group-hover:scale-105 transition-transform duration-700"
+                />
+              )}
+
+              {/* Technical Gradient Vignette */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0B1726] via-transparent to-transparent pointer-events-none" />
+
+              {/* Active Technical Badge */}
+              <div className="absolute bottom-6 left-6 z-10 bg-[#0B1726]/90 border border-white/15 px-3.5 py-1.5 rounded-sm flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#C98A2E]" />
+                <span className="text-white text-[11px] font-mono tracking-wider uppercase font-semibold">
+                  SPECIFICATION DATA // 0{activeIdx + 1}
+                </span>
+              </div>
+            </div>
+          )}
+
+          {/* Right: Data Sheet Specification Card (6 cols) */}
+          <div className="lg:col-span-6 bg-[#14243A]/70 border border-white/10 p-8 sm:p-10 rounded-sm text-left flex flex-col justify-between shadow-2xl relative">
+            {/* Corner brackets */}
+            <div className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-[#C98A2E]" />
+            <div className="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-[#C98A2E]" />
+
+            <div>
+              <div className="flex items-center justify-between pb-4 mb-4 border-b border-white/[0.08]">
+                <span className="text-[11px] font-mono text-[#C98A2E] tracking-widest uppercase font-bold">
+                  DOWNHOLE SPECIFICATION
+                </span>
+                <span className="text-[11px] font-mono text-white/40 uppercase">
+                  ACTIVE LINE
+                </span>
+              </div>
+
+              <h3 className="display-heading text-[24px] sm:text-[30px] md:text-[34px] text-white leading-tight font-bold mb-4">
+                {active.title || active.name}
+              </h3>
+
+              {active.description && (
+                <p className="text-[#A9AFB5] text-[14.5px] leading-[1.8] font-light mb-6">
+                  {stripHtml(active.description)}
+                </p>
+              )}
+
+              {/* Dynamic Benefits / Key Features */}
+              {activeBenefits && activeBenefits.length > 0 && (
+                <div className="space-y-2.5 mb-8 pt-4 border-t border-white/[0.08]">
+                  <span className="text-[10.5px] font-mono uppercase tracking-widest text-white/40 block mb-2">
+                    CORE CAPABILITIES & ATTRIBUTES
+                  </span>
+                  {activeBenefits.map((b: any, bIdx: number) => (
+                    <div key={bIdx} className="flex items-start gap-2.5 text-[13.5px] text-white/90">
+                      <CheckCircle2 size={15} className="text-[#C98A2E] mt-0.5 flex-shrink-0" />
+                      <span>{typeof b === 'string' ? b : (b.title || b.text || "")}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Action Buttons */}
+            <div className="pt-6 border-t border-white/[0.08] flex flex-wrap items-center gap-4">
+              {active.slug && (
+                <Link
+                  href={`/${active.slug}/`}
+                  className="btn-gold text-[11px] font-mono uppercase tracking-widest px-6 py-3.5"
+                >
+                  <span>{ctaLearnMore || "VIEW SPECIFICATIONS"}</span>
+                  <ArrowRight size={13} className="ml-1.5" />
+                </Link>
+              )}
+              <Link
+                href="/contact-us/"
+                className="btn-outline-white text-[11px] font-mono uppercase tracking-widest px-6 py-3.5"
+              >
+                <span>REQUEST A QUOTE</span>
               </Link>
             </div>
           </div>
 
-          {/* ── Col 2: Service List Navigation ── */}
-          <div className="w-full lg:px-8 lg:border-r border-border-dark overflow-hidden flex flex-col justify-between py-2 h-full">
-            <div className="flex flex-col gap-1 my-auto">
-              {items.map((svc: any, i: number) => (
-                <button
-                  key={svc.id}
-                  onClick={() => setActiveIdx(i)}
-                  className={`w-full text-left flex items-center gap-3 px-3.5 py-3 rounded-lg border-b border-border-dark/60 transition-all duration-200 group relative
-                    ${i === activeIdx ? 'bg-white/[0.05]' : 'hover:bg-white/[0.02]'}`}
-                >
-                  {i === activeIdx && (
-                    <motion.div
-                      layoutId="activeTabIndicator"
-                      className="absolute left-0 top-0 bottom-0 w-[3px] bg-gold rounded-l"
-                      transition={{ type: 'spring', stiffness: 350, damping: 30 }}
-                    />
-                  )}
-                  <span className={`text-[10px] font-bold tracking-widest w-6 flex-shrink-0 transition-colors ${i === activeIdx ? 'text-gold' : 'text-white/20 group-hover:text-white/40'}`}>
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                  <span className={`text-[13.5px] font-medium transition-colors truncate ${i === activeIdx ? 'text-white font-semibold' : 'text-white/50 group-hover:text-white/80'}`}>
-                    {svc.name}
-                  </span>
-                  {i === activeIdx && (
-                    <ArrowRight size={14} className="ml-auto text-gold flex-shrink-0" />
-                  )}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* ── Col 3: Active Detail Showcase (Fixed Height, Strictly 4 Benefits) ── */}
-          <div className="w-full lg:pl-8 flex flex-col h-full justify-between py-2 overflow-hidden">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeIdx}
-                initial={{ opacity: 0, y: 6 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -6 }}
-                transition={{ duration: 0.18, ease: 'easeOut' }}
-                className="flex flex-col justify-between h-full w-full"
-              >
-                {/* Upper block */}
-                <div>
-                  {/* Service image preview */}
-                  <div className="img-service-preview relative h-[170px] rounded-xl overflow-hidden mb-4 border border-white/10 shadow-2xl bg-black/40">
-                    <Image
-                      src={active.image || "/images/service-massage.webp"}
-                      alt={active.name}
-                      fill
-                      sizes="(max-width: 1024px) 100vw, 450px"
-                      className="object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/30 to-transparent" />
-                    <span className="absolute bottom-3 right-5 text-[48px] font-bold leading-none text-white/10 font-serif select-none pointer-events-none">
-                      {String(activeIdx + 1).padStart(2, '0')}
-                    </span>
-                  </div>
-
-                  <h3 className="display-heading text-[22px] md:text-[25px] text-white mb-2 leading-tight">{stripHtml(active.name)}</h3>
-                  <p className="text-white/70 text-[13.5px] leading-[1.65] mb-5 font-light min-h-[58px]">
-                    {stripHtml(active.description)}
-                  </p>
-
-                  {/* Strictly 4 benefits for clean visual consistency */}
-                  {active.benefits && (
-                    <div className="flex flex-col gap-2.5 min-h-[110px] justify-start mb-6">
-                      {active.benefits.slice(0, 4).map((b: any, idx: number) => {
-                        const benefitText = typeof b === 'string' ? b : (b.title || b.name || b.label || "");
-                        return (
-                          <div key={idx} className="flex items-center gap-2.5 text-white/80 text-[13px]">
-                            <CheckCircle2 size={14} className="text-gold flex-shrink-0" />
-                            <span className="truncate">{stripHtml(benefitText)}</span>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  )}
-                </div>
-
-                {/* Lower CTA Button block (100% Locked Position) */}
-                <div className="pt-2 mt-auto">
-                  <Link
-                    href={`/${active.slug || active.id}/`}
-                    className="btn-gold inline-flex items-center justify-center py-3 px-5 text-[11.5px] font-bold uppercase tracking-wider group/btn"
-                  >
-                    <span>
-                      {(() => {
-                        const rawTitle = stripHtml(active.name || active.title || "");
-                        if (!rawTitle) return ctaLearnMore || "Explore Service";
-                        const shortTitle = rawTitle.replace(/\s*(maryland|baltimore|timonium|clinic)\s*/gi, " ").trim();
-                        return `Explore ${shortTitle}`;
-                      })()}
-                    </span>
-                    <ArrowRight size={13} className="ml-2 group-hover/btn:translate-x-1 transition-transform duration-200" />
-                  </Link>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
-
         </div>
+
       </div>
     </section>
   );

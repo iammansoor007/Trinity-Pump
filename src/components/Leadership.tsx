@@ -1,10 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, ShieldCheck, Award, Users } from "lucide-react";
 import { motion } from "framer-motion";
 import { useContent } from "../hooks/useContent";
-
 
 export default function Leadership() {
   const { leadership, globalMetadata } = useContent();
@@ -13,115 +13,137 @@ export default function Leadership() {
     label,
     title,
     tagline,
-    desc1 = "",
-    desc2 = "",
+    desc1,
+    desc2,
     photoBadge,
     ctaMore,
-    ctaLink = "",
+    ctaLink,
     signatureName,
     signatureTitle,
-    image = "/images/theraphist.jpeg",
-    imageAlt = "Antoine Lyles"
+    image,
+    imageAlt
   } = leadership || {};
 
-  const bookingUrl = ctaLink || globalMetadata?.bookingUrl || "/contact-us/";
+  const targetLink = ctaLink || globalMetadata?.bookingUrl || "/contact-us/";
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.08 },
-    },
-  } as const;
-
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: { y: 0, opacity: 1, transition: { duration: 0.6, ease: "easeOut" } },
-  } as const;
+  if (!leadership && !title) return null;
 
   return (
-    <section className="bg-warm-white py-28 relative overflow-hidden border-t border-border-light/60">
-      {/* Decorative background grid pattern */}
-      <div className="absolute inset-0 opacity-[0.015] bg-grid-pattern-black pointer-events-none" />
+    <section className="bg-[#F5F3EE] py-24 md:py-32 relative overflow-hidden border-t border-[#E8E6E0]">
+      {/* Precision architectural background pattern */}
+      <div className="absolute inset-0 opacity-[0.02] bg-grid-pattern-black pointer-events-none" />
 
-      <div className="site-container relative">
-        <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1.3fr] gap-16 lg:gap-24 items-center">
-
-          {/* ── Left Column: Premium Framed Image ───────── */}
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="relative"
-          >
-            {/* Gold backdrop accent square */}
-            <div className="absolute -bottom-4 -right-4 w-full h-full border border-gold/40 rounded-sm pointer-events-none z-0" />
-
-            {/* Main photo container */}
-            <div className="img-therapist h-[400px] md:h-[600px] rounded-sm overflow-hidden shadow-2xl relative z-10 border border-border-light group">
-              <Image
-                src={image}
-                alt={imageAlt}
-                fill
-                sizes="(max-width: 1024px) 100vw, 45vw"
-                className="object-cover object-top transition-transform duration-750 group-hover:scale-105"
-                priority
-              />
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-dark/5 group-hover:bg-transparent transition-colors duration-300" />
+      <div className="site-container relative z-10">
+        {/* Section Header */}
+        <div className="max-w-3xl mb-16 text-left">
+          {label && (
+            <div className="flex items-center gap-2 mb-3">
+              <span className="w-3 h-[2px] bg-[#C98A2E]" />
+              <p className="text-[#C98A2E] text-[11px] font-mono tracking-[0.2em] uppercase font-bold">
+                {label}
+              </p>
             </div>
-
-            {/* Small floating tag */}
-            <div className="absolute bottom-6 left-6 z-20 bg-dark text-gold font-mono text-[10px] font-bold tracking-widest uppercase px-4 py-2 border border-border-dark shadow-2xl">
-              {photoBadge}
-            </div>
-          </motion.div>
-
-          {/* ── Right Column: Editorial Text ───────── */}
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-60px" }}
-            className="flex flex-col"
-          >
-            <motion.p variants={itemVariants} className="section-label text-gold mb-4">
-              {label}
-            </motion.p>
-            
-            <motion.h2 variants={itemVariants} className="display-heading text-[32px] min-[400px]:text-[38px] md:text-[48px] text-dark leading-tight mb-4">
+          )}
+          {title && (
+            <h2 className="display-heading text-[32px] min-[400px]:text-[38px] md:text-[46px] text-[#0B1726] leading-[1.1] mb-3 font-extrabold tracking-tight">
               {title}
-            </motion.h2>
-
-            <motion.p variants={itemVariants} className="text-gold font-serif italic text-[18px] md:text-[20px] mb-6">
+            </h2>
+          )}
+          {tagline && (
+            <p className="text-[#C98A2E] font-serif italic text-[18px] md:text-[22px] font-medium">
               {tagline}
-            </motion.p>
+            </p>
+          )}
+        </div>
 
-            {desc1 && (
-              <motion.div variants={itemVariants} className="text-body text-[14.5px] md:text-[15px] leading-relaxed mb-5 font-light [&>p]:mb-0" dangerouslySetInnerHTML={{ __html: desc1 }} />
-            )}
+        {/* Asymmetrical Executive Architecture Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-stretch">
+          
+          {/* Executive Narrative & Directives (7 cols) */}
+          <div className="lg:col-span-7 flex flex-col justify-between p-8 sm:p-10 md:p-12 bg-white border border-[#D6D3CC] shadow-sm relative rounded-sm text-left">
+            {/* Top corner technical accent */}
+            <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-[#C98A2E]" />
+            <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-[#C98A2E]" />
 
-            {desc2 && (
-              <motion.div variants={itemVariants} className="text-body text-[14.5px] md:text-[15px] leading-relaxed mb-8 border-l-2 border-gold/40 pl-4 py-1 font-light [&>p]:mb-0" dangerouslySetInnerHTML={{ __html: desc2 }} />
-            )}
+            <div>
+              {desc1 && (
+                <div
+                  className="text-[#5E6670] text-[15px] md:text-[16.5px] leading-[1.8] mb-6 font-normal"
+                  dangerouslySetInnerHTML={{ __html: desc1 }}
+                />
+              )}
 
-            {/* Signature + CTA Row */}
-            {/* CTA Action Row */}
-            <motion.div
-              variants={itemVariants}
-              className="pt-6 border-t border-border-light/60 mt-auto"
-            >
-              <a
-                href={bookingUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-gold inline-flex w-full sm:w-auto justify-center text-center cursor-pointer"
-              >
-                {ctaMore} <ArrowRight size={14} className="ml-1" />
-              </a>
-            </motion.div>
-          </motion.div>
+              {desc2 && (
+                <div
+                  className="text-[#0B1726] text-[14.5px] md:text-[15.5px] leading-[1.8] p-5 sm:p-6 bg-[#F5F3EE] border-l-2 border-[#C98A2E] border-y border-r border-[#E8E6E0] rounded-sm font-medium"
+                  dangerouslySetInnerHTML={{ __html: desc2 }}
+                />
+              )}
+            </div>
+
+            {/* Signature & Sign-off Block */}
+            <div className="pt-8 mt-8 border-t border-[#E8E6E0] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+              {(signatureName || signatureTitle) && (
+                <div>
+                  {signatureName && (
+                    <span className="text-[#0B1726] font-bold text-[20px] block font-serif tracking-wide">
+                      {signatureName}
+                    </span>
+                  )}
+                  {signatureTitle && (
+                    <span className="text-[#5E6670] font-mono text-[11.5px] uppercase tracking-wider block mt-0.5">
+                      {signatureTitle}
+                    </span>
+                  )}
+                </div>
+              )}
+
+              {ctaMore && (
+                <Link
+                  href={targetLink}
+                  className="btn-gold inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-widest px-6 py-3.5"
+                >
+                  <span>{ctaMore}</span>
+                  <ArrowRight size={13} />
+                </Link>
+              )}
+            </div>
+          </div>
+
+          {/* Executive Profile Frame (5 cols) */}
+          {image && (
+            <div className="lg:col-span-5 relative flex flex-col">
+              <div className="relative w-full h-[420px] sm:h-[500px] lg:h-full min-h-[420px] rounded-sm overflow-hidden shadow-xl border border-[#D6D3CC] bg-[#0B1726] group">
+                {image.startsWith('http') || image.startsWith('/uploads') || image.startsWith('/cdn-images') ? (
+                  <img
+                    src={image}
+                    alt={imageAlt || title || "Leadership"}
+                    className="w-full h-full object-cover object-top filter contrast-105 group-hover:scale-105 transition-transform duration-700"
+                  />
+                ) : (
+                  <Image
+                    src={image}
+                    alt={imageAlt || title || "Leadership"}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 40vw"
+                    className="object-cover object-top filter contrast-105 group-hover:scale-105 transition-transform duration-700"
+                    priority
+                  />
+                )}
+
+                {/* Industrial gradient vignette */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0B1726]/85 via-transparent to-transparent pointer-events-none" />
+
+                {/* Floating technical credential tag */}
+                {photoBadge && (
+                  <div className="absolute bottom-6 left-6 z-20 bg-[#0B1726]/95 text-[#C98A2E] font-mono text-[11px] font-bold tracking-widest uppercase px-4 py-2 border border-[#C98A2E]/50 shadow-xl rounded-sm flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#C98A2E] animate-pulse" />
+                    <span>{photoBadge}</span>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
 
         </div>
       </div>

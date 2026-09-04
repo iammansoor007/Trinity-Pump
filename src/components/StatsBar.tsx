@@ -1,65 +1,38 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { useContent } from "../hooks/useContent";
 
 export default function StatsBar() {
   const { stats } = useContent();
+  const items = stats?.items || [];
 
-  const defaultStats = [
-    { value: "8+", label: "Years of Experience" },
-    { value: "5,000+", label: "Clients Treated" },
-    { value: "15,000+", label: "Sessions Completed" },
-    { value: "100%", label: "Satisfaction Rate" }
-  ];
-
-  const items = stats?.items && stats.items.length > 0 ? stats.items : defaultStats;
-  const statsItems = items.slice(0, 4);
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { y: 15, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: { duration: 0.6, ease: "easeOut" },
-    },
-  } as const;
+  if (!items || items.length === 0) return null;
 
   return (
-    <div className="bg-dark-2 border-y border-border-dark py-8 relative z-20">
+    <div className="bg-[#08101C] border-y border-white/[0.08] py-8 md:py-10 relative z-20">
       <div className="site-container">
-        <motion.div 
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-40px" }}
-          className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8"
-        >
-          {statsItems.map((stat: any, idx: number) => (
-            <motion.div 
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+          {items.slice(0, 4).map((stat: any, idx: number) => (
+            <div 
               key={idx} 
-              variants={itemVariants}
-              className="flex flex-col items-center text-center p-4 rounded-sm bg-white/[0.02] border border-white/5 hover:border-gold/30 hover:bg-white/[0.04] transition-all duration-300 group cursor-default"
+              className="relative flex flex-col items-center sm:items-start text-center sm:text-left p-5 md:p-6 bg-[#0B1726]/60 border border-white/[0.06] hover:border-[#C98A2E]/40 hover:bg-[#14243A]/50 transition-all duration-300 group rounded-sm"
             >
-              <span className="text-gold font-serif text-[28px] md:text-[34px] font-bold block leading-none mb-2 group-hover:scale-105 transition-transform duration-300">
+              {/* Technical corner accent */}
+              <div className="absolute top-0 right-0 w-2.5 h-2.5 border-t-2 border-r-2 border-[#C98A2E]/40 group-hover:border-[#C98A2E] transition-colors" />
+
+              <div className="text-[10px] font-mono text-white/30 uppercase tracking-widest mb-2">
+                INDEX // 0{idx + 1}
+              </div>
+
+              <span className="text-[#C98A2E] font-serif text-[32px] sm:text-[36px] md:text-[40px] font-bold block leading-none mb-2 group-hover:scale-105 transition-transform duration-300">
                 {stat.value}
               </span>
-              <span className="text-white/60 text-[10px] sm:text-[11px] font-mono uppercase tracking-widest font-semibold leading-tight">
+              <span className="text-[#A9AFB5] text-[11px] sm:text-[12px] font-mono uppercase tracking-wider font-semibold leading-snug">
                 {stat.label}
               </span>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </div>
   );

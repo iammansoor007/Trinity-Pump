@@ -142,13 +142,13 @@ export const useContent = () => {
             const items = Array.isArray(s.items) && s.items.length > 0 ? s.items : defaultItems;
             return {
                 ...s,
-                label: s.label || "Our Achievements",
-                titleLine1: s.titleLine1 || "Proven Results.",
-                titleLine2: s.titleLine2 || "Professional",
-                titleItalicWord: s.titleItalicWord || "Standards.",
-                description: s.description || "At Trinity Pump & Supply, we deliver high-quality USA-manufactured pump parts and oilfield supplies across Texas and New Mexico.",
-                image: s.image || "/images/blog-3.webp",
-                imageAlt: s.imageAlt || "Clinical sports massage session",
+                label: s.label || "",
+                titleLine1: s.titleLine1 || "",
+                titleLine2: s.titleLine2 || "",
+                titleItalicWord: s.titleItalicWord || "",
+                description: s.description || "",
+                image: s.image || "",
+                imageAlt: s.imageAlt || "",
                 items
             };
         })(),
@@ -163,11 +163,9 @@ export const useContent = () => {
                 const name = item.name || item.title || `Service ${i + 1}`;
                 const slug = item.slug || item.id || title.toLowerCase().replace(/\s+/g, '-');
                 const description = item.description || item.heroDescription || "";
-                const image = item.image || item.featuredImage || "/images/service-massage.webp";
+                const image = item.image || item.featuredImage || "";
                 const rawBenefits = item.benefits || item.focusCards || [];
-                const benefits = Array.isArray(rawBenefits) && rawBenefits.length > 0 
-                    ? rawBenefits 
-                    : ["Targeted Recovery", "Pain Relief", "Mobility Restoration", "Certified Specialists"];
+                const benefits = Array.isArray(rawBenefits) ? rawBenefits : [];
                 return {
                     ...item,
                     id: item.id || String(i + 1).padStart(2, '0'),
@@ -190,11 +188,11 @@ export const useContent = () => {
             const rawItems = Array.isArray(s.items) && s.items.length > 0 ? s.items : formattedServices.slice(0, 6);
             const formattedItems = rawItems.map((svc: any, i: number) => formatService(svc, i)).sort(sortAscending);
 
-            const label = s.label || s.badge || "Our Services";
-            const titleLine1 = s.titleLine1 || s.headline?.prefix || "Therapies";
-            const titleLine2 = s.titleLine2 || s.headline?.highlight || "Designed";
-            const titleLine3 = s.titleLine3 || s.headline?.suffix || "Around";
-            const titleItalicWord = s.titleItalicWord || "You";
+            const label = s.label || s.badge || "";
+            const titleLine1 = s.titleLine1 || s.headline?.prefix || "";
+            const titleLine2 = s.titleLine2 || s.headline?.highlight || "";
+            const titleLine3 = s.titleLine3 || s.headline?.suffix || "";
+            const titleItalicWord = s.titleItalicWord || "";
             
             const ctaAll = s.ctaAll || "VIEW ALL SERVICES";
             const ctaLearnMore = s.ctaLearnMore || "LEARN MORE";
@@ -223,19 +221,19 @@ export const useContent = () => {
             const ceo = l.ceo || {};
             const section = l.section || {};
 
-            const label = l.label || section.badge || "The Specialist";
-            const title = l.title || section.headline || "Meet Antoine Lyles";
-            const tagline = l.tagline || (typeof ceo.quotes?.[0] === 'string' ? ceo.quotes[0].replace(/<[^>]*>/g, '').trim() : "Performance Recovery Specialist");
-            const image = l.image || ceo.image?.src || "/images/theraphist.jpeg";
-            const imageAlt = l.imageAlt || ceo.image?.alt || "Antoine Lyles";
+            const label = l.label || section.badge || "";
+            const title = l.title || section.headline || "";
+            const tagline = l.tagline || (typeof ceo.quotes?.[0] === 'string' ? ceo.quotes[0].replace(/<[^>]*>/g, '').trim() : "");
+            const image = l.image || ceo.image?.src || "";
+            const imageAlt = l.imageAlt || ceo.image?.alt || title || "";
 
-            const desc1 = l.desc1 || (ceo.description ? ceo.description.split("</p>")[0] + "</p>" : "<p>Antoine Lyles is a certified massage therapist specializing in clinical sports massage, myofascial release, and neuromuscular therapy.</p>");
-            const desc2 = l.desc2 || (ceo.description && ceo.description.includes("</p>") ? ceo.description.split("</p>").slice(1).join("</p>") : "<p>With years of experience working with competitive athletes and active individuals, he delivers targeted protocols designed to restore functional movement.</p>");
+            const desc1 = l.desc1 || (ceo.description ? ceo.description.split("</p>")[0] + "</p>" : "");
+            const desc2 = l.desc2 || (ceo.description && ceo.description.includes("</p>") ? ceo.description.split("</p>").slice(1).join("</p>") : "");
 
-            const photoBadge = l.photoBadge || ceo.badges?.top || "PERFORMANCE RECOVERY SPECIALIST";
-            const signatureName = l.signatureName || ceo.name || "Antoine Lyles";
-            const signatureTitle = l.signatureTitle || ceo.title || "Performance Recovery Specialist";
-            const ctaMore = l.ctaMore || "LEARN MORE ABOUT ANTOINE";
+            const photoBadge = l.photoBadge || ceo.badges?.top || "";
+            const signatureName = l.signatureName || ceo.name || "";
+            const signatureTitle = l.signatureTitle || ceo.title || "";
+            const ctaMore = l.ctaMore || "";
             const ctaLink = l.ctaLink || "";
 
             return {
@@ -366,10 +364,10 @@ export const useContent = () => {
             return globalFaq;
         })(),
         process: getSafe(completeData, 'process', {
-            label: "THE CLINICAL PROCESS",
-            title: "Your Recovery Journey.",
+            label: "",
+            title: "",
             description: "",
-            phaseLabel: "PHASE",
+            phaseLabel: "COMMITMENT",
             items: []
         }),
         quote: getSafe(completeData, 'quote', {
@@ -398,40 +396,35 @@ export const useContent = () => {
               answer: f.answer || f.a || ""
             }));
             
-            const formLabel = quoteObj.section?.badge || quoteObj.badge || "GET IN TOUCH";
-            const formTitle = quoteObj.section?.headline || quoteObj.title || "Have Questions? Let's Connect.";
+            const formLabel = quoteObj.section?.badge || quoteObj.badge || "REQUEST A QUOTE";
+            const formTitle = quoteObj.section?.headline || quoteObj.title || "Ready to Optimize Your Oilfield Operations?";
             
-            const formClinicPortal = quoteObj.formClinicPortal || "INSTANT ONLINE BOOKING";
-            const formClinicPortalSub = quoteObj.formClinicPortalSub || "Book directly on StyleSeat portal";
-            const formStyleSeatBtn = quoteObj.formStyleSeatBtn || "BOOK ON STYLESEAT";
+            const formClinicPortal = quoteObj.formClinicPortal || "";
+            const formClinicPortalSub = quoteObj.formClinicPortalSub || "";
+            const formStyleSeatBtn = quoteObj.formStyleSeatBtn || "";
             
-            const formNameLabel = quoteObj.formNameLabel || "YOUR FULL NAME";
-            const formNamePlaceholder = quoteObj.formNamePlaceholder || "Antoine Lyles";
+            const formNameLabel = quoteObj.formNameLabel || "YOUR FULL NAME / COMPANY";
+            const formNamePlaceholder = quoteObj.formNamePlaceholder || "Your Name / Company";
             const formEmailLabel = quoteObj.formEmailLabel || "EMAIL ADDRESS";
-            const formEmailPlaceholder = quoteObj.formEmailPlaceholder || "antoine@example.com";
+            const formEmailPlaceholder = quoteObj.formEmailPlaceholder || "email@company.com";
             const formPhoneLabel = quoteObj.formPhoneLabel || "PHONE NUMBER";
             const formPhonePlaceholder = quoteObj.formPhonePlaceholder || "830-279-3996";
-            const formServiceLabel = quoteObj.formServiceLabel || "DESIRED SERVICE CATEGORY";
-            const formServicePlaceholder = quoteObj.formServicePlaceholder || "Select a service category";
-            const formMessageLabel = quoteObj.formMessageLabel || "YOUR MESSAGE / INJURY DETAILS";
-            const formMessagePlaceholder = quoteObj.formMessagePlaceholder || "Please describe any pain, stiffness, or injuries...";
+            const formServiceLabel = quoteObj.formServiceLabel || "EQUIPMENT / SERVICE CATEGORY";
+            const formServicePlaceholder = quoteObj.formServicePlaceholder || "Select equipment or service";
+            const formMessageLabel = quoteObj.formMessageLabel || "YOUR MESSAGE / WELL SPECIFICATIONS";
+            const formMessagePlaceholder = quoteObj.formMessagePlaceholder || "Please describe your pump, depth, or supply needs...";
             
-            const formBtnSubmit = quoteObj.formBtnSubmit || "SEND MESSAGE";
-            const formBtnSuccess = quoteObj.formBtnSuccess || "MESSAGE SENT!";
-            const formSuccessToast = quoteObj.formSuccessToast || "Thank you! Your inquiry has been sent. We will reply within 24 hours.";
+            const formBtnSubmit = quoteObj.formBtnSubmit || "SEND REQUEST";
+            const formBtnSuccess = quoteObj.formBtnSuccess || "REQUEST SENT!";
+            const formSuccessToast = quoteObj.formSuccessToast || "Thank you! Your quote request has been sent. We will respond promptly.";
             
-            const trustHipa = quoteObj.trustHipa || "HIPAA Compliant & Secure";
-            const trustResponse = quoteObj.trustResponse || "Avg Response: 2 Hours";
+            const trustHipa = quoteObj.trustHipa || "";
+            const trustResponse = quoteObj.trustResponse || "";
             
             // Map quote.services to options format { label, value }
             const formServicesOptions = Array.isArray(quoteObj.services) && quoteObj.services.length > 0 
               ? quoteObj.services.map((s: any) => typeof s === 'string' ? { label: s, value: s } : { label: s.label || s.name || "", value: s.value || s.id || "" })
-              : [
-                  { label: "Performance Sports Massage", value: "sports-massage" },
-                  { label: "PNF Stretch & Mobility Session", value: "pnf-stretch" },
-                  { label: "Myofascial Trigger Point Therapy", value: "trigger-point" },
-                  { label: "Therapeutic Muscle Scraping", value: "scraping" }
-                ];
+              : (Array.isArray(completeData?.contactFaq?.formServicesOptions) ? completeData.contactFaq.formServicesOptions : []);
                 
             return {
                 label: formLabel,
@@ -461,17 +454,18 @@ export const useContent = () => {
                 trustHipa,
                 trustResponse,
                 formServicesOptions,
-                faqs: formattedFaqs
+                faqs: formattedFaqs,
+                contactInfo: (completeData?.contactFaq?.contactInfo || footerContact || {})
             };
         })(),
         ctaBanner: (() => {
             const cb = getSafe(completeData, 'ctaBanner', {});
             return {
                 ...cb,
-                tagline: cb.tagline || "Take the First Step",
-                title: cb.title || "Ready to Feel Your Best?",
-                description: cb.description || "Book your appointment today and start your journey to a pain-free, stronger you.",
-                button: cb.button || "BOOK APPOINTMENT",
+                tagline: cb.tagline || "",
+                title: cb.title || "",
+                description: cb.description || "",
+                button: cb.button || "CONTACT US",
                 buttonUrl: cb.buttonUrl || cb.btnUrl || "/contact-us/"
             };
         })(),

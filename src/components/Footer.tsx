@@ -1,9 +1,9 @@
 "use client";
 
 import { useContent } from "../hooks/useContent";
-import { useContentContext } from "../context/ContentContext";
 import Link from "next/link";
 import * as LucideIcons from "lucide-react";
+import { Phone, Mail, MapPin, Clock, ArrowRight } from "lucide-react";
 
 /** Strip HTML tags and return plain text */
 function stripHtml(html: string): string {
@@ -15,28 +15,30 @@ function stripHtml(html: string): string {
 function FooterLogo({ logoUrl, siteTitle, logoText1, logoText2 }: { logoUrl?: string; siteTitle?: string; logoText1?: string; logoText2?: string }) {
   if (logoUrl && (logoUrl.startsWith('http') || logoUrl.startsWith('/uploads') || logoUrl.startsWith('/cdn-images'))) {
     return (
-      <Link href="/" className="inline-flex items-center gap-3 mb-4">
-        <div className="relative w-[110px] h-[110px] sm:w-[130px] sm:h-[130px] flex items-center justify-center overflow-hidden">
+      <Link href="/" className="inline-flex items-center gap-3 mb-5">
+        <div className="relative w-[130px] sm:w-[160px] h-[55px] sm:h-[65px] flex items-center justify-start overflow-hidden">
           <img
             src={logoUrl}
             alt={siteTitle || "Trinity Pump & Supply Logo"}
-            className="object-contain w-full h-full"
+            className="object-contain w-full h-full object-left"
           />
         </div>
       </Link>
     );
   }
   return (
-    <Link href="/" className="inline-flex items-center gap-3 mb-6">
-      <svg width="36" height="42" viewBox="0 0 42 48" fill="none" className="md:w-[42px] md:h-[48px] flex-shrink-0">
-        <path d="M21 1L40 9.5V25C40 36.5 31.5 44.5 21 47C10.5 44.5 2 36.5 2 25V9.5L21 1Z" fill="#C98A2E" />
-        <text x="21" y="33" textAnchor="middle" fill="#0B1726" fontFamily="var(--font-heading), sans-serif" fontSize="22" fontWeight="bold">T</text>
-      </svg>
+    <Link href="/" className="inline-flex items-center gap-3 mb-5 group">
+      <div className="w-10 h-11 bg-[#14243A] border border-[#C98A2E]/50 flex items-center justify-center rounded-sm shadow-md group-hover:border-[#C98A2E] transition-colors">
+        <svg width="24" height="28" viewBox="0 0 42 48" fill="none">
+          <path d="M21 1L40 9.5V25C40 36.5 31.5 44.5 21 47C10.5 44.5 2 36.5 2 25V9.5L21 1Z" fill="#C98A2E" />
+          <text x="21" y="33" textAnchor="middle" fill="#0B1726" fontFamily="sans-serif" fontSize="22" fontWeight="bold">T</text>
+        </svg>
+      </div>
       <span className="flex flex-col text-left">
-        <span className="text-[15px] md:text-[18px] font-black tracking-[0.16em] text-white leading-none">
+        <span className="text-[17px] font-black tracking-[0.14em] text-white leading-none">
           {logoText1 || "TRINITY"}
         </span>
-        <span className="text-[10px] md:text-[11px] font-black tracking-[0.16em] text-gold mt-1 leading-none">
+        <span className="text-[10px] font-bold tracking-[0.2em] text-[#C98A2E] mt-1 leading-none uppercase">
           {logoText2 || "PUMP & SUPPLY"}
         </span>
       </span>
@@ -44,46 +46,27 @@ function FooterLogo({ logoUrl, siteTitle, logoText1, logoText2 }: { logoUrl?: st
   );
 }
 
-/* ── Social Icons — only renders platforms added from dashboard ── */
+/* ── Social Icons ──────────────────────────────────────── */
 function SocialIcons({ socialItems }: { socialItems?: any[] }) {
-  if (typeof window !== 'undefined') {
-    // eslint-disable-next-line no-console
-    console.log('[Footer] socialItems received:', socialItems);
-  }
-
   if (!socialItems || socialItems.length === 0) return null;
-
-  // Show all entries that have a platform name
   const activeSocials = socialItems.filter((s: any) => s.platform && s.platform.trim() !== '');
-
   if (activeSocials.length === 0) return null;
 
   return (
-    <div className="flex gap-2.5 mt-4 justify-start">
+    <div className="flex gap-2.5 mt-5 justify-start">
       {activeSocials.map((s: any, i: number) => {
-        // Look up iconName from s.icon or s.platform
         const iconName = s.icon || s.platform || '';
-        // Format to PascalCase to match Lucide icon export names
         const formattedIconName = iconName.charAt(0).toUpperCase() + iconName.slice(1);
 
         let IconComponent = (LucideIcons as any)[formattedIconName];
-
-        // Specific fallbacks for common lowercase names if not direct match
         if (!IconComponent) {
           const lower = formattedIconName.toLowerCase();
-          if (lower === 'linkedin') {
-            IconComponent = LucideIcons.Linkedin;
-          } else if (lower === 'facebook') {
-            IconComponent = LucideIcons.Facebook;
-          } else if (lower === 'instagram') {
-            IconComponent = LucideIcons.Instagram;
-          } else if (lower === 'twitter') {
-            IconComponent = LucideIcons.Twitter;
-          } else if (lower === 'youtube') {
-            IconComponent = LucideIcons.Youtube;
-          } else {
-            IconComponent = LucideIcons.Share2;
-          }
+          if (lower === 'linkedin') IconComponent = LucideIcons.Linkedin;
+          else if (lower === 'facebook') IconComponent = LucideIcons.Facebook;
+          else if (lower === 'instagram') IconComponent = LucideIcons.Instagram;
+          else if (lower === 'twitter') IconComponent = LucideIcons.Twitter;
+          else if (lower === 'youtube') IconComponent = LucideIcons.Youtube;
+          else IconComponent = LucideIcons.Share2;
         }
 
         const href = s.href && s.href.trim() !== '' ? s.href : '#';
@@ -94,9 +77,9 @@ function SocialIcons({ socialItems }: { socialItems?: any[] }) {
             target={href !== '#' ? '_blank' : undefined}
             rel="noopener noreferrer"
             aria-label={s.platform}
-            className="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:text-gold hover:border-gold transition-all duration-200"
+            className="w-8 h-8 rounded-sm bg-white/[0.04] border border-white/10 flex items-center justify-center text-white/60 hover:text-[#C98A2E] hover:border-[#C98A2E] hover:bg-[#14243A] transition-all duration-200"
           >
-            <IconComponent size={16} strokeWidth={1.5} />
+            <IconComponent size={14} strokeWidth={1.5} />
           </a>
         );
       })}
@@ -104,110 +87,66 @@ function SocialIcons({ socialItems }: { socialItems?: any[] }) {
   );
 }
 
-
-/* ── Map Placeholder ───────────────────────────────────── */
-function MapPlaceholder({ addressText, iframeHtml }: { addressText: string; iframeHtml?: string | null }) {
+/* ── Map Embed ─────────────────────────────────────────── */
+function MapEmbed({ addressText, iframeHtml }: { addressText: string; iframeHtml?: string | null }) {
   if (iframeHtml) {
-    // Ensure the map iframe fills the container perfectly and has rounded borders
     const styledIframe = iframeHtml
       .replace(/width="[^"]*"/i, 'width="100%"')
       .replace(/height="[^"]*"/i, 'height="100%"');
     return (
       <div
-        className="mt-5 h-[160px] w-full rounded-md overflow-hidden border border-white/10 relative"
+        className="mt-4 h-[120px] w-full rounded-sm overflow-hidden border border-white/10 relative"
         dangerouslySetInnerHTML={{ __html: styledIframe }}
       />
     );
   }
+  if (!addressText) return null;
+  const encoded = encodeURIComponent(addressText);
   return (
-    <div className="mt-5 h-24 sm:h-28 bg-white/[0.03] rounded-md overflow-hidden relative flex items-center justify-center border border-white/10">
-      <div className="relative flex flex-col items-center gap-1.5 px-3">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="#C98A2E">
-          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
-        </svg>
-        <p className="text-white/55 text-[10.5px] font-medium text-center whitespace-pre-line leading-tight">{addressText}</p>
-      </div>
+    <div className="mt-4 h-[120px] w-full rounded-sm overflow-hidden border border-white/10 relative">
+      <iframe
+        title="Location Map"
+        width="100%"
+        height="100%"
+        style={{ border: 0 }}
+        loading="lazy"
+        allowFullScreen
+        referrerPolicy="no-referrer-when-downgrade"
+        src={`https://www.google.com/maps?q=${encoded}&output=embed`}
+      />
     </div>
   );
 }
 
 export default function Footer() {
-  const { footer, navbar, services: servicesData, hours } = useContent();
-  const rawCtx = useContentContext();
-  const rawFooter = rawCtx?.footer || {};
+  const content = useContent();
+  const { footer = {}, navbar = {}, services: servicesData = {}, hours = {} } = content;
 
-  const contactInfo = footer?.contact || {};
-  const companyInfo = footer?.company || {};
-  const bottomInfo = footer?.bottom || {};
-  const socialLinks: any[] = Array.isArray(rawFooter.social) ? rawFooter.social
-    : Array.isArray((footer as any)?.social) ? (footer as any).social
-      : [];
+  const companyInfo = footer.company || {};
+  const contactInfo = footer.contact || {};
+  const bottomInfo = footer.bottom || {};
 
-  if (typeof window !== 'undefined') {
-    // eslint-disable-next-line no-console
-    console.log('[Footer] rawFooter.social:', rawFooter.social, '| socialLinks:', socialLinks);
-  }
+  const brandDescriptionText: string = stripHtml(companyInfo.description || "");
+  const addressText: string = stripHtml(contactInfo.address || "");
+  const phoneText: string = contactInfo.phone || navbar.phone || "";
+  const emailText: string = contactInfo.email || "";
 
-  const {
-    quickLinksLabel = "Quick Links",
-    servicesLabel = "Services",
-    contactLabel = "Contact Us",
-    privacy = "Privacy Policy",
-    terms = "Terms & Conditions",
-    divider = "|"
-  } = footer || {};
-
-  const brandDescriptionText: string = stripHtml(
-    companyInfo.description || (footer as any)?.brandDescription || "Elite performance recovery bodywork, mobility optimization, and injury prevention for athletes and active adults in Maryland."
-  );
-
-  // Extract map iframe if present in the address field
-  const rawAddress = contactInfo.address || (footer as any)?.address || "1301 York Rd., 8th Floor, Ste 48\nTimonium, MD 21093";
-  const iframeRegex = /<iframe[^>]*>[\s\S]*?<\/iframe>/i;
-  const match = rawAddress.match(iframeRegex);
-  const iframeHtml = match ? match[0] : null;
-
-  // Clean address text by removing the iframe block
-  const addressCleanHtml = rawAddress.replace(iframeRegex, "").trim();
-  const addressText = stripHtml(addressCleanHtml);
-
-  const phoneText: string = stripHtml(contactInfo.phone || (footer as any)?.phone || "830-279-3996");
-  const emailText: string = stripHtml(contactInfo.email || (footer as any)?.email || "trinitypumpsupply@gmail.com");
-
-  // Construct business hours dynamically from general settings or fall back
+  // Dynamic hours resolution
   let hoursText = "";
-  const rawHoursText = contactInfo.hours || (footer as any)?.hours || "";
-  if (rawHoursText && rawHoursText !== "Mon–Sat: 8:00 AM – 7:00 PM" && rawHoursText !== "Sat–Sun: 8:00 AM – 7:00 PM") {
-    hoursText = stripHtml(rawHoursText);
-  } else if (hours && typeof hours === 'object' && Object.keys(hours).length > 0) {
+  if (typeof contactInfo.hours === 'string' && contactInfo.hours.trim()) {
+    hoursText = contactInfo.hours;
+  } else if (hours && typeof hours === 'object') {
+    const h = hours as any;
     const parts: string[] = [];
-    const h = hours as Record<string, string>;
-    const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
-    const activeDays = days.filter(d => h[d]);
-    if (activeDays.length === 7 && days.every(d => h[d]?.trim() === h['sunday']?.trim())) {
-      parts.push(`Sun–Sat: ${h['sunday']}`);
-    } else {
-      if (h.weekdays) parts.push(`Mon–Fri: ${h.weekdays}`);
-      else if (h.monday && h.friday && h.monday === h.friday) parts.push(`Mon–Fri: ${h.monday}`);
-      else if (h.monday) parts.push(`Mon–Fri: ${h.monday}`);
-
-      if (h.saturday && h.sunday && h.saturday.trim().toLowerCase() === h.sunday.trim().toLowerCase()) {
-        parts.push(`Sat–Sun: ${h.saturday}`);
-      } else {
-        if (h.saturday) parts.push(`Sat: ${h.saturday}`);
-        if (h.sunday) parts.push(`Sun: ${h.sunday}`);
-      }
+    if (h.monday && h.friday && h.monday === h.friday) {
+      parts.push(`Mon–Fri: ${h.monday}`);
     }
+    if (h.saturday) parts.push(`Sat: ${h.saturday}`);
+    if (h.sunday) parts.push(`Sun: ${h.sunday}`);
     hoursText = parts.join('\n');
-  } else if (rawHoursText) {
-    hoursText = stripHtml(rawHoursText);
   }
 
-  if (!hoursText || hoursText === "Mon–Sat: 8:00 AM – 7:00 PM" || hoursText === "Sat–Sun: 8:00 AM – 7:00 PM") {
-    hoursText = "Sun–Sat: 8:00 AM – 7:00 PM";
-  }
-
-  const copyrightText: string = stripHtml(bottomInfo.copyright || (footer as any)?.copyright || "© 2026 Trinity Pump & Supply. All Rights Reserved.");
+  const copyrightText: string = stripHtml(bottomInfo.copyright || (footer as any)?.copyright || `© ${new Date().getFullYear()} Trinity Pump & Supply. All Rights Reserved.`);
 
   const companyLinks = navbar?.companyLinks || navbar?.links || [];
   const quickLinksData = companyLinks.map((link: any) => {
@@ -216,10 +155,7 @@ export default function Footer() {
     if (href.startsWith("/") && !href.endsWith("/") && !href.includes("#") && !href.includes("?")) {
       href = `${href}/`;
     }
-    return {
-      label: link.label,
-      href
-    };
+    return { label: link.label, href };
   });
 
   const servicesListRaw = (servicesData?.services || []).filter((s: any) => s.status === 'published' || s.status === undefined);
@@ -228,136 +164,166 @@ export default function Footer() {
     href: `/${svc.slug}/`
   }));
 
+  const socialLinks: any[] = (footer as any)?.social?.items || (footer as any)?.social || [];
+
   return (
-    <footer>
+    <footer className="bg-[#0B1726] border-t border-white/[0.08] text-white">
+      {/* ── Dynamic Telemetry Strip (Only rendered if phone or address present) ── */}
+      {(phoneText || addressText || hoursText) && (
+        <div className="bg-[#08101C] border-b border-white/[0.08] py-4">
+          <div className="site-container flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-mono">
+            <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 sm:gap-6 text-white/75">
+              {addressText && (
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-[#C98A2E]"></span>
+                  <span className="text-white font-bold tracking-wider">{addressText.split(',')[0]} FACILITY</span>
+                </div>
+              )}
+              {hoursText && (
+                <div className="flex items-center gap-1.5 text-white/70">
+                  <Clock size={12} className="text-[#C98A2E]" />
+                  <span>{hoursText.replace(/\n/g, ' • ')}</span>
+                </div>
+              )}
+            </div>
 
-      {/* ══ Main Footer ════════════════════════════════ */}
-      <div className="bg-dark pt-12 md:pt-16 pb-0 border-t border-border-dark/20">
+            {phoneText && (
+              <div className="flex items-center gap-3">
+                <a
+                  href={`tel:${phoneText.replace(/[^\d+]/g, '')}`}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#C98A2E]/10 border border-[#C98A2E]/40 text-[#C98A2E] hover:bg-[#C98A2E] hover:text-[#0B1726] transition-all rounded-sm text-[11px] font-bold tracking-wider uppercase font-mono"
+                >
+                  <Phone size={11} />
+                  <span>CALL: {phoneText}</span>
+                </a>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* ── Main Footer Columns ──────────────────────────────── */}
+      <div className="pt-16 pb-12">
         <div className="site-container">
-
-          {/* Responsive grid wrapping from 1 to 4 columns */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1.2fr_1.5fr] gap-10 md:gap-12 pb-12 border-b border-border-dark">
-
-            {/* Col 1 — Brand */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1.2fr_1.4fr] gap-10 lg:gap-12 pb-12 border-b border-white/[0.08]">
+            
+            {/* Col 1 — Company Profile */}
             <div className="flex flex-col items-start text-left">
-              <FooterLogo logoUrl={(navbar as any)?.logo} siteTitle={(navbar as any)?.siteTitle} logoText1={(navbar as any)?.logoText1} logoText2={(navbar as any)?.logoText2} />
-              <p className="text-white/80 text-[13.5px] leading-[1.8] mb-4 max-w-[280px]">
-                {brandDescriptionText}
-              </p>
+              <FooterLogo
+                logoUrl={(navbar as any)?.logo}
+                siteTitle={(navbar as any)?.siteTitle}
+                logoText1={(navbar as any)?.logoText1}
+                logoText2={(navbar as any)?.logoText2}
+              />
+              {brandDescriptionText && (
+                <p className="text-[#A9AFB5] text-[13.5px] leading-[1.8] mb-4 max-w-[300px]">
+                  {brandDescriptionText}
+                </p>
+              )}
               <SocialIcons socialItems={socialLinks} />
             </div>
 
-            {/* Col 2 — Quick Links */}
+            {/* Col 2 — Quick Navigation */}
             <div className="flex flex-col items-start text-left">
-              <h4 className="text-white font-bold text-[12px] tracking-[0.18em] uppercase mb-5">
-                {quickLinksLabel}
-              </h4>
-              <ul className="flex flex-col gap-3">
-                {quickLinksData.map((link: any) => (
-                  <li key={link.label}>
-                    <Link href={link.href} className="text-white/75 text-[13.5px] hover:text-gold transition-colors duration-200 flex items-center gap-2 group py-0.5">
-                      <span className="w-0 h-px bg-gold transition-all duration-200 group-hover:w-3" />
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Col 3 — Services */}
-            <div className="flex flex-col items-start text-left">
-              <h4 className="text-white font-bold text-[12px] tracking-[0.18em] uppercase mb-5">
-                {servicesLabel}
-              </h4>
-              <ul className="flex flex-col gap-3">
-                {servicesDataList.map((svc: any) => (
-                  <li key={svc.label}>
-                    <Link href={svc.href} className="text-white/75 text-[13.5px] hover:text-gold transition-colors duration-200 flex items-center gap-2 group py-0.5">
-                      <span className="w-0 h-px bg-gold transition-all duration-200 group-hover:w-3" />
-                      {svc.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Col 4 — Contact */}
-            <div className="flex flex-col items-start text-left">
-              <h4 className="text-white font-bold text-[12px] tracking-[0.18em] uppercase mb-5">
-                {contactLabel}
-              </h4>
-              <ul className="flex flex-col gap-3.5 w-full">
-                {[
-                  {
-                    icon: <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />,
-                    text: addressText,
-                  },
-                  {
-                    icon: <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.92a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />,
-                    text: phoneText,
-                  },
-                  {
-                    icon: <><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><path d="M22 6l-10 7L2 6" /></>,
-                    text: emailText,
-                  },
-                  {
-                    icon: <><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></>,
-                    text: hoursText,
-                  },
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <svg
-                      width="14" height="14"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="#C98A2E"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="mt-0.5 flex-shrink-0"
+              <span className="text-[11px] font-mono tracking-widest text-[#C98A2E] uppercase font-bold mb-5 block">
+                NAVIGATION
+              </span>
+              <ul className="space-y-2.5">
+                {quickLinksData.map((link: any, idx: number) => (
+                  <li key={idx}>
+                    <Link
+                      href={link.href}
+                      className="text-[#A9AFB5] hover:text-white text-[13.5px] transition-colors inline-flex items-center gap-1.5 group"
                     >
-                      {item.icon}
-                    </svg>
-                    <span className="text-white/80 text-[13px] leading-snug whitespace-pre-line">
-                      {item.text}
-                    </span>
+                      <span className="w-1 h-1 rounded-full bg-[#C98A2E]/40 group-hover:bg-[#C98A2E] transition-colors" />
+                      <span>{link.label}</span>
+                    </Link>
                   </li>
                 ))}
               </ul>
-              <div className="w-full">
-                <MapPlaceholder addressText={addressText} iframeHtml={iframeHtml} />
+            </div>
+
+            {/* Col 3 — Downhole Services & Equipment */}
+            <div className="flex flex-col items-start text-left">
+              <span className="text-[11px] font-mono tracking-widest text-[#C98A2E] uppercase font-bold mb-5 block">
+                EQUIPMENT LINES
+              </span>
+              <ul className="space-y-2.5">
+                {servicesDataList.map((svc: any, idx: number) => (
+                  <li key={idx}>
+                    <Link
+                      href={svc.href}
+                      className="text-[#A9AFB5] hover:text-white text-[13.5px] transition-colors inline-flex items-center gap-1.5 group"
+                    >
+                      <span className="w-1 h-1 rounded-full bg-[#C98A2E]/40 group-hover:bg-[#C98A2E] transition-colors" />
+                      <span>{svc.label}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Col 4 — Facility Coordinates & Map */}
+            <div className="flex flex-col items-start text-left">
+              <span className="text-[11px] font-mono tracking-widest text-[#C98A2E] uppercase font-bold mb-5 block">
+                FACILITY COORDINATES
+              </span>
+              <div className="space-y-2.5 text-[13px] text-[#A9AFB5]">
+                {addressText && (
+                  <div className="flex items-start gap-2.5">
+                    <MapPin size={15} className="text-[#C98A2E] mt-0.5 flex-shrink-0" />
+                    <span>{addressText}</span>
+                  </div>
+                )}
+                {phoneText && (
+                  <div className="flex items-center gap-2.5">
+                    <Phone size={14} className="text-[#C98A2E] flex-shrink-0" />
+                    <a href={`tel:${phoneText.replace(/[^\d+]/g, '')}`} className="hover:text-white font-mono">
+                      {phoneText}
+                    </a>
+                  </div>
+                )}
+                {emailText && (
+                  <div className="flex items-center gap-2.5">
+                    <Mail size={14} className="text-[#C98A2E] flex-shrink-0" />
+                    <a href={`mailto:${emailText}`} className="hover:text-white">
+                      {emailText}
+                    </a>
+                  </div>
+                )}
               </div>
+
+              <MapEmbed addressText={addressText} iframeHtml={contactInfo?.mapUrl} />
             </div>
 
           </div>
 
-          {/* ── Bottom bar ───────────────────────────── */}
-          <div className="flex flex-col sm:flex-row items-center justify-between py-6 gap-3 text-center sm:text-left">
-            <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-white/75 text-[13px]">
-              <p className="font-medium text-white/85">{copyrightText}</p>
-              <span className="hidden sm:inline text-white/30">•</span>
-              <p className="text-white/75">
-                Designed & Developed by{" "}
-                <a
-                  href="https://mohsindesigns.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gold hover:text-white font-semibold underline decoration-gold/60 hover:decoration-white transition-colors"
-                >
-                  Mohsin Design
-                </a>
-              </p>
-            </div>
-            <div className="flex items-center gap-4 sm:gap-6 text-[13px]">
-              <Link href="/privacy/" className="text-white/70 hover:text-white transition-colors">{privacy}</Link>
-              <span className="text-white/30">{divider}</span>
-              <Link href="/terms/" className="text-white/70 hover:text-white transition-colors">{terms}</Link>
+          {/* ── Bottom Bar ───────────────────────────────────── */}
+          <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#5E6670] font-mono">
+            <p className="text-center sm:text-left">
+              {copyrightText}
+            </p>
+            <div className="flex items-center gap-4">
+              <Link href="/privacy/" className="hover:text-[#A9AFB5] transition-colors">
+                Privacy Policy
+              </Link>
+              <span>•</span>
+              <Link href="/terms/" className="hover:text-[#A9AFB5] transition-colors">
+                Terms of Service
+              </Link>
+              <span>•</span>
+              <a
+                href="https://mohsindesigns.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#C98A2E] hover:underline"
+              >
+                Mohsin Design
+              </a>
             </div>
           </div>
-
         </div>
       </div>
-
     </footer>
   );
 }

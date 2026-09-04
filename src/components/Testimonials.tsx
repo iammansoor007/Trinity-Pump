@@ -1,9 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { Star, ChevronLeft, ChevronRight } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
 import { useContent } from "../hooks/useContent";
 import { stripHtml } from "../lib/utils";
 
@@ -12,132 +10,134 @@ export default function TestimonialsSection() {
   const { testimonials } = useContent();
 
   const {
-    label = "Clients Love Us",
-    title1 = "Real People.",
-    title2 = "Real Results.",
-    quoteIcon = "\"",
+    label,
+    title1,
+    title2,
     dash = "—",
     items = [],
     results = []
   } = testimonials || {};
 
+  if (!testimonials || !items || items.length === 0) return null;
+
   const prev = () => setActiveIdx((i) => (i === 0 ? items.length - 1 : i - 1));
   const next = () => setActiveIdx((i) => (i === items.length - 1 ? 0 : i + 1));
 
-  if (!items || items.length === 0) return null;
-  const activeTestimonial = items[activeIdx];
+  const active = items[activeIdx] || items[0];
+  const authorName = active.author || active.name || "";
+  const authorRole = [active.role, active.company].filter(Boolean).join(" • ");
 
   return (
-    <section id="testimonials" className="bg-dark py-20 md:py-32 relative overflow-hidden border-t border-white/10">
-      {/* Delicate Ambient radial dot grid */}
-      <div className="absolute inset-0 opacity-[0.03] bg-radial-dots-gold pointer-events-none" />
+    <section id="testimonials" className="bg-[#0B1726] py-24 md:py-32 relative overflow-hidden border-t border-white/[0.08]">
+      {/* Precision background technical pattern */}
+      <div className="absolute inset-0 opacity-[0.025] bg-grid-pattern-dark pointer-events-none" />
 
-      <div className="site-container relative">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.35fr] gap-12 lg:gap-16 items-stretch">
+      <div className="site-container relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
 
-          {/* ── Left: Quote ── */}
-          <div className="flex flex-col justify-between h-full">
+          {/* ── Left: Operator Testimonial Showcase (7 cols) ── */}
+          <div className="lg:col-span-7 flex flex-col justify-between text-left">
             <div>
-              <p className="section-label mb-4 md:mb-5">{label}</p>
+              {label && (
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="w-3 h-[2px] bg-[#C98A2E]" />
+                  <p className="text-[#C98A2E] text-[11px] font-mono tracking-[0.2em] uppercase font-bold">
+                    {label}
+                  </p>
+                </div>
+              )}
 
-              <h2 className="display-heading text-white leading-[1.06] mb-8 md:mb-10">
-                <span className="text-[32px] min-[400px]:text-[38px] md:text-[48px]">{title1}</span><br />
-                <span className="text-[32px] min-[400px]:text-[38px] md:text-[48px] text-gold italic">{title2}</span>
-              </h2>
+              {(title1 || title2) && (
+                <h2 className="display-heading text-white leading-[1.12] mb-8 font-extrabold tracking-tight">
+                  {title1 && <span className="text-[32px] min-[400px]:text-[38px] md:text-[44px] block">{title1}</span>}
+                  {title2 && <span className="text-[32px] min-[400px]:text-[38px] md:text-[44px] text-[#C98A2E] font-serif italic block">{title2}</span>}
+                </h2>
+              )}
 
-              {/* Quote card */}
-              <div className="border border-border-dark bg-dark-3/60 p-5 sm:p-8 mb-6 md:mb-8 relative min-h-[220px] md:min-h-[240px] flex flex-col justify-between rounded-lg">
+              {/* Quote Card */}
+              <div className="border border-white/10 bg-[#14243A]/80 p-8 sm:p-10 mb-8 relative rounded-sm shadow-2xl">
                 {/* Large decorative quote mark */}
-                <span className="absolute -top-5 left-4 sm:left-6 text-[60px] md:text-[80px] leading-none text-gold font-serif select-none">
-                  {quoteIcon}
+                <span className="absolute -top-5 left-6 text-[64px] leading-none text-[#C98A2E]/25 font-serif select-none pointer-events-none">
+                  “
                 </span>
 
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={activeIdx}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.25, ease: "easeOut" }}
-                  >
-                    <p className="text-white/80 text-[13.5px] min-[400px]:text-[15px] md:text-[16px] leading-[1.65] md:leading-[1.75] font-display italic pt-3 sm:pt-4 mb-5">
-                      {stripHtml(activeTestimonial.quote)}
-                    </p>
+                {active.quote && (
+                  <p className="text-white/90 text-[15px] sm:text-[16px] md:text-[17px] leading-[1.8] font-light pt-2 mb-6">
+                    “{stripHtml(active.quote)}”
+                  </p>
+                )}
 
-                    {/* Stars + name */}
-                    <div className="flex flex-wrap items-center gap-2.5 pt-4 border-t border-border-dark">
-                      <div className="flex gap-0.5 text-gold flex-shrink-0">
-                        {Array.from({ length: activeTestimonial.stars || 5 }).map((_, i) => (
-                          <Star key={i} size={13} fill="currentColor" stroke="none" />
-                        ))}
-                      </div>
-                      <span className="text-gold text-[11.5px] min-[400px]:text-[12.5px] md:text-[13px] font-semibold tracking-wide">
-                        {dash} {stripHtml(activeTestimonial.name)}
+                {/* Stars + Operator Attribution */}
+                <div className="flex flex-wrap items-center justify-between gap-4 pt-6 border-t border-white/10">
+                  <div>
+                    {authorName && (
+                      <span className="text-[#C98A2E] text-[14px] font-mono font-bold tracking-wide block">
+                        {dash} {authorName}
                       </span>
-                    </div>
-                  </motion.div>
-                </AnimatePresence>
-              </div>
-            </div>
+                    )}
+                    {authorRole && (
+                      <span className="text-white/50 text-[11.5px] font-mono uppercase tracking-wider block mt-0.5">
+                        {authorRole}
+                      </span>
+                    )}
+                  </div>
 
-            {/* Navigation */}
-            <div className="flex items-center gap-3">
-              <button
-                onClick={prev}
-                className="w-10 h-10 md:w-12 md:h-12 border border-border-dark text-white/50 flex items-center justify-center rounded-md hover:border-gold hover:text-gold transition-colors duration-200"
-              >
-                <ChevronLeft size={18} className="md:w-5 md:h-5" />
-              </button>
-              <button
-                onClick={next}
-                className="w-10 h-10 md:w-12 md:h-12 border border-border-dark text-white/50 flex items-center justify-center rounded-md hover:border-gold hover:text-gold transition-colors duration-200"
-              >
-                <ChevronRight size={18} className="md:w-5 md:h-5" />
-              </button>
-              {/* Dots */}
-              <div className="flex gap-1.5 ml-2">
-                {items.map((_: any, i: number) => (
-                  <button
-                    key={i}
-                    onClick={() => setActiveIdx(i)}
-                    className={`h-2 rounded-full transition-all duration-200
-                      ${i === activeIdx ? "bg-gold w-5" : "bg-white/20 w-2 hover:bg-gold/50"}`}
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* ── Right: Result Cards (6 Images Grid) ── */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 md:gap-4 mt-8 lg:mt-0">
-            {(results || []).slice(0, 6).map((result: any) => (
-              <div key={result.id} className="group relative overflow-hidden cursor-pointer aspect-[4/5] min-h-[170px] border border-border-dark bg-dark-3 rounded-md">
-                {/* Photo */}
-                <div className="img-testimonial-tile relative w-full h-full">
-                  <Image
-                    src={result.image || "/images/placeholder.svg"}
-                    alt={result.label || result.caption || "Testimonial result"}
-                    fill
-                    sizes="(max-width: 640px) 45vw, 20vw"
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  {/* Strong gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-dark via-dark/50 to-transparent" />
-
-                  {/* Gold corner accent */}
-                  <div className="absolute top-0 left-0 w-5 h-5 m-2 opacity-50 group-hover:opacity-100 transition-opacity">
-                    <div className="absolute top-0 left-0 w-full h-[2px] bg-gold" />
-                    <div className="absolute top-0 left-0 h-full w-[2px] bg-gold" />
+                  <div className="flex gap-1 text-[#C98A2E]">
+                    {Array.from({ length: active.rating || active.stars || 5 }).map((_, i) => (
+                      <Star key={i} size={14} fill="currentColor" stroke="none" />
+                    ))}
                   </div>
                 </div>
-
-                {/* Caption */}
-                <p className="absolute bottom-3 left-2.5 right-2.5 text-white text-[10.5px] min-[400px]:text-[11.5px] font-semibold leading-tight opacity-90 group-hover:opacity-100 transition-opacity">
-                  {result.label || result.caption}
-                </p>
               </div>
-            ))}
+
+              {/* Carousel Controls */}
+              {items.length > 1 && (
+                <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={prev}
+                      aria-label="Previous quote"
+                      className="w-10 h-10 rounded-sm bg-[#14243A] border border-white/10 text-white/70 hover:text-[#C98A2E] hover:border-[#C98A2E] transition-all flex items-center justify-center cursor-pointer"
+                    >
+                      <ChevronLeft size={18} />
+                    </button>
+                    <button
+                      onClick={next}
+                      aria-label="Next quote"
+                      className="w-10 h-10 rounded-sm bg-[#14243A] border border-white/10 text-white/70 hover:text-[#C98A2E] hover:border-[#C98A2E] transition-all flex items-center justify-center cursor-pointer"
+                    >
+                      <ChevronRight size={18} />
+                    </button>
+                  </div>
+                  <span className="text-[12px] font-mono text-white/40 tracking-wider">
+                    0{activeIdx + 1} / 0{items.length}
+                  </span>
+                </div>
+              )}
+            </div>
           </div>
+
+          {/* ── Right: Field Verification Metrics (5 cols) ── */}
+          {results && results.length > 0 && (
+            <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {results.map((res: any, rIdx: number) => (
+                <div
+                  key={rIdx}
+                  className="p-6 bg-[#14243A]/60 border border-white/10 rounded-sm text-left relative group hover:border-[#C98A2E]/50 transition-colors shadow-lg"
+                >
+                  <div className="text-[10px] font-mono text-white/30 uppercase tracking-widest mb-2">
+                    METRIC // 0{rIdx + 1}
+                  </div>
+                  <span className="text-[#C98A2E] font-serif text-[32px] sm:text-[36px] font-bold block leading-none mb-2">
+                    {res.value}
+                  </span>
+                  <span className="text-[#A9AFB5] text-[11.5px] font-mono uppercase tracking-wider font-semibold block leading-snug">
+                    {res.label}
+                  </span>
+                </div>
+              ))}
+            </div>
+          )}
 
         </div>
       </div>

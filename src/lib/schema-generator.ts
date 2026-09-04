@@ -17,12 +17,12 @@ interface SchemaOptions {
 
 export function getHomepageSchemas(servicesList?: Array<{ name: string }>, faqs?: Array<{ question?: string; answer?: string; q?: string; a?: string }>) {
   const defaultServices = [
-    { name: "Deep Tissue Massage" },
-    { name: "Sports Massage" },
-    { name: "Myofascial Release" },
-    { name: "Cupping Therapy" },
-    { name: "Stretch Therapy" },
-    { name: "Hot Stone Massage" }
+    { name: "Downhole Rod Pumps" },
+    { name: "Burleson HD Rod Rotator" },
+    { name: "Downhole Supplies" },
+    { name: "General Oilfield Supplies" },
+    { name: "Poly Pipe and Fittings" },
+    { name: "Battery & Well head Supplies" }
   ];
 
   const serviceOffers = (servicesList && servicesList.length > 0 ? servicesList : defaultServices).map(s => ({

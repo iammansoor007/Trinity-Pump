@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { normalizeBlogImage } from "@/lib/blogImage";
 
 interface BlogPost {
@@ -31,8 +31,9 @@ interface BlogSectionProps {
 }
 
 export default function BlogSection({
-  title = "Insights & Recovery Tips",
-  subtitle = "FROM THE BLOG",
+  title,
+  subtitle,
+  description,
   ctaAll = "View All Articles",
   ctaReadMore = "Read Article",
   posts = [],
@@ -72,38 +73,45 @@ export default function BlogSection({
   };
 
   return (
-    <section id="blog" className="bg-warm-white py-16 md:py-24 overflow-hidden border-t border-border-light/60">
+    <section id="blog" className="bg-[#F5F3EE] py-20 md:py-28 overflow-hidden border-t border-[#E8E6E0]">
       <div className="site-container">
 
         {/* ── Header ─────────────────────────────── */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12 text-left">
           <div>
-            <p className="section-label text-gold mb-3 md:mb-4">{subtitle}</p>
-            <h2 className="display-heading text-[28px] min-[400px]:text-[32px] md:text-[44px] text-dark leading-tight">{title}</h2>
+            <div className="flex items-center gap-2 mb-3">
+              <span className="w-3 h-[2px] bg-[#C98A2E]" />
+              <p className="text-[#C98A2E] text-[11px] font-mono tracking-[0.2em] uppercase font-bold">
+                {subtitle}
+              </p>
+            </div>
+            <h2 className="display-heading text-[28px] min-[400px]:text-[32px] md:text-[42px] text-[#0B1726] leading-tight font-bold tracking-tight">
+              {title}
+            </h2>
           </div>
 
           <div className="flex items-center gap-4">
             <Link
               href={viewAllLink}
-              className="flex items-center gap-2 text-gold text-[12px] font-bold tracking-[0.12em] uppercase hover:gap-3 transition-all duration-200"
+              className="flex items-center gap-2 text-[#C98A2E] text-[12px] font-bold tracking-[0.14em] uppercase hover:gap-3 transition-all duration-200"
             >
               {ctaAll} <ArrowRight size={14} />
             </Link>
 
-            {/* Slider Navigation Buttons (Visible when posts > cardsPerView) */}
+            {/* Slider Navigation Buttons */}
             {hasSlider && (
               <div className="flex items-center gap-2 ml-3">
                 <button
                   onClick={handlePrev}
                   aria-label="Previous article"
-                  className="w-9 h-9 rounded-md border border-border-light text-dark/70 hover:border-gold hover:text-gold hover:bg-gold/10 flex items-center justify-center transition-all duration-200 active:scale-95"
+                  className="w-9 h-9 rounded-sm border border-[#D6D3CC] bg-white text-[#0B1726]/70 hover:border-[#C98A2E] hover:text-[#C98A2E] flex items-center justify-center transition-all duration-200 active:scale-95 shadow-sm"
                 >
                   <ChevronLeft size={18} />
                 </button>
                 <button
                   onClick={handleNext}
                   aria-label="Next article"
-                  className="w-9 h-9 rounded-md border border-border-light text-dark/70 hover:border-gold hover:text-gold hover:bg-gold/10 flex items-center justify-center transition-all duration-200 active:scale-95"
+                  className="w-9 h-9 rounded-sm border border-[#D6D3CC] bg-white text-[#0B1726]/70 hover:border-[#C98A2E] hover:text-[#C98A2E] flex items-center justify-center transition-all duration-200 active:scale-95 shadow-sm"
                 >
                   <ChevronRight size={18} />
                 </button>
@@ -122,7 +130,6 @@ export default function BlogSection({
             transition={{ type: "spring", stiffness: 260, damping: 28 }}
           >
             {posts.map((post) => {
-              // Derive tag from category or tags
               const rawCat = Array.isArray(post.categories) && post.categories[0];
               const rawTag = Array.isArray(post.tags) && post.tags[0];
 
@@ -132,7 +139,6 @@ export default function BlogSection({
                 (rawTag ? (typeof rawTag === "string" ? rawTag : (rawTag as any).name || "") : "") ||
                 "";
 
-              // Clean HTML from excerpt
               const rawExcerpt = post.excerpt || "";
               const cleanExcerpt = rawExcerpt.replace(/<[^>]*>?/gm, "").trim();
               const postUrl = `/blogs/${post.slug}/`;
@@ -143,11 +149,11 @@ export default function BlogSection({
                   style={{ width: `${100 / cardsPerView}%` }}
                   className="flex-shrink-0 px-3 md:px-4"
                 >
-                  <article className="blog-card group bg-white border border-border-light hover:border-gold/50 hover:shadow-xl rounded-sm overflow-hidden flex flex-col h-full transition-all duration-300">
+                  <article className="blog-card group bg-white border border-[#D6D3CC] hover:border-[#C98A2E] hover:shadow-xl rounded-sm overflow-hidden flex flex-col h-full transition-all duration-300 text-left">
                     <Link href={postUrl} className="flex flex-col flex-1 no-underline">
 
                       {/* Image */}
-                      <div className="img-blog relative h-[210px] w-full overflow-hidden bg-dark/10">
+                      <div className="relative h-[210px] w-full overflow-hidden bg-[#0B1726]">
                         {post.featuredImage ? (
                           <Image
                             src={normalizeBlogImage(post.featuredImage)}
@@ -157,13 +163,13 @@ export default function BlogSection({
                             className="object-cover transition-transform duration-500 group-hover:scale-105"
                           />
                         ) : (
-                          <div className="w-full h-full bg-warm-white flex items-center justify-center">
-                            <ArrowRight size={32} className="text-gold/30" />
+                          <div className="w-full h-full bg-[#14243A] flex items-center justify-center">
+                            <ArrowRight size={32} className="text-[#C98A2E]/30" />
                           </div>
                         )}
                         {/* Tag chip */}
                         {tag && (
-                          <span className="absolute top-3 left-3 bg-gold text-white text-[10px] font-bold tracking-wider uppercase px-2.5 py-1 rounded-xs shadow-sm">
+                          <span className="absolute top-3 left-3 bg-[#0B1726]/90 backdrop-blur-sm border border-[#C98A2E]/40 text-[#C98A2E] text-[10px] font-mono font-bold tracking-wider uppercase px-2.5 py-1 rounded-sm shadow-sm">
                             {tag}
                           </span>
                         )}
@@ -172,16 +178,16 @@ export default function BlogSection({
                       {/* Content */}
                       <div className="flex flex-col flex-1 p-5 sm:p-6 justify-between">
                         <div>
-                          <h3 className="text-dark font-bold text-[16px] sm:text-[17px] leading-snug mb-2.5 group-hover:text-gold transition-colors duration-200 line-clamp-2">
+                          <h3 className="text-[#0B1726] font-bold text-[16px] sm:text-[17px] leading-snug mb-2.5 group-hover:text-[#C98A2E] transition-colors duration-200 line-clamp-2">
                             {post.title}
                           </h3>
                           {cleanExcerpt && (
-                            <p className="text-body text-[13px] leading-relaxed mb-4 line-clamp-2 font-light">
+                            <p className="text-[#5E6670] text-[13px] leading-relaxed mb-4 line-clamp-2 font-normal">
                               {cleanExcerpt}
                             </p>
                           )}
                         </div>
-                        <span className="flex items-center gap-2 text-gold text-[11.5px] font-bold tracking-wider uppercase group-hover:gap-3 transition-all duration-200 pt-2 border-t border-border-light/60">
+                        <span className="flex items-center gap-2 text-[#C98A2E] text-[11.5px] font-bold tracking-wider uppercase group-hover:gap-3 transition-all duration-200 pt-3 border-t border-[#E8E6E0]">
                           {ctaReadMore} <ArrowRight size={13} />
                         </span>
                       </div>
@@ -203,7 +209,7 @@ export default function BlogSection({
                 onClick={() => setCurrentIndex(idx)}
                 aria-label={`Go to slide ${idx + 1}`}
                 className={`h-2 rounded-full transition-all duration-200 ${
-                  currentIndex === idx ? "bg-gold-dark w-6" : "bg-dark/20 w-2 hover:bg-gold-dark/50"
+                  currentIndex === idx ? "bg-[#C98A2E] w-6" : "bg-black/20 w-2 hover:bg-[#C98A2E]/50"
                 }`}
               />
             ))}
@@ -214,3 +220,4 @@ export default function BlogSection({
     </section>
   );
 }
+

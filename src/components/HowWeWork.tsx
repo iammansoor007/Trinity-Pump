@@ -1,192 +1,102 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import Image from "next/image";
-import { Check } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
 import { useContent } from "../hooks/useContent";
 import { stripHtml } from "../lib/utils";
 
-const stepImages = [
-  "/images/trinity/hero-banner.jpg",
-  "/images/trinity/rod-pumps.jpg",
-  "/images/trinity/rod-rotator.jpg",
-  "/images/trinity/oilfield-supplies.jpg",
-];
-
 export default function HowItWorksSection() {
-  const [activeIdx, setActiveIdx] = useState(0);
   const { process } = useContent();
 
   const {
-    label = "THE CLINICAL PROCESS",
-    title = "Your Recovery Journey.",
-    description = "",
-    phaseLabel = "PHASE",
+    label,
+    title,
+    description,
+    phaseLabel = "COMMITMENT",
     items = []
   } = process || {};
 
-  // Scroll-based sync: finds the step whose center is closest to 40% from the top of the viewport
-  useEffect(() => {
-    const handleScroll = () => {
-      const focalPoint = window.innerHeight * 0.4; // 40% down from top
-      const steps = document.querySelectorAll(".process-step-item");
-      let bestIdx = 0;
-      let bestDist = Infinity;
-
-      steps.forEach((el, idx) => {
-        const rect = el.getBoundingClientRect();
-        const elCenter = rect.top + rect.height / 2;
-        const dist = Math.abs(elCenter - focalPoint);
-        if (dist < bestDist) {
-          bestDist = dist;
-          bestIdx = idx;
-        }
-      });
-
-      setActiveIdx(bestIdx);
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll(); // set initial active state on mount
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [items]);
-
-  const handleStepClick = (idx: number) => {
-    setActiveIdx(idx);
-    const target = document.querySelector(`[data-step-index="${idx}"]`);
-    if (target) {
-      const y = target.getBoundingClientRect().top + window.pageYOffset - 160;
-      window.scrollTo({ top: y, behavior: "smooth" });
-    }
-  };
+  if (!process || !items || items.length === 0) return null;
 
   return (
-    <section className="bg-warm-gray py-16 md:py-32 relative border-t border-border-light/60">
-      {/* Decorative background grid pattern */}
-      <div className="absolute inset-0 opacity-[0.015] bg-grid-pattern-black pointer-events-none" />
+    <section className="bg-[#E8E6E0] py-24 md:py-32 relative border-t border-[#D6D3CC]">
+      {/* Precision architectural technical pattern */}
+      <div className="absolute inset-0 opacity-[0.025] bg-grid-pattern-black pointer-events-none" />
 
-      <div className="site-container relative">
+      <div className="site-container relative z-10">
 
-        {/* ── Header ── */}
-        <div className="mb-12 md:mb-20 max-w-xl">
-          <p className="section-label text-gold mb-4">{stripHtml(label)}</p>
-          <h2 className="display-heading text-[28px] min-[400px]:text-[34px] md:text-[48px] text-dark leading-tight">
-            {stripHtml(title)}
-          </h2>
-          <p className="text-body text-[14px] md:text-[15px] leading-relaxed mt-4">
-            {stripHtml(description)}
-          </p>
+        {/* Section Header */}
+        <div className="mb-16 max-w-2xl text-left">
+          {label && (
+            <div className="flex items-center gap-2 mb-3">
+              <span className="w-3 h-[2px] bg-[#C98A2E]" />
+              <p className="text-[#C98A2E] text-[11px] font-mono tracking-[0.2em] uppercase font-bold">
+                {stripHtml(label)}
+              </p>
+            </div>
+          )}
+          {title && (
+            <h2 className="display-heading text-[32px] min-[400px]:text-[38px] md:text-[46px] text-[#0B1726] leading-[1.12] font-extrabold tracking-tight">
+              {stripHtml(title)}
+            </h2>
+          )}
+          {description && (
+            <p className="text-[#5E6670] text-[15px] md:text-[16.5px] leading-[1.8] mt-4 font-normal">
+              {stripHtml(description)}
+            </p>
+          )}
         </div>
 
-        {/* ── Sticky Scroll Reveal Grid ── */}
-        <div className="grid grid-cols-1 md:grid-cols-[1.2fr_1fr] gap-12 md:gap-20">
+        {/* Architectural Principles & Commitments Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {items.map((item: any, idx: number) => {
+            const stepNum = item.step || String(idx + 1).padStart(2, '0');
+            const itemTag = item.tag || `${phaseLabel} ${stepNum}`;
+            const itemDesc = item.desc || item.description || "";
 
-          {/* Left Column: Full-height container, sticky image frame */}
-          <div className="hidden md:block">
-            <div className="sticky top-36 h-[460px] w-full overflow-hidden rounded-xl shadow-2xl border border-border-light bg-dark">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeIdx}
-                  initial={{ opacity: 0, scale: 1.03 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.97 }}
-                  transition={{ duration: 0.4, ease: "easeOut" }}
-                  className="absolute inset-0 w-full h-full"
-                >
-                  <Image
-                    src={items[activeIdx]?.image || stepImages[activeIdx] || stepImages[0]}
-                    alt={items[activeIdx]?.title || "Recovery Phase"}
-                    fill
-                    sizes="45vw"
-                    className="object-cover"
-                    priority
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/20 to-transparent" />
-                </motion.div>
-              </AnimatePresence>
+            return (
+              <div
+                key={idx}
+                className="p-8 bg-white border border-[#D6D3CC] rounded-sm text-left shadow-sm relative group hover:border-[#C98A2E] hover:shadow-md transition-all duration-300 flex flex-col justify-between"
+              >
+                {/* Top Corner Technical Accent */}
+                <div className="absolute top-0 right-0 w-2.5 h-2.5 border-t-2 border-r-2 border-[#C98A2E]/40 group-hover:border-[#C98A2E] transition-colors" />
 
-              {/* Dynamic Phase Overlay Badge */}
-              {items && items[activeIdx] && (
-                <div className="absolute bottom-6 left-6 right-6 bg-dark/85 backdrop-blur-md p-4 border border-white/15 rounded-lg flex items-center justify-between">
-                  <div>
-                    <p className="text-gold font-mono font-bold text-[11px] tracking-[0.2em] uppercase mb-0.5">
-                      {stripHtml(phaseLabel)} {stripHtml(items[activeIdx].id)}
-                    </p>
-                    <p className="text-white font-semibold text-[14px] leading-snug">
-                      {stripHtml(items[activeIdx].title)}
-                    </p>
+                <div>
+                  <div className="flex items-center justify-between pb-4 mb-4 border-b border-[#E8E6E0]">
+                    <span className="text-[#C98A2E] font-mono text-[11px] uppercase tracking-widest font-bold">
+                      {itemTag}
+                    </span>
+                    <span className="text-[#0B1726]/30 font-serif text-[20px] font-bold">
+                      {stepNum}
+                    </span>
                   </div>
-                  <span className="text-white/40 text-[11px] font-mono font-bold">
-                    {activeIdx + 1} / {items.length}
-                  </span>
+
+                  {item.title && (
+                    <h3 className="display-heading text-[20px] md:text-[22px] text-[#0B1726] font-bold mb-3 leading-snug">
+                      {item.title}
+                    </h3>
+                  )}
+
+                  {itemDesc && (
+                    <p className="text-[#5E6670] text-[14px] leading-[1.75] font-normal">
+                      {stripHtml(itemDesc)}
+                    </p>
+                  )}
                 </div>
-              )}
-            </div>
-          </div>
 
-          {/* Right Column: Scroll Trigger Items */}
-          <div className="flex flex-col gap-8 md:gap-14">
-            {(items || []).map((step: any, idx: number) => {
-              const actions = step.actions || [];
-              const isActive = activeIdx === idx;
-
-              return (
-                <div
-                  key={step.id}
-                  data-step-index={idx}
-                  onClick={() => handleStepClick(idx)}
-                  className={`process-step-item py-6 md:py-8 border-b border-border-light transition-all duration-300 cursor-pointer flex flex-col justify-center min-h-[240px] md:min-h-[320px] rounded-lg px-3 md:px-4
-                    ${isActive ? "bg-white/80 md:bg-transparent opacity-100 border-gold/50 shadow-sm md:shadow-none" : "opacity-60 md:opacity-40 hover:opacity-80"}`}
-                >
-                  {/* Step ID & Phase Label */}
-                  <div className="flex items-center justify-between mb-3">
-                    <span className={`text-[36px] md:text-[44px] font-serif font-bold leading-none transition-colors select-none
-                      ${isActive ? "text-gold" : "text-dark/30"}`}>
-                      {step.id}
-                    </span>
-                    <span className={`text-[10px] font-mono font-bold uppercase px-2.5 py-1 rounded-full border transition-all
-                      ${isActive ? "bg-gold/15 text-gold border-gold/30" : "bg-black/5 text-dark/40 border-transparent"}`}>
-                      {phaseLabel} {step.id}
-                    </span>
-                  </div>
-
-                  {/* Mobile Image Preview for responsive excellence */}
-                  <div className="md:hidden relative w-full h-[180px] rounded-lg overflow-hidden my-3 border border-border-light">
-                    <Image
-                      src={step.image || stepImages[idx] || stepImages[0]}
-                      alt={step.title}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-
-                  <h3 className={`font-bold text-[19px] md:text-[22px] mb-3 tracking-tight leading-snug transition-colors
-                    ${isActive ? "text-dark" : "text-dark/80"}`}>
-                    {stripHtml(step.title)}
-                  </h3>
-
-                  <p className="text-body text-[13.5px] md:text-[14.5px] leading-relaxed mb-5 font-light">
-                    {stripHtml(step.description)}
-                  </p>
-
-                  {/* Action Items Checklist */}
-                  <ul className="flex flex-col gap-2.5 pt-4 border-t border-border-light/60">
-                    {actions.map((act: string) => (
-                      <li key={act} className="flex items-center gap-3 text-dark/80 text-[12.5px] md:text-[13px]">
-                        <div className={`w-[18px] h-[18px] md:w-5 md:h-5 rounded-full flex items-center justify-center flex-shrink-0 transition-colors duration-300
-                          ${isActive ? "bg-gold text-white" : "bg-gold/15 text-gold"}`}>
-                          <Check size={11} strokeWidth={2.5} />
-                        </div>
-                        <span className="font-medium">{act}</span>
-                      </li>
+                {/* Optional checklist actions if present in CMS */}
+                {Array.isArray(item.actions) && item.actions.length > 0 && (
+                  <div className="mt-6 pt-4 border-t border-[#E8E6E0] space-y-2">
+                    {item.actions.map((act: string, aIdx: number) => (
+                      <div key={aIdx} className="flex items-center gap-2 text-[12.5px] text-[#0B1726]/80 font-medium">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#C98A2E]" />
+                        <span>{act}</span>
+                      </div>
                     ))}
-                  </ul>
-                </div>
-              );
-            })}
-          </div>
-
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
 
       </div>
