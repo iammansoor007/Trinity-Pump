@@ -188,8 +188,8 @@ export const useContent = () => {
             const titleLine3 = s.titleLine3 || s.headline?.suffix || "";
             const titleItalicWord = s.titleItalicWord || "";
             
-            const ctaAll = s.ctaAll || "VIEW ALL SERVICES";
-            const ctaLearnMore = s.ctaLearnMore || "LEARN MORE";
+            const ctaAll = s.ctaAll || "";
+            const ctaLearnMore = s.ctaLearnMore || "";
 
             return {
                 ...s,
@@ -361,7 +361,7 @@ export const useContent = () => {
             label: "",
             title: "",
             description: "",
-            phaseLabel: "COMMITMENT",
+            phaseLabel: "",
             items: []
         }),
         quote: getSafe(completeData, 'quote', {
@@ -375,8 +375,8 @@ export const useContent = () => {
             const faqObj = getSafe(completeData, 'faq', { section: { badge: "", headline: "", description: "" }, items: [] });
             const quoteObj = getSafe(completeData, 'quote', { section: { badge: "", headline: "", description: "" }, services: [] });
             
-            const faqLabel = faqObj.section?.badge || faqObj.badge || "FAQ";
-            const faqTitle = faqObj.section?.headline || faqObj.title || faqObj.section?.title || "Frequently Asked Questions";
+            const faqLabel = faqObj.section?.badge || faqObj.badge || "";
+            const faqTitle = faqObj.section?.headline || faqObj.title || faqObj.section?.title || "";
             const faqDescription = faqObj.section?.description || faqObj.description || "";
 
             const rawFaqItems = Array.isArray(faqObj.items) && faqObj.items.length > 0
@@ -390,27 +390,27 @@ export const useContent = () => {
               answer: f.answer || f.a || ""
             }));
             
-            const formLabel = quoteObj.section?.badge || quoteObj.badge || "REQUEST A QUOTE";
-            const formTitle = quoteObj.section?.headline || quoteObj.title || "Ready to Optimize Your Oilfield Operations?";
+            const formLabel = quoteObj.section?.badge || quoteObj.badge || "";
+            const formTitle = quoteObj.section?.headline || quoteObj.title || "";
             
             const formClinicPortal = quoteObj.formClinicPortal || "";
             const formClinicPortalSub = quoteObj.formClinicPortalSub || "";
             const formStyleSeatBtn = quoteObj.formStyleSeatBtn || "";
             
-            const formNameLabel = quoteObj.formNameLabel || "YOUR FULL NAME / COMPANY";
-            const formNamePlaceholder = quoteObj.formNamePlaceholder || "Your Name / Company";
-            const formEmailLabel = quoteObj.formEmailLabel || "EMAIL ADDRESS";
-            const formEmailPlaceholder = quoteObj.formEmailPlaceholder || "email@company.com";
-            const formPhoneLabel = quoteObj.formPhoneLabel || "PHONE NUMBER";
-            const formPhonePlaceholder = quoteObj.formPhonePlaceholder || "830-279-3996";
-            const formServiceLabel = quoteObj.formServiceLabel || "EQUIPMENT / SERVICE CATEGORY";
-            const formServicePlaceholder = quoteObj.formServicePlaceholder || "Select equipment or service";
-            const formMessageLabel = quoteObj.formMessageLabel || "YOUR MESSAGE / WELL SPECIFICATIONS";
-            const formMessagePlaceholder = quoteObj.formMessagePlaceholder || "Please describe your pump, depth, or supply needs...";
+            const formNameLabel = quoteObj.formNameLabel || "";
+            const formNamePlaceholder = quoteObj.formNamePlaceholder || "";
+            const formEmailLabel = quoteObj.formEmailLabel || "";
+            const formEmailPlaceholder = quoteObj.formEmailPlaceholder || "";
+            const formPhoneLabel = quoteObj.formPhoneLabel || "";
+            const formPhonePlaceholder = quoteObj.formPhonePlaceholder || "";
+            const formServiceLabel = quoteObj.formServiceLabel || "";
+            const formServicePlaceholder = quoteObj.formServicePlaceholder || "";
+            const formMessageLabel = quoteObj.formMessageLabel || "";
+            const formMessagePlaceholder = quoteObj.formMessagePlaceholder || "";
             
-            const formBtnSubmit = quoteObj.formBtnSubmit || "SEND REQUEST";
-            const formBtnSuccess = quoteObj.formBtnSuccess || "REQUEST SENT!";
-            const formSuccessToast = quoteObj.formSuccessToast || "Thank you! Your quote request has been sent. We will respond promptly.";
+            const formBtnSubmit = quoteObj.formBtnSubmit || "";
+            const formBtnSuccess = quoteObj.formBtnSuccess || "";
+            const formSuccessToast = quoteObj.formSuccessToast || "";
             
             const trustHipa = quoteObj.trustHipa || "";
             const trustResponse = quoteObj.trustResponse || "";
@@ -459,8 +459,8 @@ export const useContent = () => {
                 tagline: cb.tagline || "",
                 title: cb.title || "",
                 description: cb.description || "",
-                button: cb.button || "CONTACT US",
-                buttonUrl: cb.buttonUrl || cb.btnUrl || "/contact-us/"
+                button: cb.button || "",
+                buttonUrl: cb.buttonUrl || cb.btnUrl || ""
             };
         })(),
         footer: {

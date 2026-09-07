@@ -34,8 +34,8 @@ export default function BlogSection({
   title,
   subtitle,
   description,
-  ctaAll = "View All Articles",
-  ctaReadMore = "Read Article",
+  ctaAll,
+  ctaReadMore,
   posts = [],
   viewAllLink = "/blogs/",
 }: BlogSectionProps) {
@@ -77,26 +77,33 @@ export default function BlogSection({
       <div className="site-container">
 
         {/* ── Header ─────────────────────────────── */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12 text-left">
-          <div>
-            <div className="flex items-center gap-2 mb-3">
-              <span className="w-3 h-[2px] bg-[#C98A2E]" />
-              <p className="text-[#C98A2E] text-[11px] font-mono tracking-[0.2em] uppercase font-bold">
-                {subtitle}
-              </p>
+        {(title || subtitle || ctaAll) && (
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12 text-left">
+            <div>
+              {subtitle && (
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="w-3 h-[2px] bg-[#C98A2E]" />
+                  <p className="text-[#C98A2E] text-[11px] font-mono tracking-[0.2em] uppercase font-bold">
+                    {subtitle}
+                  </p>
+                </div>
+              )}
+              {title && (
+                <h2 className="display-heading text-[28px] min-[400px]:text-[32px] md:text-[42px] text-[#0B1726] leading-tight font-bold tracking-tight">
+                  {title}
+                </h2>
+              )}
             </div>
-            <h2 className="display-heading text-[28px] min-[400px]:text-[32px] md:text-[42px] text-[#0B1726] leading-tight font-bold tracking-tight">
-              {title}
-            </h2>
-          </div>
 
-          <div className="flex items-center gap-4">
-            <Link
-              href={viewAllLink}
-              className="flex items-center gap-2 text-[#C98A2E] text-[12px] font-bold tracking-[0.14em] uppercase hover:gap-3 transition-all duration-200"
-            >
-              {ctaAll} <ArrowRight size={14} />
-            </Link>
+            <div className="flex items-center gap-4">
+              {ctaAll && (
+                <Link
+                  href={viewAllLink || "/blogs/"}
+                  className="flex items-center gap-2 text-[#C98A2E] text-[12px] font-bold tracking-[0.14em] uppercase hover:gap-3 transition-all duration-200"
+                >
+                  {ctaAll} <ArrowRight size={14} />
+                </Link>
+              )}
 
             {/* Slider Navigation Buttons */}
             {hasSlider && (
@@ -119,6 +126,7 @@ export default function BlogSection({
             )}
           </div>
         </div>
+        )}
 
         {/* ── Sliding Track Carousel ──────────────── */}
         <div className="relative overflow-hidden -mx-4 px-4 sm:mx-0 sm:px-0">
@@ -187,9 +195,11 @@ export default function BlogSection({
                             </p>
                           )}
                         </div>
-                        <span className="flex items-center gap-2 text-[#C98A2E] text-[11.5px] font-bold tracking-wider uppercase group-hover:gap-3 transition-all duration-200 pt-3 border-t border-[#E8E6E0]">
-                          {ctaReadMore} <ArrowRight size={13} />
-                        </span>
+                        {ctaReadMore && (
+                          <span className="flex items-center gap-2 text-[#C98A2E] text-[11.5px] font-bold tracking-wider uppercase group-hover:gap-3 transition-all duration-200 pt-3 border-t border-[#E8E6E0]">
+                            {ctaReadMore} <ArrowRight size={13} />
+                          </span>
+                        )}
                       </div>
 
                     </Link>

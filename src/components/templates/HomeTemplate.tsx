@@ -2,69 +2,76 @@
 
 import dynamic from "next/dynamic";
 import Hero from "@/components/Hero";
+import StatsBar from "@/components/StatsBar";
 import StatsSection from "@/components/StatsSection";
 import Services from "@/components/Services";
+import { useContent } from "@/hooks/useContent";
 
-
-const Portfolio = dynamic(() => import("@/components/Portfolio"));
 const Leadership = dynamic(() => import("@/components/Leadership"));
 const Testimonials = dynamic(() => import("@/components/Testimonials"), { ssr: false });
 const HowWeWork = dynamic(() => import("@/components/HowWeWork"), { ssr: false });
 const QAForm = dynamic(() => import("@/components/QAForm"), { ssr: false });
-const FAQ = dynamic(() => import("@/components/FAQ"), { ssr: false });
-const QuickQuote = dynamic(() => import("@/components/QuickQuote"), { ssr: false });
 const BlogSection = dynamic(() => import("@/components/sections/BlogSection"), { ssr: false });
 const CtaBanner = dynamic(() => import("@/components/CtaBanner"), { ssr: false });
 
-import { useContent } from "@/hooks/useContent";
-import PageInlineFaqs from "@/components/PageInlineFaqs";
-
-import StatsBar from "@/components/StatsBar";
-
-export default function HomeTemplate({ pageData, params }: { pageData?: any, params?: any }) {
+export default function HomeTemplate({ pageData, params }: { pageData?: any; params?: any }) {
   const { allBlogs, blogSection } = useContent();
+
+  const heroData = pageData?.content?.hero;
+  const statsData = pageData?.content?.stats;
+  const servicesData = pageData?.content?.services;
+  const leadershipData = pageData?.content?.leadership;
+  const processData = pageData?.content?.process || pageData?.content?.howWeWork;
+  const testimonialsData = pageData?.content?.testimonials;
+  const ctaBannerData = pageData?.content?.ctaBanner;
+  const contactFaqData = pageData?.content?.contactFaq || {
+    ...(pageData?.content?.quote || {}),
+    formLabel: pageData?.content?.quote?.section?.badge || pageData?.content?.quote?.badge || pageData?.content?.quote?.formLabel,
+    formTitle: pageData?.content?.quote?.section?.headline || pageData?.content?.quote?.title || pageData?.content?.quote?.formTitle,
+    formServicesOptions: pageData?.content?.quote?.services,
+    faqLabel: pageData?.content?.faq?.section?.badge || pageData?.content?.faq?.badge,
+    faqTitle: pageData?.content?.faq?.section?.headline || pageData?.content?.faq?.section?.title || pageData?.content?.faq?.title,
+    faqs: pageData?.content?.faq?.items
+  };
+  const blogData = pageData?.content?.blogSection || blogSection;
+
   return (
     <div className="relative">
-      <Hero />
-      <StatsBar />
+      <Hero data={heroData} pageData={pageData} />
+      <StatsBar data={statsData} pageData={pageData} />
       <section id="achievements">
-        <StatsSection />
+        <StatsSection data={statsData} pageData={pageData} />
       </section>
       <section id="services">
-        <Services />
+        <Services data={servicesData} pageData={pageData} />
       </section>
       <section id="leadership">
-        <Leadership />
+        <Leadership data={leadershipData} pageData={pageData} />
       </section>
-
-
       <section id="about">
-        <HowWeWork />
+        <HowWeWork data={processData} pageData={pageData} />
       </section>
-      <Testimonials />
-      <CtaBanner />
+      <Testimonials data={testimonialsData} pageData={pageData} />
+      <CtaBanner data={ctaBannerData} pageData={pageData} />
       <section id="contact">
-        <QAForm pageData={pageData} />
+        <QAForm data={contactFaqData} pageData={pageData} />
       </section>
-
 
       <BlogSection
-        title={pageData?.content?.blogSection?.title || blogSection?.title}
-        subtitle={pageData?.content?.blogSection?.subtitle || blogSection?.subtitle}
-        description={pageData?.content?.blogSection?.description || blogSection?.description}
-        ctaAll={pageData?.content?.blogSection?.ctaAll || blogSection?.ctaAll}
-        ctaReadMore={pageData?.content?.blogSection?.ctaReadMore || blogSection?.ctaReadMore}
+        title={blogData?.title}
+        subtitle={blogData?.subtitle}
+        description={blogData?.description}
+        ctaAll={blogData?.ctaAll}
+        ctaReadMore={blogData?.ctaReadMore}
+        viewAllLink={blogData?.viewAllLink}
         posts={(() => {
-          const selected = pageData?.content?.blogSection?.selectedPosts || blogSection?.selectedPosts || [];
-          const filtered = Array.isArray(selected) && selected.length > 0 
+          const selected = blogData?.selectedPosts || [];
+          const filtered = Array.isArray(selected) && selected.length > 0
             ? allBlogs.filter((p: any) => selected.map(String).includes(String(p._id)))
             : [];
           return filtered.length > 0 ? filtered : (allBlogs.length > 0 ? allBlogs.slice(0, 3) : []);
         })()}
       />
-
-
     </div>
   );
 }
-

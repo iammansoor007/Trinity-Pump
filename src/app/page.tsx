@@ -33,7 +33,7 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     openGraph: {
       url: pageUrl,
-      siteName: "Trinity Pump & Supply",
+      siteName: settings?.siteTitle || "",
       type: "website",
     },
     twitter: {
@@ -107,7 +107,7 @@ export async function generateMetadata(): Promise<Metadata> {
     homePageDoc?.title ||
     homeData?.seo?.metaTitle ||
     settings?.siteTitle ||
-    "Trinity Pump & Supply | Downhole Rod Pumps & Oilfield Supplies";
+    "";
 
   const metaDescription =
     seo.metaDescription ||
@@ -116,13 +116,11 @@ export async function generateMetadata(): Promise<Metadata> {
     homeData?.hero?.description ||
     homeData?.hero?.subheadline ||
     settings?.siteDescription ||
-    "Delivering High-Quality USA-Manufactured Downhole Rod Pump Parts and Oilfield Services Across Texas and New Mexico with 100+ Years Combined Experience.";
+    "";
 
   return {
     ...metadata,
-    title: {
-      absolute: metaTitle,
-    },
+    title: metaTitle ? { absolute: metaTitle } : undefined,
     description: metaDescription,
     robots: getRobotsMetadata(settings, seo),
     alternates: {
@@ -133,13 +131,13 @@ export async function generateMetadata(): Promise<Metadata> {
       description: seo.ogDescription || metaDescription,
       url: pageUrl,
       type: "website",
-      siteName: "Trinity Pump & Supply",
+      siteName: settings?.siteTitle || "",
       images: [
         {
           url: seo.ogImage || seo.featuredImage || settings?.favicon || `${BASE_URL}/logo.png`,
           width: 1200,
           height: 630,
-          alt: "Trinity Pump & Supply – Downhole Rod Pumps & Oilfield Supplies Texas",
+          alt: seo.ogImageAlt || seo.metaTitle || metaTitle || "",
           type: "image/png",
         },
       ],
@@ -149,8 +147,8 @@ export async function generateMetadata(): Promise<Metadata> {
       title: seo.twitterTitle || seo.ogTitle || metaTitle,
       description: seo.twitterDescription || seo.ogDescription || metaDescription,
       images: [seo.twitterImage || seo.ogImage || seo.featuredImage || settings?.favicon || `${BASE_URL}/logo.png`],
-      creator: "@TrinityPump",
-      site: "@TrinityPump",
+      creator: settings?.twitterHandle || undefined,
+      site: settings?.twitterHandle || undefined,
     },
   };
 }

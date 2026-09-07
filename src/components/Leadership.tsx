@@ -2,12 +2,18 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ShieldCheck, Award, Users } from "lucide-react";
-import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 import { useContent } from "../hooks/useContent";
 
-export default function Leadership() {
-  const { leadership, globalMetadata } = useContent();
+interface LeadershipProps {
+  data?: any;
+  pageData?: any;
+}
+
+export default function Leadership({ data, pageData }: LeadershipProps = {}) {
+  const content = useContent();
+  const leadership = data || pageData?.content?.leadership || content?.leadership || {};
+  const globalMetadata = pageData?.content?.globalMetadata || content?.globalMetadata || {};
 
   const {
     label,
@@ -26,7 +32,7 @@ export default function Leadership() {
 
   const targetLink = ctaLink || globalMetadata?.bookingUrl || "/contact-us/";
 
-  if (!leadership && !title) return null;
+  if (!leadership || (!title && !signatureName && !image && !desc1)) return null;
 
   return (
     <section className="bg-[#F5F3EE] py-24 md:py-32 relative overflow-hidden border-t border-[#E8E6E0]">
@@ -56,11 +62,11 @@ export default function Leadership() {
           )}
         </div>
 
-        {/* Asymmetrical Executive Architecture Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-stretch">
+        {/* Executive Grid */}
+        <div className={`grid grid-cols-1 ${image ? "lg:grid-cols-12 gap-10 lg:gap-12" : ""} items-stretch`}>
           
-          {/* Executive Narrative & Directives (7 cols) */}
-          <div className="lg:col-span-7 flex flex-col justify-between p-8 sm:p-10 md:p-12 bg-white border border-[#D6D3CC] shadow-sm relative rounded-sm text-left">
+          {/* Executive Narrative (7 cols if image exists, 12 if no image) */}
+          <div className={`${image ? "lg:col-span-7" : "max-w-4xl"} flex flex-col justify-between p-8 sm:p-10 md:p-12 bg-white border border-[#D6D3CC] shadow-sm relative rounded-sm text-left`}>
             {/* Top corner technical accent */}
             <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-[#C98A2E]" />
             <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-[#C98A2E]" />
@@ -81,49 +87,51 @@ export default function Leadership() {
               )}
             </div>
 
-            {/* Signature & Sign-off Block */}
-            <div className="pt-8 mt-8 border-t border-[#E8E6E0] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-              {(signatureName || signatureTitle) && (
-                <div>
-                  {signatureName && (
-                    <span className="text-[#0B1726] font-bold text-[20px] block font-serif tracking-wide">
-                      {signatureName}
-                    </span>
-                  )}
-                  {signatureTitle && (
-                    <span className="text-[#5E6670] font-mono text-[11.5px] uppercase tracking-wider block mt-0.5">
-                      {signatureTitle}
-                    </span>
-                  )}
-                </div>
-              )}
+            {/* Signature Block */}
+            {((signatureName || signatureTitle) || ctaMore) && (
+              <div className="pt-8 mt-8 border-t border-[#E8E6E0] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+                {(signatureName || signatureTitle) && (
+                  <div>
+                    {signatureName && (
+                      <span className="text-[#0B1726] font-bold text-[20px] block font-serif tracking-wide">
+                        {signatureName}
+                      </span>
+                    )}
+                    {signatureTitle && (
+                      <span className="text-[#5E6670] font-mono text-[11.5px] uppercase tracking-wider block mt-0.5">
+                        {signatureTitle}
+                      </span>
+                    )}
+                  </div>
+                )}
 
-              {ctaMore && (
-                <Link
-                  href={targetLink}
-                  className="btn-gold inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-widest px-6 py-3.5"
-                >
-                  <span>{ctaMore}</span>
-                  <ArrowRight size={13} />
-                </Link>
-              )}
-            </div>
+                {ctaMore && (
+                  <Link
+                    href={targetLink}
+                    className="btn-gold inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-widest px-6 py-3.5"
+                  >
+                    <span>{ctaMore}</span>
+                    <ArrowRight size={13} />
+                  </Link>
+                )}
+              </div>
+            )}
           </div>
 
-          {/* Executive Profile Frame (5 cols) */}
+          {/* Executive Profile Frame */}
           {image && (
             <div className="lg:col-span-5 relative flex flex-col">
               <div className="relative w-full h-[420px] sm:h-[500px] lg:h-full min-h-[420px] rounded-sm overflow-hidden shadow-xl border border-[#D6D3CC] bg-[#0B1726] group">
                 {image.startsWith('http') || image.startsWith('/uploads') || image.startsWith('/cdn-images') ? (
                   <img
                     src={image}
-                    alt={imageAlt || title || "Leadership"}
+                    alt={imageAlt || title || signatureName || ""}
                     className="w-full h-full object-cover object-top filter contrast-105 group-hover:scale-105 transition-transform duration-700"
                   />
                 ) : (
                   <Image
                     src={image}
-                    alt={imageAlt || title || "Leadership"}
+                    alt={imageAlt || title || signatureName || ""}
                     fill
                     sizes="(max-width: 1024px) 100vw, 40vw"
                     className="object-cover object-top filter contrast-105 group-hover:scale-105 transition-transform duration-700"
@@ -131,10 +139,10 @@ export default function Leadership() {
                   />
                 )}
 
-                {/* Industrial gradient vignette */}
+                {/* Vignette */}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0B1726]/85 via-transparent to-transparent pointer-events-none" />
 
-                {/* Floating technical credential tag */}
+                {/* Technical credential tag */}
                 {photoBadge && (
                   <div className="absolute bottom-6 left-6 z-20 bg-[#0B1726]/95 text-[#C98A2E] font-mono text-[11px] font-bold tracking-widest uppercase px-4 py-2 border border-[#C98A2E]/50 shadow-xl rounded-sm flex items-center gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#C98A2E] animate-pulse" />
