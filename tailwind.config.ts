@@ -14,11 +14,17 @@ export default {
         },
         extend: {
             fontFamily: {
-                heading: ['Space Grotesk', 'sans-serif'],
-                body: ['DM Sans', 'sans-serif'],
-                accent: ['DM Sans', 'sans-serif'],
-                sans: ['var(--font-sans)', 'Inter', 'sans-serif'],
-                display: ['var(--font-display)', 'Playfair Display', 'serif'],
+                heading: ['var(--font-heading)', 'Space Grotesk', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+                body: ['var(--font-body)', 'DM Sans', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+                accent: ['var(--font-body)', 'DM Sans', 'ui-sans-serif', 'sans-serif'],
+                sans: ['var(--font-body)', 'DM Sans', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+                // Editorial accent face. 'font-serif' is used ~12x in markup and
+                // resolved to Times New Roman until this was registered.
+                display: ['var(--font-display)', 'Instrument Serif', 'Georgia', 'serif'],
+                serif: ['var(--font-display)', 'Instrument Serif', 'Georgia', 'serif'],
+                // Technical labels. 'font-mono' is used ~73x in markup and
+                // resolved to Consolas until this was registered.
+                mono: ['var(--font-mono)', 'JetBrains Mono', 'ui-monospace', 'SFMono-Regular', 'monospace'],
             },
             colors: {
                 border: "hsl(var(--border))",
@@ -91,17 +97,38 @@ export default {
                     muted: "var(--trinity-muted)",
                 },
                 gold: {
-                    DEFAULT: "var(--color-gold)",
-                    dark: "var(--color-gold-dark)",
-                    hover: "var(--color-gold-hover)",
-                    light: "var(--color-gold-light)",
-                    muted: "var(--color-gold-muted)",
+                    DEFAULT: "#C98A2E",
+                    ink: "#8A5A24",   // small text on light surfaces (AA)
+                    soft: "#E0AC5F",  // small text on dark surfaces (AA)
+                    deep: "#6F4718",
+                    dark: "#8A5A24",
+                    hover: "#B57924",
+                    light: "#E0AC5F",
+                    muted: "rgba(201, 138, 46, 0.08)",
                 },
                 dark: {
                     DEFAULT: "var(--color-dark)",
                     2: "var(--color-dark-2)",
                     3: "var(--color-dark-3)",
                     4: "var(--color-dark-4)",
+                },
+                ink: {
+                    DEFAULT: "#0B1726",
+                    900: "#0B1726",
+                    800: "#0F1D2E",
+                    700: "#14243A",
+                    600: "#1C304A",
+                    500: "#24405F",
+                },
+                paper: {
+                    DEFAULT: "#FBFAF7",
+                    pure: "#FFFFFF",
+                    alt: "#F2F0EA",
+                },
+                line: {
+                    DEFAULT: "#E5E2DA",
+                    strong: "#D5D1C6",
+                    dark: "rgba(255, 255, 255, 0.10)",
                 },
                 "warm-white": "var(--color-warm-white)",
                 "warm-cream": "var(--color-warm-cream)",
@@ -119,9 +146,29 @@ export default {
 
             },
             borderRadius: {
-                lg: "var(--radius)",
-                md: "calc(var(--radius) - 2px)",
-                sm: "calc(var(--radius) - 4px)",
+                none: "0px",
+                sm: "2px",
+                DEFAULT: "3px",
+                md: "4px",
+                lg: "5px",
+                xl: "6px",
+                "2xl": "8px",
+                "3xl": "10px",
+                full: "9999px",
+            },
+            boxShadow: {
+                // Hairline-first elevation. No coloured glows.
+                xs: "0 1px 2px rgba(11, 23, 38, 0.04)",
+                sm: "0 1px 3px rgba(11, 23, 38, 0.05)",
+                DEFAULT: "0 2px 8px rgba(11, 23, 38, 0.05)",
+                md: "0 4px 16px rgba(11, 23, 38, 0.06)",
+                lg: "0 10px 32px rgba(11, 23, 38, 0.07)",
+                xl: "0 20px 56px rgba(11, 23, 38, 0.09)",
+                "2xl": "0 28px 72px rgba(11, 23, 38, 0.11)",
+                none: "none",
+            },
+            letterSpacing: {
+                label: "0.16em",
             },
             keyframes: {
                 "accordion-down": {

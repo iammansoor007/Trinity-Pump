@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, DM_Sans } from "next/font/google";
+import { Space_Grotesk, DM_Sans, Instrument_Serif, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/components/Providers";
 import SiteLayout from "@/components/SiteLayout";
@@ -11,12 +11,35 @@ import { getRobotsMetadata } from "@/lib/seo";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-heading",
+  display: "swap",
 });
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
+  weight: ["400", "500", "600"],
   variable: "--font-body",
+  display: "swap",
+});
+
+// Editorial accent face — italic accent words and pull quotes.
+// These previously fell back to Times New Roman: no serif was ever loaded.
+const instrumentSerif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+  variable: "--font-display",
+  display: "swap",
+});
+
+// Technical labels, eyebrows and figures.
+// These previously fell back to Consolas: no mono was ever loaded.
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-mono",
+  display: "swap",
 });
 
 
@@ -148,7 +171,7 @@ export default async function RootLayout({
           />
         ))}
       </head>
-      <body className={`${spaceGrotesk.variable} ${dmSans.variable} antialiased`}>
+      <body className={`${spaceGrotesk.variable} ${dmSans.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable} antialiased`}>
         {/* ── CMS-managed body_start scripts ── */}
         {bodyStartScripts.map((s) => (
           <div key={s.id} suppressHydrationWarning dangerouslySetInnerHTML={{ __html: s.code }} />
@@ -156,20 +179,6 @@ export default async function RootLayout({
         <ContentProvider initialData={initialGlobalData} initialBlogs={initialBlogs}>
           <Providers>
             <div className="relative min-h-screen flex flex-col">
-              {/* Common technical grid lines in Deep Ink Navy */}
-              <div className="fixed inset-0 pointer-events-none z-0 opacity-[0.025]">
-                <div
-                  className="absolute inset-0"
-                  style={{
-                    backgroundImage: `
-                      linear-gradient(to right, #0B1726 1px, transparent 1px),
-                      linear-gradient(to bottom, #0B1726 1px, transparent 1px)
-                    `,
-                    backgroundSize: '80px 80px',
-                  }}
-                />
-              </div>
-
               <SiteLayout>{children}</SiteLayout>
             </div>
           </Providers>

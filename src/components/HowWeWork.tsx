@@ -26,39 +26,33 @@ export default function HowItWorksSection({ data, pageData }: HowWeWorkProps = {
   const cleanTitle = stripHtml(title || "");
   const cleanDescription = stripHtml(description || "");
 
+  // Pick a column count that fills the last row: 4 or 8 steps go four-wide,
+  // multiples of three go three-wide, so the hairline grid never leaves an orphan cell.
+  const count = items.length;
+  const fourWide = count > 2 && count % 3 !== 0 && count % 4 === 0;
+  const colsClass =
+    count === 1 ? "" :
+    count === 2 ? "md:grid-cols-2" :
+    fourWide ? "md:grid-cols-2 xl:grid-cols-4" :
+    "md:grid-cols-2 lg:grid-cols-3";
+
   return (
-    <section className="bg-[#E8E6E0] py-24 md:py-32 relative border-t border-[#D6D3CC]">
-      {/* Precision architectural technical pattern */}
-      <div className="absolute inset-0 opacity-[0.025] bg-grid-pattern-black pointer-events-none" />
+    <section className="bg-paper-pure section-y border-y border-line">
+      <div className="site-container">
 
-      <div className="site-container relative z-10">
-
-        {/* Section Header */}
+        {/* Header */}
         {(cleanLabel || cleanTitle || cleanDescription) && (
-          <div className="mb-16 max-w-2xl text-left">
-            {cleanLabel && (
-              <div className="flex items-center gap-2 mb-3">
-                <span className="w-3 h-[2px] bg-[#C98A2E]" />
-                <p className="text-[#C98A2E] text-[11px] font-mono tracking-[0.2em] uppercase font-bold">
-                  {cleanLabel}
-                </p>
-              </div>
-            )}
-            {cleanTitle && (
-              <h2 className="display-heading text-[32px] min-[400px]:text-[38px] md:text-[46px] text-[#0B1726] leading-[1.12] font-extrabold tracking-tight">
-                {cleanTitle}
-              </h2>
-            )}
+          <div className="max-w-2xl mb-14">
+            {cleanLabel && <div className="eyebrow mb-6">{cleanLabel}</div>}
+            {cleanTitle && <h2 className="h-section text-balance">{cleanTitle}</h2>}
             {cleanDescription && (
-              <p className="text-[#5E6670] text-[15px] md:text-[16.5px] leading-[1.8] mt-4 font-normal">
-                {cleanDescription}
-              </p>
+              <p className="lede text-pretty mt-5">{cleanDescription}</p>
             )}
           </div>
         )}
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Steps — hairline grid, numbered */}
+        <div className={`grid grid-cols-1 ${colsClass} rule-grid`}>
           {items.map((item: any, idx: number) => {
             const stepNum = item.step || item.number || item.id || String(idx + 1).padStart(2, '0');
             const itemTag = item.tag || (phaseLabel ? `${phaseLabel} ${stepNum}` : (item.badge || ""));
@@ -67,50 +61,32 @@ export default function HowItWorksSection({ data, pageData }: HowWeWorkProps = {
             return (
               <div
                 key={idx}
-                className="p-8 bg-white border border-[#D6D3CC] rounded-sm text-left shadow-sm relative group hover:border-[#C98A2E] hover:shadow-md transition-all duration-300 flex flex-col justify-between"
+                className={`group relative flex flex-col p-8 ${fourWide ? "xl:p-8" : "lg:p-10"} transition-colors duration-200 hover:bg-paper`}
               >
-                {/* Top Corner Technical Accent */}
-                <div className="absolute top-0 right-0 w-2.5 h-2.5 border-t-2 border-r-2 border-[#C98A2E]/40 group-hover:border-[#C98A2E] transition-colors" />
+                {/* Step number, set as an editorial figure */}
+                {stepNum && (
+                  <span className="font-display text-[40px] leading-none text-gold/35 group-hover:text-gold transition-colors duration-300 mb-6 block">
+                    {stepNum}
+                  </span>
+                )}
 
-                <div>
-                  {(itemTag || stepNum) && (
-                    <div className="flex items-center justify-between pb-4 mb-4 border-b border-[#E8E6E0]">
-                      {itemTag ? (
-                        <span className="text-[#C98A2E] font-mono text-[11px] uppercase tracking-widest font-bold">
-                          {itemTag}
-                        </span>
-                      ) : <span />}
-                      {stepNum && (
-                        <span className="text-[#0B1726]/30 font-serif text-[20px] font-bold">
-                          {stepNum}
-                        </span>
-                      )}
-                    </div>
-                  )}
+                {itemTag && <div className="meta text-gold-ink mb-3">{itemTag}</div>}
 
-                  {item.title && (
-                    <h3 className="display-heading text-[20px] md:text-[22px] text-[#0B1726] font-bold mb-3 leading-snug">
-                      {item.title}
-                    </h3>
-                  )}
+                {item.title && <h3 className="h-card mb-3">{item.title}</h3>}
 
-                  {itemDesc && (
-                    <p className="text-[#5E6670] text-[14px] leading-[1.75] font-normal">
-                      {stripHtml(itemDesc)}
-                    </p>
-                  )}
-                </div>
+                {itemDesc && (
+                  <p className="copy">{stripHtml(itemDesc)}</p>
+                )}
 
-                {/* Optional checklist actions if present in CMS */}
                 {Array.isArray(item.actions) && item.actions.length > 0 && (
-                  <div className="mt-6 pt-4 border-t border-[#E8E6E0] space-y-2">
+                  <ul className="mt-7 pt-6 border-t border-line space-y-2.5">
                     {item.actions.map((act: string, aIdx: number) => (
-                      <div key={aIdx} className="flex items-center gap-2 text-[12.5px] text-[#0B1726]/80 font-medium">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#C98A2E]" />
+                      <li key={aIdx} className="flex items-center gap-3 text-[13.5px] text-ink-900">
+                        <span className="w-1 h-1 rounded-full bg-gold flex-shrink-0" />
                         <span>{act}</span>
-                      </div>
+                      </li>
                     ))}
-                  </div>
+                  </ul>
                 )}
               </div>
             );

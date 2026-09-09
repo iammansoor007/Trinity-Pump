@@ -39,3 +39,4 @@ build/
 .env.production.local
 *.tsbuildinfo
 .env.local.backup
+.redesign-backup/

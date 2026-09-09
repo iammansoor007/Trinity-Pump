@@ -34,99 +34,34 @@ export default function Leadership({ data, pageData }: LeadershipProps = {}) {
 
   if (!leadership || (!title && !signatureName && !image && !desc1)) return null;
 
-  return (
-    <section className="bg-[#F5F3EE] py-24 md:py-32 relative overflow-hidden border-t border-[#E8E6E0]">
-      {/* Precision architectural background pattern */}
-      <div className="absolute inset-0 opacity-[0.02] bg-grid-pattern-black pointer-events-none" />
+  const isRawImage = image && (image.startsWith('http') || image.startsWith('/uploads') || image.startsWith('/cdn-images'));
 
-      <div className="site-container relative z-10">
-        {/* Section Header */}
-        <div className="max-w-3xl mb-16 text-left">
-          {label && (
-            <div className="flex items-center gap-2 mb-3">
-              <span className="w-3 h-[2px] bg-[#C98A2E]" />
-              <p className="text-[#C98A2E] text-[11px] font-mono tracking-[0.2em] uppercase font-bold">
-                {label}
-              </p>
-            </div>
-          )}
-          {title && (
-            <h2 className="display-heading text-[32px] min-[400px]:text-[38px] md:text-[46px] text-[#0B1726] leading-[1.1] mb-3 font-extrabold tracking-tight">
-              {title}
-            </h2>
-          )}
+  return (
+    <section className="bg-paper section-y">
+      <div className="site-container">
+
+        {/* Header */}
+        <div className="max-w-2xl mb-14">
+          {label && <div className="eyebrow mb-6">{label}</div>}
+          {title && <h2 className="h-section text-balance mb-4">{title}</h2>}
           {tagline && (
-            <p className="text-[#C98A2E] font-serif italic text-[18px] md:text-[22px] font-medium">
+            <p className="accent-word text-[21px] md:text-[26px] leading-snug">
               {tagline}
             </p>
           )}
         </div>
 
-        {/* Executive Grid */}
-        <div className={`grid grid-cols-1 ${image ? "lg:grid-cols-12 gap-10 lg:gap-12" : ""} items-stretch`}>
-          
-          {/* Executive Narrative (7 cols if image exists, 12 if no image) */}
-          <div className={`${image ? "lg:col-span-7" : "max-w-4xl"} flex flex-col justify-between p-8 sm:p-10 md:p-12 bg-white border border-[#D6D3CC] shadow-sm relative rounded-sm text-left`}>
-            {/* Top corner technical accent */}
-            <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-[#C98A2E]" />
-            <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-[#C98A2E]" />
+        <div className={`grid grid-cols-1 ${image ? "lg:grid-cols-12 gap-10 lg:gap-14" : ""} items-start`}>
 
-            <div>
-              {desc1 && (
-                <div
-                  className="text-[#5E6670] text-[15px] md:text-[16.5px] leading-[1.8] mb-6 font-normal"
-                  dangerouslySetInnerHTML={{ __html: desc1 }}
-                />
-              )}
-
-              {desc2 && (
-                <div
-                  className="text-[#0B1726] text-[14.5px] md:text-[15.5px] leading-[1.8] p-5 sm:p-6 bg-[#F5F3EE] border-l-2 border-[#C98A2E] border-y border-r border-[#E8E6E0] rounded-sm font-medium"
-                  dangerouslySetInnerHTML={{ __html: desc2 }}
-                />
-              )}
-            </div>
-
-            {/* Signature Block */}
-            {((signatureName || signatureTitle) || ctaMore) && (
-              <div className="pt-8 mt-8 border-t border-[#E8E6E0] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-                {(signatureName || signatureTitle) && (
-                  <div>
-                    {signatureName && (
-                      <span className="text-[#0B1726] font-bold text-[20px] block font-serif tracking-wide">
-                        {signatureName}
-                      </span>
-                    )}
-                    {signatureTitle && (
-                      <span className="text-[#5E6670] font-mono text-[11.5px] uppercase tracking-wider block mt-0.5">
-                        {signatureTitle}
-                      </span>
-                    )}
-                  </div>
-                )}
-
-                {ctaMore && (
-                  <Link
-                    href={targetLink}
-                    className="btn-gold inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-widest px-6 py-3.5"
-                  >
-                    <span>{ctaMore}</span>
-                    <ArrowRight size={13} />
-                  </Link>
-                )}
-              </div>
-            )}
-          </div>
-
-          {/* Executive Profile Frame */}
+          {/* Portrait */}
           {image && (
-            <div className="lg:col-span-5 relative flex flex-col">
-              <div className="relative w-full h-[420px] sm:h-[500px] lg:h-full min-h-[420px] rounded-sm overflow-hidden shadow-xl border border-[#D6D3CC] bg-[#0B1726] group">
-                {image.startsWith('http') || image.startsWith('/uploads') || image.startsWith('/cdn-images') ? (
+            <div className="lg:col-span-5">
+              <div className="frame frame-zoom relative w-full h-[440px] sm:h-[540px] lg:h-[620px] border border-line">
+                {isRawImage ? (
                   <img
                     src={image}
                     alt={imageAlt || title || signatureName || ""}
-                    className="w-full h-full object-cover object-top filter contrast-105 group-hover:scale-105 transition-transform duration-700"
+                    className="w-full h-full object-cover object-top"
                   />
                 ) : (
                   <Image
@@ -134,24 +69,61 @@ export default function Leadership({ data, pageData }: LeadershipProps = {}) {
                     alt={imageAlt || title || signatureName || ""}
                     fill
                     sizes="(max-width: 1024px) 100vw, 40vw"
-                    className="object-cover object-top filter contrast-105 group-hover:scale-105 transition-transform duration-700"
-                    priority
+                    className="object-cover object-top"
                   />
                 )}
 
-                {/* Vignette */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0B1726]/85 via-transparent to-transparent pointer-events-none" />
-
-                {/* Technical credential tag */}
                 {photoBadge && (
-                  <div className="absolute bottom-6 left-6 z-20 bg-[#0B1726]/95 text-[#C98A2E] font-mono text-[11px] font-bold tracking-widest uppercase px-4 py-2 border border-[#C98A2E]/50 shadow-xl rounded-sm flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#C98A2E] animate-pulse" />
-                    <span>{photoBadge}</span>
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-ink-900/85 to-transparent px-6 pt-16 pb-5">
+                    <span className="meta text-white/85">{photoBadge}</span>
                   </div>
                 )}
               </div>
             </div>
           )}
+
+          {/* Narrative */}
+          <div className={`${image ? "lg:col-span-7" : "max-w-3xl"} flex flex-col justify-between`}>
+            <div>
+              {desc1 && (
+                <div
+                  className="lede text-pretty mb-8 [&_p]:mb-4 [&_p:last-child]:mb-0"
+                  dangerouslySetInnerHTML={{ __html: desc1 }}
+                />
+              )}
+
+              {desc2 && (
+                <div
+                  className="border-l-2 border-gold pl-6 sm:pl-7 py-1 mb-8 text-[16px] md:text-[17px] leading-[1.7] text-ink-900 [&_p]:mb-3 [&_p:last-child]:mb-0 [&_p]:text-ink-900"
+                  dangerouslySetInnerHTML={{ __html: desc2 }}
+                />
+              )}
+            </div>
+
+            {((signatureName || signatureTitle) || ctaMore) && (
+              <div className="pt-8 border-t border-line flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+                {(signatureName || signatureTitle) && (
+                  <div>
+                    {signatureName && (
+                      <span className="block font-display text-[26px] leading-tight text-ink-900">
+                        {signatureName}
+                      </span>
+                    )}
+                    {signatureTitle && (
+                      <span className="meta block mt-2">{signatureTitle}</span>
+                    )}
+                  </div>
+                )}
+
+                {ctaMore && (
+                  <Link href={targetLink} className="btn btn-outline btn-sm group flex-shrink-0">
+                    <span>{ctaMore}</span>
+                    <ArrowRight size={13} className="transition-transform duration-200 group-hover:translate-x-1" />
+                  </Link>
+                )}
+              </div>
+            )}
+          </div>
 
         </div>
       </div>

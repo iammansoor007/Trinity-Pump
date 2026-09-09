@@ -1,6 +1,6 @@
 "use client";
 
-import { PhoneCall, ArrowRight } from "lucide-react";
+import { ArrowRight, Phone } from "lucide-react";
 import { useContent } from "../hooks/useContent";
 import { stripHtml } from "../lib/utils";
 
@@ -38,59 +38,49 @@ export default function CtaBanner({ data, pageData }: CtaBannerProps = {}) {
   const cleanDescription = stripHtml(description || "");
 
   return (
-    <section className="bg-[#0B1726] relative overflow-hidden py-16 md:py-20 border-y border-white/[0.08]">
-      {/* Precision background pattern */}
-      <div className="absolute inset-0 opacity-[0.03] bg-grid-pattern-dark pointer-events-none" />
+    <section className="on-ink bg-ink-900 relative overflow-hidden">
+      <div className="absolute inset-0 opacity-[0.05] bg-grid-pattern-dark pointer-events-none" />
 
-      {/* Industrial ambient accent circles */}
-      <div className="absolute -left-20 top-1/2 -translate-y-1/2 w-72 h-72 rounded-full border border-white/[0.04] hidden lg:block pointer-events-none" />
-      <div className="absolute -right-20 top-1/2 -translate-y-1/2 w-72 h-72 rounded-full border border-white/[0.04] hidden lg:block pointer-events-none" />
+      <div className="site-container relative z-10 section-y-sm">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-10">
 
-      <div className="site-container relative flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left z-10">
-        
-        {/* Left: Icon + Statement Narrative */}
-        <div className="flex flex-col sm:flex-row items-center gap-5 md:gap-8">
-          <div className="flex-shrink-0 w-14 h-14 md:w-16 md:h-16 rounded-sm bg-[#14243A] border border-[#C98A2E]/50 flex items-center justify-center text-[#C98A2E] shadow-xl">
-            <PhoneCall size={26} className="md:w-7 md:h-7" strokeWidth={1.8} />
-          </div>
-
-          <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
+          <div className="max-w-2xl">
             {cleanTagline && (
-              <div className="flex items-center gap-2 mb-1.5">
-                <span className="w-2 h-2 rounded-full bg-[#C98A2E] inline-block animate-pulse" />
-                <p className="text-[#C98A2E] text-[10.5px] md:text-[11.5px] font-bold tracking-[0.2em] uppercase font-mono">
-                  {cleanTagline}
-                </p>
-              </div>
+              <div className="eyebrow eyebrow-on-ink mb-6">{cleanTagline}</div>
             )}
-            
+
             {cleanTitle && (
-              <h3 className="display-heading text-[22px] min-[400px]:text-[26px] md:text-[32px] text-white leading-tight mb-2 font-bold">
+              <h2 className="h-section text-white text-balance mb-4">
                 {cleanTitle}
-              </h3>
+              </h2>
             )}
 
             {cleanDescription && (
-              <p className="text-[#A9AFB5] text-[13.5px] md:text-[14.5px] max-w-xl font-light">
-                {cleanDescription}
-              </p>
+              <p className="lede lede-on-ink text-pretty">{cleanDescription}</p>
             )}
           </div>
-        </div>
 
-        {/* Right: Action Button */}
-        {button && (
-          <div className="flex-shrink-0 w-full md:w-auto">
-            <a
-              href={actionUrl}
-              className="btn-gold text-[11.5px] md:text-[12px] px-8 py-4 shadow-2xl w-full md:w-auto justify-center text-center font-bold tracking-widest uppercase"
-            >
-              <span>{button}</span>
-              <ArrowRight size={14} className="ml-1.5" />
-            </a>
+          <div className="flex flex-col sm:flex-row lg:flex-col xl:flex-row items-stretch sm:items-center gap-3 flex-shrink-0">
+            {button && (
+              <a href={actionUrl} className="btn btn-primary group">
+                {isCallAction && <Phone size={14} />}
+                <span>{button}</span>
+                <ArrowRight size={14} className="transition-transform duration-200 group-hover:translate-x-1" />
+              </a>
+            )}
+
+            {phone && !isCallAction && (
+              <a
+                href={`tel:${phone.replace(/[^\d+]/g, '')}`}
+                className="btn btn-outline-ink"
+              >
+                <Phone size={14} />
+                <span className="tnum">{phone}</span>
+              </a>
+            )}
           </div>
-        )}
 
+        </div>
       </div>
     </section>
   );

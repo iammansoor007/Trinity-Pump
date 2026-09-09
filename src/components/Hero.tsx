@@ -54,22 +54,18 @@ export default function HeroSection({ data, pageData }: HeroProps = {}) {
 
   if (!hero && !title1 && !cleanTitle1) return null;
 
+  const isRawImage = image && (image.startsWith('http') || image.startsWith('/uploads') || image.startsWith('/cdn-images'));
+
   return (
-    <section className="relative bg-[#0B1726] min-h-[90vh] flex items-center overflow-hidden border-b border-white/[0.08]">
-      {/* Precision architectural technical grid overlay */}
-      <div className="absolute inset-0 opacity-[0.035] bg-grid-pattern-dark pointer-events-none z-10" />
-
-      {/* Subtle gold depth glow */}
-      <div className="absolute top-1/3 left-1/4 -translate-y-1/2 w-[450px] h-[450px] bg-[#C98A2E]/[0.06] rounded-full blur-[140px] pointer-events-none z-0" />
-
-      {/* ── Background Image Layer ──────────────────── */}
+    <section className="on-ink relative bg-ink-900 overflow-hidden">
+      {/* ── Background image ─────────────────────────────────────────── */}
       {image && (
         <div className="absolute inset-0 z-0 pointer-events-none">
-          {image.startsWith('http') || image.startsWith('/uploads') || image.startsWith('/cdn-images') ? (
+          {isRawImage ? (
             <img
               src={image}
               alt={imageAlt || cleanTitle1 || cleanTitle2 || ""}
-              className="w-full h-full object-cover object-center filter contrast-110 brightness-90"
+              className="w-full h-full object-cover object-center"
             />
           ) : (
             <Image
@@ -77,97 +73,82 @@ export default function HeroSection({ data, pageData }: HeroProps = {}) {
               alt={imageAlt || cleanTitle1 || cleanTitle2 || ""}
               fill
               sizes="100vw"
-              className="object-cover object-center filter contrast-110 brightness-90"
+              className="object-cover object-center"
               priority
             />
           )}
 
-          {/* Gradients */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0B1726] via-[#0B1726]/90 to-[#0B1726]/40" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0B1726] via-transparent to-[#0B1726]/80" />
+          {/* Editorial scrim: readable on the left, image breathes on the right */}
+          <div className="absolute inset-0 bg-gradient-to-r from-ink-900 via-ink-900/92 to-ink-900/45" />
+          <div className="absolute inset-0 bg-gradient-to-t from-ink-900 via-ink-900/10 to-ink-900/55" />
         </div>
       )}
 
-      {/* ── Main Hero Content ──────────────────────────────────── */}
-      <div className="relative site-container pt-36 pb-20 md:pt-44 md:pb-28 w-full z-20">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+      {/* Hairline grid, barely there */}
+      <div className="absolute inset-0 z-0 opacity-[0.05] bg-grid-pattern-dark pointer-events-none" />
 
-          {/* Left Column */}
-          <div className={`${hasCardContent ? "lg:col-span-8" : "lg:col-span-12"} text-left flex flex-col items-start`}>
-            {/* Dynamic Telemetry Eyebrow */}
+      {/* ── Content ──────────────────────────────────────────────────── */}
+      <div className="site-container relative z-10 pt-36 pb-20 md:pt-44 md:pb-28 lg:pt-52 lg:pb-36">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-14 gap-x-12 items-end">
+
+          {/* Headline column */}
+          <div className={hasCardContent ? "lg:col-span-7" : "lg:col-span-9"}>
             {cleanLabel && (
-              <div className="flex items-center gap-3 mb-5">
-                <span className="inline-flex items-center gap-2 px-3 py-1 bg-[#14243A] border border-[#C98A2E]/40 text-[#C98A2E] text-[10.5px] sm:text-[11.5px] font-mono font-bold tracking-[0.2em] uppercase rounded-sm shadow-sm">
-                  <span className="w-2 h-2 rounded-full bg-[#C98A2E] animate-pulse"></span>
-                  {cleanLabel}
-                </span>
+              <div className="eyebrow eyebrow-on-ink mb-7">
+                {cleanLabel}
               </div>
             )}
 
-            {/* Dynamic Headline */}
             {(cleanTitle1 || cleanTitle2) && (
-              <h1 className="display-heading text-[36px] min-[400px]:text-[42px] sm:text-[52px] md:text-[62px] lg:text-[66px] text-white leading-[1.08] tracking-tight mb-6 font-black">
+              <h1 className="h-display text-white text-balance mb-7">
                 {cleanTitle1 && <span className="block">{cleanTitle1}</span>}
                 {cleanTitle2 && (
-                  <span className="text-[#C98A2E] block mt-1 font-serif italic font-normal">
+                  <span className="accent-word accent-word-on-ink block">
                     {cleanTitle2}
                   </span>
                 )}
               </h1>
             )}
 
-            {/* Dynamic Description */}
             {cleanDescription && (
-              <p className="text-[#A9AFB5] text-[15px] sm:text-[16.5px] md:text-[18px] leading-[1.75] font-light max-w-[620px] mb-8">
+              <p className="lede lede-on-ink mb-10 text-pretty">
                 {cleanDescription}
               </p>
             )}
 
-            {/* Dynamic Action CTAs */}
             {(ctaBook || ctaServices) && (
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto mb-8">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
                 {ctaBook && (
-                  <a
-                    href={ctaLink}
-                    className="btn-gold flex items-center justify-center gap-2 text-[12px] font-mono tracking-widest uppercase px-8 py-4 shadow-xl"
-                  >
-                    {isCallAction && <Phone size={14} className="fill-current" />}
+                  <a href={ctaLink} className="btn btn-primary group">
+                    {isCallAction && <Phone size={14} />}
                     <span>{ctaBook}</span>
-                    <ArrowRight size={14} />
+                    <ArrowRight size={14} className="transition-transform duration-200 group-hover:translate-x-1" />
                   </a>
                 )}
 
                 {ctaServices && (
-                  <Link
-                    href={servicesUrl}
-                    className="btn-outline-white flex items-center justify-center gap-2 text-[12px] font-mono tracking-widest uppercase px-7 py-4"
-                  >
+                  <Link href={servicesUrl} className="btn btn-outline-ink group">
                     <span>{ctaServices}</span>
-                    <ArrowRight size={14} />
+                    <ArrowRight size={14} className="transition-transform duration-200 group-hover:translate-x-1" />
                   </Link>
                 )}
               </div>
             )}
           </div>
 
-          {/* Right Column: Dynamic Telemetry HUD Card */}
+          {/* Contact / credential panel */}
           {hasCardContent && (
-            <div className="lg:col-span-4 w-full">
-              <div className="bg-[#14243A]/80 backdrop-blur-md border border-white/10 p-6 sm:p-8 rounded-sm text-left shadow-2xl relative">
-                {/* Corner brackets */}
-                <div className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-[#C98A2E]" />
-                <div className="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-[#C98A2E]" />
+            <div className="lg:col-span-4 lg:col-start-9">
+              <div className="border border-white/15 bg-ink-900/70 backdrop-blur-md rounded p-7 sm:p-8">
 
                 {(cleanCardBadge || cleanStatusText) && (
-                  <div className="flex items-center justify-between pb-4 mb-4 border-b border-white/[0.08]">
+                  <div className="flex items-center justify-between gap-4 pb-5 mb-5 border-b border-white/10">
                     {cleanCardBadge ? (
-                      <span className="text-[10.5px] font-mono tracking-widest text-[#C98A2E] uppercase font-bold">
-                        {cleanCardBadge}
-                      </span>
+                      <span className="meta text-gold-soft">{cleanCardBadge}</span>
                     ) : <span />}
                     {cleanStatusText && (
-                      <span className="inline-flex items-center gap-1.5 text-[10.5px] font-mono text-emerald-400">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
+                      <span className="meta meta-on-ink inline-flex items-center gap-2 text-emerald-400/90">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
                         {cleanStatusText}
                       </span>
                     )}
@@ -175,30 +156,31 @@ export default function HeroSection({ data, pageData }: HeroProps = {}) {
                 )}
 
                 {cleanSocialProof && (
-                  <div className="mb-5">
+                  <div className="mb-6">
                     {cleanSocialProofLabel && (
-                      <span className="text-[11px] font-mono text-white/40 uppercase tracking-wider block mb-1.5">
+                      <span className="meta meta-on-ink block mb-2.5">
                         {cleanSocialProofLabel}
                       </span>
                     )}
-                    <p className="text-white/90 text-[13.5px] font-medium leading-relaxed">
+                    <p className="text-white/90 text-[15px] leading-relaxed">
                       {cleanSocialProof}
                     </p>
                   </div>
                 )}
 
                 {phone && (
-                  <div className={`${cleanSocialProof || cleanCardBadge || cleanStatusText ? "pt-4 border-t border-white/[0.08]" : ""}`}>
+                  <div className={cleanSocialProof || cleanCardBadge || cleanStatusText ? "pt-5 border-t border-white/10" : ""}>
                     {cleanHotlineLabel && (
-                      <span className="text-[11px] font-mono text-white/40 uppercase tracking-wider block mb-1">
+                      <span className="meta meta-on-ink block mb-2">
                         {cleanHotlineLabel}
                       </span>
                     )}
                     <a
                       href={`tel:${phone.replace(/[^\d+]/g, '')}`}
-                      className="text-[#C98A2E] font-mono text-[16px] sm:text-[18px] font-bold tracking-wider hover:underline block"
+                      className="inline-flex items-center gap-2.5 text-white hover:text-gold-soft transition-colors font-heading text-[22px] font-medium tracking-tight tnum"
                     >
-                      {phone}
+                      <Phone size={16} className="text-gold" />
+                      <span>{phone}</span>
                     </a>
                   </div>
                 )}

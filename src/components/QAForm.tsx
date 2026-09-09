@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Send, Plus, Minus, Phone, MapPin, Clock, ShieldCheck } from "lucide-react";
+import { Send, Plus, Minus, Phone, MapPin, Clock, Check } from "lucide-react";
 import { useContent } from "../hooks/useContent";
 
 interface QAFormProps {
@@ -82,11 +82,11 @@ export default function ContactFaqSection({ data, pageData }: QAFormProps = {}) 
     a: typeof f?.answer === 'string' ? f.answer : (typeof f?.a === 'string' ? f.a : (typeof f?.desc === 'string' ? f.desc : (typeof f?.description === 'string' ? f.description : "")))
   })).filter((f: any) => f.q && f.a) : [];
 
-  const displayFaqLabel = typeof (pageData?.content?.faq?.section?.badge || pageData?.faqBadge || pageData?.content?.faqBadge || faqLabel) === 'string' 
-    ? (pageData?.content?.faq?.section?.badge || pageData?.faqBadge || pageData?.content?.faqBadge || faqLabel) 
+  const displayFaqLabel = typeof (pageData?.content?.faq?.section?.badge || pageData?.faqBadge || pageData?.content?.faqBadge || faqLabel) === 'string'
+    ? (pageData?.content?.faq?.section?.badge || pageData?.faqBadge || pageData?.content?.faqBadge || faqLabel)
     : "";
-  const displayFaqTitle = typeof (pageData?.content?.faq?.section?.headline || pageData?.content?.faq?.section?.title || pageData?.faqTitle || pageData?.content?.faqTitle || faqTitle) === 'string' 
-    ? (pageData?.content?.faq?.section?.headline || pageData?.content?.faq?.section?.title || pageData?.faqTitle || pageData?.content?.faqTitle || faqTitle) 
+  const displayFaqTitle = typeof (pageData?.content?.faq?.section?.headline || pageData?.content?.faq?.section?.title || pageData?.faqTitle || pageData?.content?.faqTitle || faqTitle) === 'string'
+    ? (pageData?.content?.faq?.section?.headline || pageData?.content?.faq?.section?.title || pageData?.faqTitle || pageData?.content?.faqTitle || faqTitle)
     : "";
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -125,63 +125,42 @@ export default function ContactFaqSection({ data, pageData }: QAFormProps = {}) 
   const hasRightColumn = Boolean(displayFaqTitle || (activeFaqs && activeFaqs.length > 0) || shopAddress || shopHours);
 
   return (
-    <section id="contact" className="bg-[#F5F3EE] py-24 md:py-32 relative overflow-hidden border-t border-[#E8E6E0]">
-      {/* Precision background pattern */}
-      <div className="absolute inset-0 opacity-[0.02] bg-grid-pattern-black pointer-events-none" />
+    <section id="contact" className="bg-paper-pure section-y border-y border-line">
+      <div className="site-container">
 
-      <div className="site-container relative z-10">
-        
-        {/* Section Header */}
+        {/* Header */}
         {(formLabel || label || formTitle) && (
-          <div className="max-w-2xl mb-14 text-left">
+          <div className="max-w-2xl mb-14">
             {(formLabel || label) && (
-              <div className="flex items-center gap-2 mb-3">
-                <span className="w-3 h-[2px] bg-[#C98A2E]" />
-                <p className="text-[#C98A2E] text-[11px] font-mono tracking-[0.2em] uppercase font-bold">
-                  {formLabel || label}
-                </p>
-              </div>
+              <div className="eyebrow mb-6">{formLabel || label}</div>
             )}
-            {formTitle && (
-              <h2 className="display-heading text-[30px] min-[400px]:text-[36px] md:text-[44px] text-[#0B1726] leading-[1.12] font-extrabold tracking-tight">
-                {formTitle}
-              </h2>
-            )}
+            {formTitle && <h2 className="h-section text-balance">{formTitle}</h2>}
           </div>
         )}
 
-        {/* 2-Column Industrial Split */}
-        <div className={`grid grid-cols-1 ${hasRightColumn ? "lg:grid-cols-12 gap-12" : "max-w-3xl mx-auto"} items-start`}>
-          
-          {/* ── Left Column: Form ── */}
-          <div className={`${hasRightColumn ? "lg:col-span-7" : "w-full"} bg-white border border-[#D6D3CC] p-8 sm:p-10 rounded-sm shadow-sm text-left relative`}>
-            {/* Top technical accent */}
-            <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-[#C98A2E]" />
-            <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-[#C98A2E]" />
+        <div className={`grid grid-cols-1 ${hasRightColumn ? "lg:grid-cols-12 gap-10 lg:gap-14" : "max-w-2xl"} items-start`}>
 
-            {/* Direct Hotline Bar */}
+          {/* ── Form ── */}
+          <div className={`${hasRightColumn ? "lg:col-span-7" : "w-full"} bg-paper border border-line rounded p-7 sm:p-9`}>
+
+            {/* Hotline */}
             {shopPhone && (
-              <div className="mb-8 p-4 bg-[#0B1726] border border-[#14243A] rounded-sm flex items-center justify-between gap-4">
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-sm bg-[#14243A] border border-[#C98A2E]/40 flex items-center justify-center text-[#C98A2E]">
-                    <Phone size={15} />
-                  </div>
-                  <div>
-                    {displayHotlineLabel && (
-                      <span className="text-white/40 text-[10px] font-mono uppercase tracking-widest block">
-                        {displayHotlineLabel}
-                      </span>
-                    )}
-                    <a
-                      href={`tel:${shopPhone.replace(/[^\d+]/g, '')}`}
-                      className="text-[#C98A2E] font-mono text-[14px] font-bold hover:underline"
-                    >
-                      {shopPhone}
-                    </a>
-                  </div>
+              <div className="mb-8 pb-8 border-b border-line flex flex-wrap items-center justify-between gap-4">
+                <div>
+                  {displayHotlineLabel && (
+                    <span className="meta block mb-2">{displayHotlineLabel}</span>
+                  )}
+                  <a
+                    href={`tel:${shopPhone.replace(/[^\d+]/g, '')}`}
+                    className="inline-flex items-center gap-2.5 font-heading text-[21px] sm:text-[24px] font-medium tracking-tight text-ink-900 hover:text-gold-ink transition-colors tnum"
+                  >
+                    <Phone size={17} className="text-gold" />
+                    <span>{shopPhone}</span>
+                  </a>
                 </div>
                 {displayDispatch && (
-                  <span className="hidden sm:inline-block text-white/40 text-[10.5px] font-mono uppercase">
+                  <span className="meta inline-flex items-center gap-2 text-emerald-700">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
                     {displayDispatch}
                   </span>
                 )}
@@ -190,18 +169,14 @@ export default function ContactFaqSection({ data, pageData }: QAFormProps = {}) 
 
             {submitted ? (
               <div className="py-12 text-center">
-                <div className="w-12 h-12 rounded-full bg-[#C98A2E]/10 border border-[#C98A2E] text-[#C98A2E] flex items-center justify-center mx-auto mb-4">
-                  <ShieldCheck size={24} />
+                <div className="w-12 h-12 rounded-full border border-gold text-gold flex items-center justify-center mx-auto mb-5">
+                  <Check size={22} strokeWidth={2.5} />
                 </div>
-                <h3 className="text-[20px] font-bold text-[#0B1726] mb-2 font-serif">
-                  {formBtnSuccess}
-                </h3>
-                <p className="text-[#5E6670] text-[14px] max-w-md mx-auto">
-                  {formSuccessToast}
-                </p>
+                <h3 className="h-sub mb-3">{formBtnSuccess}</h3>
+                <p className="copy max-w-md mx-auto">{formSuccessToast}</p>
                 <button
                   onClick={() => setSubmitted(false)}
-                  className="btn-gold mt-6 text-[11px] font-mono uppercase tracking-widest px-6 py-2.5 cursor-pointer"
+                  className="btn btn-outline btn-sm mt-7"
                 >
                   {formBtnReset}
                 </button>
@@ -210,64 +185,48 @@ export default function ContactFaqSection({ data, pageData }: QAFormProps = {}) 
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div>
-                    {formNameLabel && (
-                      <label className="text-[#0B1726] text-[11px] font-mono uppercase tracking-wider font-bold block mb-1.5">
-                        {formNameLabel}
-                      </label>
-                    )}
+                    {formNameLabel && <label className="field-label">{formNameLabel}</label>}
                     <input
                       type="text"
                       required
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       placeholder={formNamePlaceholder}
-                      className="w-full bg-[#F5F3EE] border border-[#D6D3CC] focus:border-[#C98A2E] focus:outline-none px-4 py-3 text-[14px] text-[#0B1726] rounded-sm font-sans"
+                      className="field"
                     />
                   </div>
 
                   <div>
-                    {formEmailLabel && (
-                      <label className="text-[#0B1726] text-[11px] font-mono uppercase tracking-wider font-bold block mb-1.5">
-                        {formEmailLabel}
-                      </label>
-                    )}
+                    {formEmailLabel && <label className="field-label">{formEmailLabel}</label>}
                     <input
                       type="email"
                       required
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       placeholder={formEmailPlaceholder}
-                      className="w-full bg-[#F5F3EE] border border-[#D6D3CC] focus:border-[#C98A2E] focus:outline-none px-4 py-3 text-[14px] text-[#0B1726] rounded-sm font-sans"
+                      className="field"
                     />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div>
-                    {formPhoneLabel && (
-                      <label className="text-[#0B1726] text-[11px] font-mono uppercase tracking-wider font-bold block mb-1.5">
-                        {formPhoneLabel}
-                      </label>
-                    )}
+                    {formPhoneLabel && <label className="field-label">{formPhoneLabel}</label>}
                     <input
                       type="tel"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                       placeholder={formPhonePlaceholder}
-                      className="w-full bg-[#F5F3EE] border border-[#D6D3CC] focus:border-[#C98A2E] focus:outline-none px-4 py-3 text-[14px] text-[#0B1726] rounded-sm font-sans"
+                      className="field"
                     />
                   </div>
 
                   <div>
-                    {formServiceLabel && (
-                      <label className="text-[#0B1726] text-[11px] font-mono uppercase tracking-wider font-bold block mb-1.5">
-                        {formServiceLabel}
-                      </label>
-                    )}
+                    {formServiceLabel && <label className="field-label">{formServiceLabel}</label>}
                     <select
                       value={formData.service}
                       onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                      className="w-full bg-[#F5F3EE] border border-[#D6D3CC] focus:border-[#C98A2E] focus:outline-none px-4 py-3 text-[14px] text-[#0B1726] rounded-sm font-sans"
+                      className="field cursor-pointer"
                     >
                       <option value="">{formServicePlaceholder}</option>
                       {serviceOptions.map((opt: any, oIdx: number) => {
@@ -284,39 +243,43 @@ export default function ContactFaqSection({ data, pageData }: QAFormProps = {}) 
                 </div>
 
                 <div>
-                  {formMessageLabel && (
-                    <label className="text-[#0B1726] text-[11px] font-mono uppercase tracking-wider font-bold block mb-1.5">
-                      {formMessageLabel}
-                    </label>
-                  )}
+                  {formMessageLabel && <label className="field-label">{formMessageLabel}</label>}
                   <textarea
-                    rows={4}
+                    rows={5}
                     required
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     placeholder={formMessagePlaceholder}
-                    className="w-full bg-[#F5F3EE] border border-[#D6D3CC] focus:border-[#C98A2E] focus:outline-none px-4 py-3 text-[14px] text-[#0B1726] rounded-sm font-sans"
+                    className="field resize-y"
                   />
                 </div>
 
                 {errorMessage && (
-                  <p className="text-rose-600 text-xs font-mono">{errorMessage}</p>
+                  <p className="text-[13px] text-red-700">{errorMessage}</p>
                 )}
 
-                <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div className="pt-2 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="btn-gold w-full sm:w-auto inline-flex items-center justify-center gap-2 text-[11.5px] font-mono uppercase tracking-widest px-8 py-3.5 shadow-md cursor-pointer disabled:opacity-50"
+                    className="btn btn-primary w-full sm:w-auto disabled:opacity-55 disabled:cursor-not-allowed"
                   >
                     <span>{isSubmitting ? formBtnSubmitting : formBtnSubmit}</span>
                     <Send size={13} />
                   </button>
 
                   {(trustHipa || trustResponse) && (
-                    <div className="flex items-center gap-4 text-[11.5px] text-[#5E6670] font-mono">
-                      {trustHipa && typeof trustHipa === 'string' && <span>✓ {trustHipa}</span>}
-                      {trustResponse && typeof trustResponse === 'string' && <span>✓ {trustResponse}</span>}
+                    <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+                      {trustHipa && typeof trustHipa === 'string' && (
+                        <span className="meta inline-flex items-center gap-1.5">
+                          <Check size={12} className="text-gold" strokeWidth={3} />{trustHipa}
+                        </span>
+                      )}
+                      {trustResponse && typeof trustResponse === 'string' && (
+                        <span className="meta inline-flex items-center gap-1.5">
+                          <Check size={12} className="text-gold" strokeWidth={3} />{trustResponse}
+                        </span>
+                      )}
                     </div>
                   )}
                 </div>
@@ -324,77 +287,64 @@ export default function ContactFaqSection({ data, pageData }: QAFormProps = {}) 
             )}
           </div>
 
-          {/* ── Right Column: Dynamic FAQ & Coordinates ── */}
+          {/* ── FAQ + location ── */}
           {hasRightColumn && (
-            <div className="lg:col-span-5 text-left flex flex-col justify-between">
-              <div>
-                {displayFaqLabel && (
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="w-3 h-[2px] bg-[#C98A2E]" />
-                    <p className="text-[#C98A2E] text-[11px] font-mono tracking-[0.2em] uppercase font-bold">
-                      {displayFaqLabel}
-                    </p>
-                  </div>
-                )}
+            <div className="lg:col-span-5">
+              {displayFaqLabel && <div className="eyebrow mb-6">{displayFaqLabel}</div>}
 
-                {displayFaqTitle && (
-                  <h3 className="display-heading text-[24px] sm:text-[28px] md:text-[32px] text-[#0B1726] leading-tight font-bold mb-6">
-                    {displayFaqTitle}
-                  </h3>
-                )}
+              {displayFaqTitle && (
+                <h3 className="h-sub text-balance mb-7">{displayFaqTitle}</h3>
+              )}
 
-                {/* Dynamic FAQ Accordion */}
-                {activeFaqs && activeFaqs.length > 0 && (
-                  <div className="space-y-3">
-                    {activeFaqs.map((faq: any, fIdx: number) => {
-                      const isOpen = openIdx === fIdx;
-                      return (
-                        <div
-                          key={fIdx}
-                          className="bg-white border border-[#D6D3CC] rounded-sm overflow-hidden shadow-sm"
+              {activeFaqs && activeFaqs.length > 0 && (
+                <div className="border-t border-line">
+                  {activeFaqs.map((faq: any, fIdx: number) => {
+                    const isOpen = openIdx === fIdx;
+                    return (
+                      <div key={fIdx} className="border-b border-line">
+                        <button
+                          onClick={() => setOpenIdx(isOpen ? null : fIdx)}
+                          aria-expanded={isOpen}
+                          className="w-full py-5 flex items-start justify-between gap-5 text-left cursor-pointer group"
                         >
-                          <button
-                            onClick={() => setOpenIdx(isOpen ? null : fIdx)}
-                            className="w-full p-5 flex items-center justify-between gap-4 text-left cursor-pointer hover:bg-[#F5F3EE]/50 transition-colors"
-                          >
-                            <span className="text-[#0B1726] text-[14.5px] font-semibold leading-snug">
-                              {faq.q}
-                            </span>
-                            <span className="text-[#C98A2E] flex-shrink-0">
-                              {isOpen ? <Minus size={16} /> : <Plus size={16} />}
-                            </span>
-                          </button>
+                          <span className={`text-[15px] font-medium leading-snug transition-colors ${isOpen ? "text-gold-ink" : "text-ink-900 group-hover:text-gold-ink"}`}>
+                            {faq.q}
+                          </span>
+                          <span className="flex-shrink-0 mt-0.5 text-gold">
+                            {isOpen ? <Minus size={16} /> : <Plus size={16} />}
+                          </span>
+                        </button>
 
-                          {isOpen && faq.a && (
-                            <div className="px-5 pb-5 pt-1 border-t border-[#E8E6E0] text-[#5E6670] text-[14px] leading-[1.75]">
-                              {faq.a}
-                            </div>
-                          )}
-                        </div>
-                      );
-                    })}
-                  </div>
-                )}
-              </div>
+                        {isOpen && faq.a && (
+                          <div className="pb-6 pr-8 copy">
+                            {faq.a}
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
 
-              {/* Shop Coordinates Card */}
               {(shopAddress || shopHours) && (
-                <div className="mt-8 p-6 bg-[#E8E6E0] border border-[#D6D3CC] rounded-sm text-left">
+                <div className="mt-10 p-7 bg-paper border border-line rounded">
                   {displayLocationTitle && (
-                    <span className="text-[#0B1726] font-mono text-[11px] font-bold uppercase tracking-wider block mb-3">
-                      {displayLocationTitle}
-                    </span>
+                    <span className="meta block mb-5">{displayLocationTitle}</span>
                   )}
                   {shopAddress && (
-                    <div className="flex items-start gap-2.5 text-[13px] text-[#5E6670] mb-2">
-                      <MapPin size={15} className="text-[#C98A2E] mt-0.5 flex-shrink-0" />
-                      <span>{shopAddress}</span>
+                    <div className="flex items-start gap-3 mb-4">
+                      <MapPin size={16} className="text-gold mt-0.5 flex-shrink-0" />
+                      <span className="text-[14px] leading-relaxed text-[color:var(--text-body)] whitespace-pre-line">
+                        {shopAddress}
+                      </span>
                     </div>
                   )}
                   {shopHours && (
-                    <div className="flex items-start gap-2.5 text-[13px] text-[#5E6670]">
-                      <Clock size={15} className="text-[#C98A2E] mt-0.5 flex-shrink-0" />
-                      <span>{shopHours}</span>
+                    <div className="flex items-start gap-3">
+                      <Clock size={16} className="text-gold mt-0.5 flex-shrink-0" />
+                      <span className="text-[14px] leading-relaxed text-[color:var(--text-body)] whitespace-pre-line">
+                        {shopHours}
+                      </span>
                     </div>
                   )}
                 </div>
@@ -403,7 +353,6 @@ export default function ContactFaqSection({ data, pageData }: QAFormProps = {}) 
           )}
 
         </div>
-
       </div>
     </section>
   );

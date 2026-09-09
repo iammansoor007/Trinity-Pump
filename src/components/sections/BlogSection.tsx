@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowRight, ArrowLeft } from "lucide-react";
 import { motion } from "framer-motion";
 import { normalizeBlogImage } from "@/lib/blogImage";
 
@@ -73,63 +73,50 @@ export default function BlogSection({
   };
 
   return (
-    <section id="blog" className="bg-[#F5F3EE] py-20 md:py-28 overflow-hidden border-t border-[#E8E6E0]">
+    <section id="blog" className="bg-paper section-y overflow-hidden">
       <div className="site-container">
 
         {/* ── Header ─────────────────────────────── */}
         {(title || subtitle || ctaAll) && (
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12 text-left">
-            <div>
-              {subtitle && (
-                <div className="flex items-center gap-2 mb-3">
-                  <span className="w-3 h-[2px] bg-[#C98A2E]" />
-                  <p className="text-[#C98A2E] text-[11px] font-mono tracking-[0.2em] uppercase font-bold">
-                    {subtitle}
-                  </p>
-                </div>
-              )}
-              {title && (
-                <h2 className="display-heading text-[28px] min-[400px]:text-[32px] md:text-[42px] text-[#0B1726] leading-tight font-bold tracking-tight">
-                  {title}
-                </h2>
-              )}
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12">
+            <div className="max-w-2xl">
+              {subtitle && <div className="eyebrow mb-6">{subtitle}</div>}
+              {title && <h2 className="h-section text-balance">{title}</h2>}
+              {description && <p className="lede text-pretty mt-5">{description}</p>}
             </div>
 
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-5 flex-shrink-0">
               {ctaAll && (
-                <Link
-                  href={viewAllLink || "/blogs/"}
-                  className="flex items-center gap-2 text-[#C98A2E] text-[12px] font-bold tracking-[0.14em] uppercase hover:gap-3 transition-all duration-200"
-                >
-                  {ctaAll} <ArrowRight size={14} />
+                <Link href={viewAllLink || "/blogs/"} className="link-arrow">
+                  <span>{ctaAll}</span>
+                  <ArrowRight size={14} />
                 </Link>
               )}
 
-            {/* Slider Navigation Buttons */}
-            {hasSlider && (
-              <div className="flex items-center gap-2 ml-3">
-                <button
-                  onClick={handlePrev}
-                  aria-label="Previous article"
-                  className="w-9 h-9 rounded-sm border border-[#D6D3CC] bg-white text-[#0B1726]/70 hover:border-[#C98A2E] hover:text-[#C98A2E] flex items-center justify-center transition-all duration-200 active:scale-95 shadow-sm"
-                >
-                  <ChevronLeft size={18} />
-                </button>
-                <button
-                  onClick={handleNext}
-                  aria-label="Next article"
-                  className="w-9 h-9 rounded-sm border border-[#D6D3CC] bg-white text-[#0B1726]/70 hover:border-[#C98A2E] hover:text-[#C98A2E] flex items-center justify-center transition-all duration-200 active:scale-95 shadow-sm"
-                >
-                  <ChevronRight size={18} />
-                </button>
-              </div>
-            )}
+              {hasSlider && (
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={handlePrev}
+                    aria-label="Previous article"
+                    className="w-10 h-10 rounded border border-line-strong bg-paper-pure text-ink-900 hover:border-ink-900 hover:bg-paper-alt transition-colors flex items-center justify-center cursor-pointer"
+                  >
+                    <ArrowLeft size={16} />
+                  </button>
+                  <button
+                    onClick={handleNext}
+                    aria-label="Next article"
+                    className="w-10 h-10 rounded border border-line-strong bg-paper-pure text-ink-900 hover:border-ink-900 hover:bg-paper-alt transition-colors flex items-center justify-center cursor-pointer"
+                  >
+                    <ArrowRight size={16} />
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
-        </div>
         )}
 
-        {/* ── Sliding Track Carousel ──────────────── */}
-        <div className="relative overflow-hidden -mx-4 px-4 sm:mx-0 sm:px-0">
+        {/* ── Sliding track ──────────────── */}
+        <div className="relative overflow-hidden -mx-3 sm:mx-0">
           <motion.div
             className="flex"
             animate={{
@@ -155,48 +142,44 @@ export default function BlogSection({
                 <div
                   key={post._id}
                   style={{ width: `${100 / cardsPerView}%` }}
-                  className="flex-shrink-0 px-3 md:px-4"
+                  className="flex-shrink-0 px-3"
                 >
-                  <article className="blog-card group bg-white border border-[#D6D3CC] hover:border-[#C98A2E] hover:shadow-xl rounded-sm overflow-hidden flex flex-col h-full transition-all duration-300 text-left">
+                  <article className="group card card-hover overflow-hidden flex flex-col h-full">
                     <Link href={postUrl} className="flex flex-col flex-1 no-underline">
 
                       {/* Image */}
-                      <div className="relative h-[210px] w-full overflow-hidden bg-[#0B1726]">
+                      <div className="frame relative aspect-[16/10] w-full rounded-none">
                         {post.featuredImage ? (
                           <Image
                             src={normalizeBlogImage(post.featuredImage)}
                             alt={post.title}
                             fill
                             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                            className="object-cover transition-transform duration-500 group-hover:scale-105"
+                            className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                           />
                         ) : (
-                          <div className="w-full h-full bg-[#14243A] flex items-center justify-center">
-                            <ArrowRight size={32} className="text-[#C98A2E]/30" />
+                          <div className="w-full h-full bg-ink-700 flex items-center justify-center">
+                            <ArrowRight size={28} className="text-gold/30" />
                           </div>
-                        )}
-                        {/* Tag chip */}
-                        {tag && (
-                          <span className="absolute top-3 left-3 bg-[#0B1726]/90 backdrop-blur-sm border border-[#C98A2E]/40 text-[#C98A2E] text-[10px] font-mono font-bold tracking-wider uppercase px-2.5 py-1 rounded-sm shadow-sm">
-                            {tag}
-                          </span>
                         )}
                       </div>
 
                       {/* Content */}
-                      <div className="flex flex-col flex-1 p-5 sm:p-6 justify-between">
+                      <div className="flex flex-col flex-1 p-6 sm:p-7 justify-between">
                         <div>
-                          <h3 className="text-[#0B1726] font-bold text-[16px] sm:text-[17px] leading-snug mb-2.5 group-hover:text-[#C98A2E] transition-colors duration-200 line-clamp-2">
+                          {tag && <div className="meta text-gold-ink mb-4">{tag}</div>}
+
+                          <h3 className="h-card mb-3 line-clamp-2 group-hover:text-gold-ink transition-colors duration-200">
                             {post.title}
                           </h3>
+
                           {cleanExcerpt && (
-                            <p className="text-[#5E6670] text-[13px] leading-relaxed mb-4 line-clamp-2 font-normal">
-                              {cleanExcerpt}
-                            </p>
+                            <p className="copy line-clamp-2 mb-6">{cleanExcerpt}</p>
                           )}
                         </div>
+
                         {ctaReadMore && (
-                          <span className="flex items-center gap-2 text-[#C98A2E] text-[11.5px] font-bold tracking-wider uppercase group-hover:gap-3 transition-all duration-200 pt-3 border-t border-[#E8E6E0]">
+                          <span className="link-arrow pt-5 border-t border-line">
                             {ctaReadMore} <ArrowRight size={13} />
                           </span>
                         )}
@@ -210,16 +193,16 @@ export default function BlogSection({
           </motion.div>
         </div>
 
-        {/* Mobile / Tablet Pagination Dots */}
+        {/* Pagination dots */}
         {hasSlider && (
-          <div className="flex justify-center items-center gap-2 mt-8 md:hidden">
+          <div className="flex justify-center items-center gap-2 mt-10 md:hidden">
             {Array.from({ length: maxIndex + 1 }).map((_, idx) => (
               <button
                 key={idx}
                 onClick={() => setCurrentIndex(idx)}
                 aria-label={`Go to slide ${idx + 1}`}
-                className={`h-2 rounded-full transition-all duration-200 ${
-                  currentIndex === idx ? "bg-[#C98A2E] w-6" : "bg-black/20 w-2 hover:bg-[#C98A2E]/50"
+                className={`h-1 rounded-full transition-all duration-200 ${
+                  currentIndex === idx ? "bg-gold w-7" : "bg-line-strong w-3 hover:bg-gold/50"
                 }`}
               />
             ))}
@@ -230,4 +213,3 @@ export default function BlogSection({
     </section>
   );
 }
-
